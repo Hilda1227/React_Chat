@@ -1,0 +1,51 @@
+.index{
+    width: 80%;
+    max-width: 1300px;
+    height: 100%;
+    position: relative;
+    margin: 0 auto; 
+    display: flex;
+    justify-content: space-between; 
+    transition: 500ms;
+    box-shadow: 1px 1px 9px 1px #666;
+    .aside{
+        width: 35%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        transition: 500ms;
+    }
+    .room{
+        width: 65%;
+        height: 100%;
+        float: right;
+        transition: 500ms;
+        background-color: #eef1f6;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+    }
+  }
+  
+  @media screen and (max-width: 1050px) {
+    .index{
+      width: 100%;
+    }
+  }
+
+  
+  @media screen and (max-width: 650px) {
+    .aside{
+      display: none !important;
+    }
+  }
+
+  
+@media screen and (max-width: 650px) {
+    .room{
+      width: 100% !important;
+    }
+  }

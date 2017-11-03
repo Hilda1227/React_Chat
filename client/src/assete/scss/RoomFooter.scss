@@ -1,0 +1,59 @@
+.room-footer{
+  position: relative;
+  bottom: 0px;
+  width: 100%;
+  height: 3.5rem;
+  display: flex;
+  justify-content: center;
+  .footer-wrap{
+    height: 2rem;
+    width: 95%;
+    display: flex;
+    justify-content: flex-start;
+    input{
+      width: 60%;
+      border-radius: 2px;
+      padding-left: 5px;
+      &::placeholder{
+        font-size: 13px;
+      }
+    }
+    .tool{
+      height: 1.6rem;
+      width: 1.6rem;
+      
+      margin: auto 2rem;
+      cursor: pointer;
+    }
+    #emoji{
+      background: url('../img/send.png') no-repeat;
+      background-size: 100%;
+    }
+    #send{
+      background: url('../img/emoji.png') no-repeat;
+      background-size: 100%;
+    }
+  }
+}
+
+// @media screen and (max-width: 650px) {
+//     .room-footer{
+//         position: absolute;
+//         bottom: 0px;
+//         width: 100%;
+//         height: 4.5rem;
+//         display: flex;
+//         justify-content: center;
+//         .footer-wrap{
+//           height: 2rem;
+//           width: 95%;
+//           display: flex;
+//           background-color: red;
+//           justify-content: space-between;
+//           input{
+//              width: 60%;
+//              border-radius: 2px;
+//           }
+//         }
+//      } 
+// }

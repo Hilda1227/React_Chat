@@ -17,10 +17,11 @@ const userSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'room'
   }],
-  privates: [{
-    type: Schema.Types.ObjectId,
-    ref: 'user' 
-  }],
+  // 私聊过的人
+  // privates: [{
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'user' 
+  // }],
   createAt: {
     type: Date,
     default: Date.now()

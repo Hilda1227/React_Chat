@@ -17,11 +17,11 @@ router.post('/api/signUp', async function (ctx){
   password = bcrypt.hashSync(password, salt);
   // 新建该用户实例
   let result  = await User.create({ nickname, email, password }),
-    // 根据_id生成taken
+    // 根据_id生成token
   exp = Math.floor((new Date().getTime())/1000) + 60 * 60 * 24 * 30;
-  taken = jwt.sign({ user_id: result._id, exp }, SIGN_KEY);  
+  token = jwt.sign({ user_id: result._id, exp }, SIGN_KEY);  
   result.save();
-  ctx.body = {taken};
+  ctx.body = {token};
 
 })
 
@@ -35,8 +35,8 @@ router.post('/api/login', async function (ctx) {
   }
   if(bcrypt.compareSync(password, user.password)){
     exp = Math.floor((new Date().getTime())/1000) + 60 * 60 * 24 * 30;
-    taken = jwt.sign({ user_id: user._id, exp },SIGN_KEY);
-    return ctx.body = {taken}; 
+    token = jwt.sign({ user_id: user._id, exp },SIGN_KEY);
+    return ctx.body = {token}; 
   }
   return ctx.body = { isError: true, errMsg: '密码错误'};
 })

@@ -1,0 +1,13 @@
+.room-msg{
+  width: 100%;
+  flex-grow: 1;
+  position: relative;
+  .room-msg-wrap{
+    width: 95%;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}

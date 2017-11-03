@@ -12,8 +12,8 @@ export const signUp = (info) => {
   return axios.post('/api/signUp', info)
     .then((res) => {
       if(!res.data.isError)
-        localStorage.setItem('taken', res.data.taken);
-        return res;
+        localStorage.setItem('token', res.data.token);
+      return res;
     })
 }
 
@@ -21,7 +21,7 @@ export const login = (info) => {
   return axios.post('/api/login', info)
   .then(res => {
     if(!res.data.isError)
-      localStorage.setItem('taken', res.data.taken);
+      localStorage.setItem('token', res.data.token);
     return res;
   })
 }

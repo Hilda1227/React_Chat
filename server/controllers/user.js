@@ -8,31 +8,32 @@ module.exports = {
 
   async login (info, socket, cb) {
     let { email, password } = info;
-    let user = await User.findOne({email: email});
-    if(!user)  {
-      user = await User.findOne({nickname: email});
+    let user = await User.findOne({ email: email });
+    if(!user) {
+      user = await User.findOne({ nickname: email });
       if(!user)
-        return cb({ isError: true, errMsg: '不存在该用户'});
+        return cb({ isError: true, msg: '不存在该用户'});
     }
-    if(bcrypt.compareSync(password, user.password)){
+    if(bcrypt.compareSync( password, user.password)) {
         // 将该在线用户保存进socket集合
-      sock = new Socket({user: user._id, socket_id: socket.id}); 
+      sock = new Socket({ user: user._id, socket_id: socket.id }); 
       user.socket = sock._id;
       user.save(); sock.save();
-      // 生成taken返回给客户端
+      // 生成token返回给客户端
       exp = Math.floor((new Date().getTime())/1000) + 60 * 60 * 24 * 30;
-      taken = await jwt.sign({ user_id: user._id, exp },SIGN_KEY);
-      return cb({taken}); 
+      token = await jwt.sign({ user_id: user._id, exp }, SIGN_KEY);
+      return cb({ isError: false, msg: { token } });
     }
-    return cb({ isError: true, errMsg: '密码错误'});
+    return cb({ isError: true, msg: '密码错误'});
   },
+
 
   async signUp (info, socket, cb) {
     let { nickname, email, password } = info,
         repnickname = await User.find({nickname: nickname}),
         repemail = await User.find({email: email});
     if(repnickname.length || repemail.length) {
-      return cb({isError: true, errMsg: '用户已存在'}); 
+      return cb({isError: true, msg: '用户已存在'}); 
     }
     // password加密
     const salt = bcrypt.genSaltSync(10);
@@ -41,10 +42,11 @@ module.exports = {
     let user = new User ({ nickname, email, password }),
         sock = new Socket({user: user._id, socket_id: socket.id}),
         exp = Math.floor((new Date().getTime())/1000) + 60 * 60 * 24 * 30,
-        taken = await jwt.sign({ user: user._id, exp }, SIGN_KEY); 
+        token = await jwt.sign({ user: user._id, exp }, SIGN_KEY); 
     user.socket = sock._id; user.save(); 
-    sock.save(); cb({taken});
+    sock.save(); cb({isError: false, msg: {token} });;
   },
+
 
   async disconnect (info, socket, cb) {
     let online = await Socket.findOne({socket_id:socket.id}).populate('user','_id nickname');
@@ -58,6 +60,12 @@ module.exports = {
       socket.broadcast.emit('disconnect',{msg: `${online.user.nickname}下线了`})
       console.log(`--------------------${online.user.nickname}下线了`);
     }
+  },
+
+  
+  async getUsers (info, socket, cb) {
+    const users = await User.find({});
+    return cb({isError: false, msg: {users} });;
   }
 
 }

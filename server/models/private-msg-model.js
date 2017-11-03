@@ -10,10 +10,11 @@ const privateMsgSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'user'
   },
+  content: String,
   createAt: {
     type: Date,
     default: Date.now()
-  },
+  }
 });
 
 module.exports = mongoose.model('privateMsg', privateMsgSchema);

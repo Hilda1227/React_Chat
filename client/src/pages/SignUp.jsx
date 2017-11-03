@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import { Route, NavLink, BrowserHistory } from 'react-router-dom';
-import InputText from '../components/InputText'
+import InputText from '../components/common/InputText'
 import { autobind } from 'core-decorators';
-import { signUp, login} from '../actions/user';
-import socketEmit from '../actions/socketEmit';
+import { signUp, login} from '../redux/actions/user';
+import socketEmit from '../redux/actions/socketEmit';
 import PropTypes from 'prop-types';
 
 
@@ -31,7 +31,7 @@ class SignUp extends Component {
     e.preventDefault(); const info = this.validateInput();
     if(info) {
       socketEmit('signUp', info)
-      .then(data => this.context.router.history.push("/"))
+      .then(data => {this.context.router.history.push("/"); localStorage.setItem('token', data.token);})
       .catch(err => alert(err))
     }
     else alert("输入不合法");

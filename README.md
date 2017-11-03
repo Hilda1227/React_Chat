@@ -4,3 +4,97 @@
 
 1. 用户密码采用bcrypt-nodejs模块进行加密
 2. 用户登录成功后，采用jsonwebtoken生成token发送给客户端保存起来，客户端在以后的请求中携带此token,服务端验证token是否合法，是则进行后续的处理。
+
+## webpack无法对组件里以相对路径引用的图片进行打包
+
+## presentation component与container component的组织问题
+
+
+
+## 接口说明
+
+### 1.注册
+
+#### 事件   
+
+> 'signUp'
+
+#### 请求参数  
+
+> | 参数      | 必选   | 类型   | 说明   |
+> | :------ | :--- | :--- | ---- |
+> | nickname | true | String  | 昵称 |
+> | email | true | String  | 邮箱 |
+> | password | true | String  | 密码 |
+
+#### 返回字段
+
+> 成功: {isError: false, msg: {token: ...}}
+> 失败：{isError: true, msg: ...}
+
+----------
+
+### 2.登录
+
+#### 事件   
+
+> 'login'
+
+#### 请求参数  
+
+> | 参数      | 必选   | 类型   | 说明   |
+> | :------ | :--- | :--- | ---- |
+> | nickname | false | String  | 昵称 |
+> | email | false | String  | 邮箱 |
+> | password | true | String  | 密码 |
+> 昵称和邮箱任选其一
+
+#### 返回字段
+
+> 成功: {isError: false, msg: {token: ...} }
+> 失败： {isError: true, msg: ...}
+
+-----------
+
+### 3.注销登录
+
+#### 事件   
+
+> 'disconnect'
+
+#### 请求参数  
+
+> | 参数      | 必选   | 类型   | 说明   |
+> | :------ | :--- | :--- | ---- |
+> | token | true | String  | 无 |
+
+
+#### 返回字段
+
+> 成功: {isError: false, msg: {msg: '已注销'}}
+> 失败: {isError: true, msg: ...}
+
+----------------
+
+#### 4. 得到所有用户列表
+
+#### 事件   
+
+> 'getUsers'
+
+#### 请求参数  
+
+> | 参数      | 必选   | 类型   | 说明   |
+> | :------ | :--- | :--- | ---- |
+> | token | true | String  | 无 |
+
+
+#### 返回字段
+
+> 成功: {isError: false, msg: {users: [...]}}
+> 失败: {isError: true, msg: ...}
+
+
+
+
+

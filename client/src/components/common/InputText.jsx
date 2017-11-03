@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../assete/scss/InputText.scss'
+import '../../assete/scss/InputText.scss'
 
 class InputText extends Component {
   constructor (props) {

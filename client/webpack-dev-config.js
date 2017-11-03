@@ -30,7 +30,14 @@ module.exports = {
                 loaders: ['style-loader', 'css-loader', 'sass-loader'],
              }, 
             //编译sass文件
-            { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'} 
+            {
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                loader: 'url-loader',
+                options: {
+                  limit: 8000,
+                  name: 'img/[name].[hash:7].[ext]'
+                }
+              },
             //对图片进行打包
         ]
     },

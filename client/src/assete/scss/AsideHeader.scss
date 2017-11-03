@@ -1,0 +1,21 @@
+.aside-header{
+    height: 55px;
+    width: 100%;
+    background-color: #38a5f8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 0;
+    .avatar{
+        width: 2.6rem;
+        height: 2.6rem;
+        border-radius: 50%;
+        margin: auto 1rem;
+        cursor: pointer;
+    }
+    .tool{
+        float: right;
+        margin-right: 2rem;
+        cursor: pointer;
+    }
+}

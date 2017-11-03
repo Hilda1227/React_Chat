@@ -8,8 +8,8 @@ const socketEmit = (name, payload) => {
   return new Promise(function(resolve, reject) {
     try{
       socket.emit(name, payload, function (data) {
-        if(data.isError) reject(data.errMsg);
-        resolve(data);
+        if(data.isError) reject(data.msg);
+        resolve(data.msg);
       })
     }catch(err){
       console.log(`socketEmit出错了~${err}`)

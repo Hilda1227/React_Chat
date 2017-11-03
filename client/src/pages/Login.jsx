@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import { Route, NavLink } from 'react-router-dom';
-import InputText from '../components/InputText';
+import InputText from '../components/common/InputText';
 import '../assete/scss/sign.scss'
 import { autobind } from 'core-decorators';
-import socketEmit from '../actions/socketEmit';
-import { login} from '../actions/user';
+import socketEmit from '../redux/actions/socketEmit';
+import { login} from '../redux/actions/user';
 import PropTypes from 'prop-types';
 
 
@@ -31,7 +31,7 @@ class Login extends Component {
   handleSubmmit (e) {
     e.preventDefault();
     socketEmit('login', {email: this.state.email, password: this.state.password})
-    .then(data => this.context.router.history.push("/"))
+    .then(data => {this.context.router.history.push("/"); localStorage.setItem('token', data.token);})
     .catch(err => alert(err))
   }
   render () {
