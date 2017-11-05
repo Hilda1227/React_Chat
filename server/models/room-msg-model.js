@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const roomMsgSchema = mongoose.Schema({
-  belong: [{
+  to: [{
     type: Schema.Types.ObjectId,
     ref: 'room'
   }],

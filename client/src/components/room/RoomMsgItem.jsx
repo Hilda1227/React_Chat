@@ -1,13 +1,18 @@
 import React from 'react';
 import '../../assete/scss/RoomMsgItem.scss';
 
-const RoomMsgItem = () => (
-  <div className = 'room-msg-item'>
-    <span className = 'nickname'>hilda</span>
-    <img src = 'https://cdn.dribbble.com/users/478776/screenshots/3909240/helloween-on-island.jpg' className = 'avatar'/>
-    <p className = 'msg'>加油加油加油加油加油加油加油加油加油</p>
-    <time></time>
-  </div>
-)
+const RoomMsgItem = (props) => {
+  const {from, avatar, content, createAt} = props;
+  return (
+    <div className = 'room-msg-item'>
+      <img src = { avatar } className = 'avatar'/>
+      <div className = 'content'>
+        <span className = 'from'>{ from }</span>
+        <p className = 'msg'>{ content }</p>
+        <time></time>
+      </div>
+    </div>
+  )
+}
 
 export default RoomMsgItem

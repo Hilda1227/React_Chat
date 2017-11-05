@@ -11,8 +11,8 @@
     display: flex;
     justify-content: space-between; 
     #close{
-      width: 1.6rem;
-      height: 1.6rem;
+      width: 1.5rem;
+      height: 1.5rem;
       background-image: url('../img/close.png');
       background-size: 100%;
       cursor: pointer;
@@ -25,4 +25,7 @@
       cursor: pointer;
     } 
   }
+}
+.room-header-hidden{
+  visibility: hidden;
 }

@@ -28,6 +28,9 @@
         justify-content: space-between;
         position: relative;
     }
+    .room-hidden{
+      visibility: hidden;
+    }
   }
   
   @media screen and (max-width: 1050px) {

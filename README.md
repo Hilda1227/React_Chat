@@ -9,6 +9,8 @@
 
 ## presentation component与container component的组织问题
 
+## 在一个点击事件中无法连续调用两次相互依赖的dispatch
+
 
 
 ## 接口说明
@@ -29,7 +31,7 @@
 
 #### 返回字段
 
-> 成功: {isError: false, msg: {token: ...}}
+> 成功: {isError: false, msg: {token: ..., user: ...}}
 > 失败：{isError: true, msg: ...}
 
 ----------
@@ -93,6 +95,65 @@
 
 > 成功: {isError: false, msg: {users: [...]}}
 > 失败: {isError: true, msg: ...}
+
+
+### 5.发送消息
+
+#### 事件   
+
+> 'new message'
+
+#### 请求参数  
+
+> | 参数      | 必选   | 类型   | 说明   |
+> | :------ | :--- | :--- | ---- |
+> | token | true | String  | 无 |
+> | type | true | String  | 无 |
+> | to | true | String  | 无 |
+> | content | true | String  | 无 |
+
+### 5.接受消息
+
+#### 事件   
+
+> 'new message'
+
+#### 返回数据 (私聊) 
+
+> | 参数      | 必选   | 类型   | 说明   |
+> | :------ | :--- | :--- | ---- |
+> | from | true | String  | 无 |
+> | createAt | true | String  | 无 |
+> | content | true | String  | 无 |
+> | type | true | String  | 无 |
+> | avatar | true | String  | 无 |
+> | id | true | String  | 无 |
+
+### 5.获取历史消息
+
+#### 事件   
+
+> 'getHistory'
+
+#### 请求参数
+
+> | 参数      | 必选   | 类型   | 说明   |
+> | :------ | :--- | :--- | ---- |
+> | token | true | String  | 无 |
+> | to | true | String  | 对方昵称 |
+> | type | true | String  | 'private'或'group' |
+
+#### 返回数据 
+
+> | 参数      | 必选   | 类型   | 说明   |
+> | :------ | :--- | :--- | ---- |
+> | from | true | String  | 发送者昵称 |
+> | createAt | true | String  | 无 |
+> | content | true | String  | 无 |
+> | type | true | String  | 无 |
+> | avatar | true | String  | 无 |
+
+
 
 
 

@@ -6,12 +6,13 @@ import {
 } from '../constants/chatting'
 
 const chatting = (state = Immutable.fromJS({}), action) => {
-  // console.log(action.payload)
   switch( action.type ){
-    case SET_CHATTING:
-      return action.payload;
-    case CLOSE_CHATTING:
-      return {};
+    case SET_CHATTING: {
+      return Immutable.fromJS(action.payload);
+    }
+    case CLOSE_CHATTING:{
+      return Immutable.fromJS({});
+    }
     default:
       return state;
   }

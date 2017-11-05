@@ -15,7 +15,7 @@ const store = {
     lastWordTime: '', 
   }],
   messages: [{
-    nickname: 'xxx',
+    from: 'xxx',
     avatar: 'xxx',
     content: 'xxx',
     createAt: 'xxx'

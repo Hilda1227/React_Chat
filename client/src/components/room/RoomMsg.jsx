@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { Component }from 'react';
 import '../../assete/scss/RoomMsg.scss';
 import RoomMsgItem from './RoomMsgItem';
 
-const RoomMsg = () => (
-  <div className = 'room-msg'>
-    <div className = 'room-msg-wrap'>
-      <RoomMsgItem/>
-    </div>
-  </div>
-)
+class RoomMsg extends Component {
+  constructor (props) {
+    super(props);
+  }
+
+  render () {
+    const lists = this.props.messages.map((item, index) => (
+      <RoomMsgItem
+        {...item.toJS()}
+        key = { index }
+      />
+    ));
+    return (
+      <div className = 'room-msg'>
+        <div className = 'room-msg-wrap'>
+          { lists }
+        </div>
+      </div>
+    )
+  }
+}
+
 
 export default RoomMsg

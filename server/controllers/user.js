@@ -17,12 +17,12 @@ module.exports = {
     if(bcrypt.compareSync( password, user.password)) {
         // 将该在线用户保存进socket集合
       sock = new Socket({ user: user._id, socket_id: socket.id }); 
-      user.socket = sock._id;
+      user.socket = sock._id; user.onlineState = true;
       user.save(); sock.save();
       // 生成token返回给客户端
       exp = Math.floor((new Date().getTime())/1000) + 60 * 60 * 24 * 30;
       token = await jwt.sign({ user_id: user._id, exp }, SIGN_KEY);
-      return cb({ isError: false, msg: { token } });
+      return cb({ isError: false, msg: { token, user } });
     }
     return cb({ isError: true, msg: '密码错误'});
   },
@@ -33,7 +33,7 @@ module.exports = {
         repnickname = await User.find({nickname: nickname}),
         repemail = await User.find({email: email});
     if(repnickname.length || repemail.length) {
-      return cb({isError: true, msg: '用户已存在'}); 
+      return cb({ isError: true, msg: '用户已存在' }); 
     }
     // password加密
     const salt = bcrypt.genSaltSync(10);
@@ -43,8 +43,8 @@ module.exports = {
         sock = new Socket({user: user._id, socket_id: socket.id}),
         exp = Math.floor((new Date().getTime())/1000) + 60 * 60 * 24 * 30,
         token = await jwt.sign({ user: user._id, exp }, SIGN_KEY); 
-    user.socket = sock._id; user.save(); 
-    sock.save(); cb({isError: false, msg: {token} });;
+    user.socket = sock._id; user.onlineState = true; user.save(); 
+    sock.save(); return cb({ isError: false, msg: {token, user} });
   },
 
 
@@ -57,7 +57,7 @@ module.exports = {
       }});
       let sock = Socket.remove({socket_id: socket.id});
       await sock; await user;
-      socket.broadcast.emit('disconnect',{msg: `${online.user.nickname}下线了`})
+      socket.broadcast.emit('disconnect',{msg: `${online.user.nickname}下线了`});
       console.log(`--------------------${online.user.nickname}下线了`);
     }
   },
@@ -65,8 +65,9 @@ module.exports = {
   
   async getUsers (info, socket, cb) {
     const users = await User.find({});
-    return cb({isError: false, msg: {users} });;
-  }
+    return cb({isError: false, msg: {users} });
+  },
+
 
 }
 

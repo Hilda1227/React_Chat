@@ -3,9 +3,11 @@ import { Route, NavLink, BrowserHistory } from 'react-router-dom';
 import InputText from '../components/common/InputText'
 import { autobind } from 'core-decorators';
 import { signUp, login} from '../redux/actions/user';
-import socketEmit from '../redux/actions/socketEmit';
+import { socketEmit } from '../redux/actions/common';
 import PropTypes from 'prop-types';
 
+import { setUser } from '../redux/actions/user';
+import { dispatchAction } from '../redux/actions/common'
 
 class SignUp extends Component {
   constructor (props) {
@@ -31,7 +33,11 @@ class SignUp extends Component {
     e.preventDefault(); const info = this.validateInput();
     if(info) {
       socketEmit('signUp', info)
-      .then(data => {this.context.router.history.push("/"); localStorage.setItem('token', data.token);})
+      .then(data => {
+        this.context.router.history.push("/"); 
+        localStorage.setItem('token', data.token);
+        dispatchAction(setUser(data.user));
+      })
       .catch(err => alert(err))
     }
     else alert("输入不合法");
