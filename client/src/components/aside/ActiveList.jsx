@@ -8,7 +8,7 @@ const ActiveList = ({ activeList }) => {
     return (
       <ActiveListItem
       {...item.toJS() }
-      key={ item.get('nickname') }
+      key={ item.get('_id') }
       />
     )    
   });

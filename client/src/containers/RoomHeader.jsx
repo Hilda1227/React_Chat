@@ -10,12 +10,16 @@ import { getHistory } from '../redux/actions/message';
 import RoomHeader from '../components/room/RoomHeader';
 
 function mapStateToProps(state) {
+  let last = state.activeList.last();
+  let nextChatting = typeof last !== 'undefined'
+    ? {
+      to: last.get('nickname'),
+      type: last.get('type'),
+    }
+    : {};
   return {
     chatting: state.chatting,
-    nextChatting: Immutable.fromJS({
-      to: state.activeList.last().get('nickname'),
-      type: state.activeList.last().get('type'),
-    })
+    nextChatting: Immutable.fromJS(nextChatting)
   };
 }
 

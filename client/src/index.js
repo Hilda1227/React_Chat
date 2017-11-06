@@ -11,8 +11,12 @@ import reducers from './redux/reducers'
 import { socket, dispatchAction, socketEmit } from './redux/actions/common' 
 
 import {  addMessageItem } from './redux/actions/message'
-import { updateActiveItem } from './redux/actions/activeList'
+import { updateActiveItem, setOnline} from './redux/actions/activeList'
 import { setUser } from './redux/actions/user'
+
+socketEmit('auto login', {token: localStorage.getItem('token')})
+.then( data => dispatchAction(setUser( data.user )))
+.catch( err => {console.log(err), BrowserHistory.push('/login')})
 
 socket.on('new message', data => {
   if(data.from === store.getState().chatting.get('to')){
@@ -27,9 +31,15 @@ socket.on('new message', data => {
   }
 })
 
-socketEmit('auto login', {token: localStorage.getItem('token')})
-.then( data => dispatchAction(setUser( data.user )))
-.catch( err => {console.log(err), BrowserHistory.push('/login')})
+socket.on('offline', data => {
+  dispatchAction(setOnline({ ...data, state: false}));
+})
+
+socket.on('online', data => {
+  dispatchAction(setOnline({ ...data, state: true}));
+})
+
+
 
 
 ReactDOM.render(

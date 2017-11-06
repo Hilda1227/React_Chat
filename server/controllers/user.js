@@ -22,6 +22,7 @@ module.exports = {
       // 生成token返回给客户端
       exp = Math.floor((new Date().getTime())/1000) + 60 * 60 * 24 * 30;
       token = await jwt.sign({ user_id: user._id, exp }, SIGN_KEY);
+      socket.broadcast.emit('online',{_id: user._id, nickname: user.nickname});
       return cb({ isError: false, msg: { token, user } });
     }
     return cb({ isError: true, msg: '密码错误'});
@@ -35,6 +36,7 @@ module.exports = {
       sock = new Socket({ user: user._id, socket_id: socket.id }); 
       user.socket = sock._id; user.onlineState = true;
       await user.save(); await sock.save();
+      socket.broadcast.emit('online',{_id: user._id, nickname: user.nickname});
       return cb({isError: false, msg: {user}});
     }
     return cb({isError: true, msg: 'token登录失败'})
@@ -57,24 +59,34 @@ module.exports = {
         exp = Math.floor((new Date().getTime())/1000) + 60 * 60 * 24 * 30,
         token = await jwt.sign({ user: user._id, exp }, SIGN_KEY); 
     user.socket = sock._id; user.onlineState = true; user.save(); 
-    sock.save(); return cb({ isError: false, msg: {token, user} });
+    sock.save(); 
+    socket.broadcast.emit('online', {_id: user._id, nickname: user.nickname});
+    return cb({ isError: false, msg: {token, user} });
   },
 
 
   async disconnect (info, socket, cb) {
     let online = await Socket.findOne({socket_id:socket.id}).populate('user','_id nickname');
     if(online){
-      let user = User.update({_id: online.user._id},{$set: {
+      var user = User.update({_id: online.user._id},{$set: {
         onlineState: false,
         lastOnline: Date.now(),
       }});
       let sock = Socket.remove({socket_id: socket.id});
       await sock; await user;
-      socket.broadcast.emit('disconnect',{msg: `${online.user.nickname}下线了`});
+      socket.broadcast.emit('offline',{_id: online.user._id, nickname: online.user.nickname});
       console.log(`--------------------${online.user.nickname}下线了`);
     }
   },
 
+
+  async findUser (info, socket, cb) {
+    let { nickname } = info;
+    user = await User.findOne({ nickname });
+    if(user) return cb({ isError: false, msg: {user} });
+    return cb({ isError: true, msg: '不存在此用户' });     
+  },
+  
   
   async getUsers (info, socket, cb) {
     const users = await User.find({});

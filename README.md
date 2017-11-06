@@ -153,9 +153,32 @@
 > | :------ | :--- | :--- | ---- |
 > | from | true | String  | 发送者昵称 |
 > | createAt | true | String  | 无 |
-> | content | true | String  | 无 |
+> | content | true | String  | 无 |### 5.获取历史消息
+
+#### 根据昵称查找某用户   
+
+> 'find user'
+
+#### 请求参数
+
+> | 参数      | 必选   | 类型   | 说明   |
+> | :------ | :--- | :--- | ---- |
+> | nickname | true | String  | 对方昵称 |
+
+#### 返回数据 
+
+> | 参数      | 必选   | 类型   | 说明   |
+> | :------ | :--- | :--- | ---- |
+> | _id | true | String  | 用户id |
+> | createAt | true | String  | 无 |
+> | sex | true | String  | 无 |
 > | type | true | String  | 无 |
 > | avatar | true | String  | 无 |
+> | onlineState | true | boolean  | 无 |
+> | lastOnlineTime | true | String  | 无 |
+
+
+
 
 
 

@@ -48,7 +48,5 @@ module.exports = {
     }))
     return cb({isError: false, msg: {historys}});
   },
-
-
-
+  
 }

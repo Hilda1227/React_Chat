@@ -4,12 +4,12 @@ import '../../assete/scss/ActiveListItem.scss'
 
 const def = {
   avatar: 'https://cdn.dribbble.com/users/255/screenshots/2848799/avatar-rogemon_1x.png',
-  lastWord: '开始对话吧~',
+  onlineState: '离线',
   lastWordTime: new Date()
 }
 
 const ActiveListItem = (props) => {
-  const { setChatting , nickname, avatar, lastWord, lastWordTime, type, unread, clearUnread } = props;
+  const { setChatting , nickname, lastWord, avatar, onlineState, lastWordTime, type, unread, clearUnread } = props;
   return (
     <div className = 'active-list-item'
       onClick = {() => {
@@ -21,7 +21,7 @@ const ActiveListItem = (props) => {
         <img src = { avatar ? avatar: def.avatar } className = 'avatar'></img>
         <div className = 'info'>
           <p className = 'nickname'>{ nickname }</p>
-          <p className = 'last-word'>{ lastWord ? lastWord: def.lastWord }</p>
+          <p className = 'last-word'>{ lastWord ? lastWord : (onlineState ? '[在线]' : '[离开]')}</p>
         </div>
         <div className = 'other'>
           <time>{ lastWordTime }</time>

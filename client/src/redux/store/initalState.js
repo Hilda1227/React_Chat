@@ -12,7 +12,9 @@ const store = {
     nickname: '',
     avatar: '',
     lastWord: '',
+    onlineState: '',
     lastWordTime: '', 
+    _id: ''
   }],
   messages: [{
     from: 'xxx',
