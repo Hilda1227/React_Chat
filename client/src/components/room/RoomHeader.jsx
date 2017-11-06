@@ -7,20 +7,23 @@ class RoomHeader extends Component {
   }
   // 
   componentWillReceiveProps (nextProps) {  
-    const {chatting, nextChatting, getHistory} = this.props;  
-    if(!this.props.nextChatting.equals( nextProps.nextChatting ))
+    const {chatting, nextChatting, getHistory} = this.props;
+
+    if( !this.props.nextChatting.equals( nextProps.nextChatting ) ) {
       nextProps.setChatting(nextProps.nextChatting);
-    if(!chatting.equals( nextProps.chatting ))
+    }   
+    if(!chatting.equals( nextProps.chatting )) {
+      console.log('调用history')
       getHistory({
         to: nextProps.chatting.get('to'),
         type: 'private',
         token: localStorage.getItem('token')
       });
+    }
   }
 
   render () {
     const {chatting, closeChatting, nextChatting} = this.props;
-    console.log(nextChatting.toJS())
     return (
       <div className = { `room-header${chatting.isEmpty() ? '-hidden' : ''}` }>
         <div className = 'room-header-wrap'>

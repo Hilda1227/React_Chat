@@ -5,7 +5,7 @@ import { closeChatting } from '../redux/actions/chatting';
 import { setChatting } from '../redux/actions/chatting'
 import Immutable from 'immutable'
 import { getHistory } from '../redux/actions/message';
-// import { closeChatting } from '../redux/actions/chatting';
+
 
 import RoomHeader from '../components/room/RoomHeader';
 

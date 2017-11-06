@@ -4,12 +4,7 @@ import {
   SET_USER
 } from '../constants/user.js'
 
-const init = Immutable.fromJS({
-  nickname: 'xxx',
-  sex: 'xxx',
-  createAt: 'xxx',
-  avatar: 'xxx'
-});
+const init = Immutable.fromJS({});
 
 const user = (state = init, action) => {
   switch( action.type ){

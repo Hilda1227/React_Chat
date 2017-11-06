@@ -10,8 +10,7 @@ const ActiveList = ({ activeList }) => {
       {...item.toJS() }
       key={ item.get('nickname') }
       />
-    )
-    
+    )    
   });
   return (
     <div className='active-list'>

@@ -4,15 +4,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #fafafa;
+    border-bottom: 1px solid #efefef;
     cursor: pointer;
+    &:hover{
+      background-color: #ebfbfb;
+    }
   .active-item-wrap{
     width: 94%;
     height: 2.7rem;
     display: flex;
     justify-content: flex-start;
-    align-items: center; 
-    position: relative;      
+    align-items: center;    
+    position: relative; 
     .avatar{
       width: 2.7rem;
       height: 2.7rem;
@@ -29,12 +32,31 @@
         color: #aaa;
       }
     }
-    time{
+    .other{
+      height: 100%;
+      align-self: flex-end;
       position: absolute;
-      font-size: 10px;
-      color: #aaa;
-      right: 0px;
-      top: 0px;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      time{
+        font-size: 10px;
+      }
+      .unread{
+        width: 1.2rem;
+        height: 1.2rem;
+        display: inline-block;
+        border-radius: 50%;
+        background-color: #e1501b;
+        color: #fff;
+        text-align: center;
+        line-height: 1.2rem;
+        font-size: 10px;
+      }
+      .unread-hidden{
+        display: none;
+      }
     }
   }
 }

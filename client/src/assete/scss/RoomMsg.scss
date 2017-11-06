@@ -1,7 +1,6 @@
 .room-msg{
   width: 100%;
   flex-grow: 1;
-  position: relative;
   overflow: scroll;
   .room-msg-wrap{
     width: 95%;
@@ -9,11 +8,6 @@
     margin: auto;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    
+    justify-content: flex-start;   
   }
-}
-.room-msg-hidden{
-  visibility: hidden;
-  // display: none;
 }

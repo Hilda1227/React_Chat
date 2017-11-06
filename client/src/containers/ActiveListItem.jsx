@@ -2,12 +2,16 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import ActiveListitem from '../components/aside/ActiveListitem';
-import {setChatting} from '../redux/actions/chatting'
+import { setChatting } from '../redux/actions/chatting'
+import { clearUnread } from '../redux/actions/activeList'
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return {
-    onClick: payload => {
+    setChatting: payload => {
       dispatch(setChatting(payload))
+    },
+    clearUnread: payload => {
+      dispatch(clearUnread(payload))
     }
   }
 }

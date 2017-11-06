@@ -4,8 +4,16 @@ import {
   INIT_ACTIVE_LIST,
   ADD_ACTIVE_ITEM,
   REMOVE_ACTIVE_ITEM,
-  SET_ITEM_UNREAD,
+  UPDATE_ACTIVE_ITEM,
+  CLEAR_UNREAD,
 } from '../constants/activeList'
+
+const findItem = (state, payload) => {
+  return state.findKey((value) => (
+    value.get('nickname') === payload.get('nickname')
+    && value.get('type') === payload.get('type')
+  ));
+}
 
 const  def = Immutable.fromJS([{
   nickname: 'hilda',
@@ -17,28 +25,32 @@ const  def = Immutable.fromJS([{
 }]);
 
 const activeList = (state = def, action) => {
-    switch( action.type ){
-      case ADD_ACTIVE_ITEM: {
-        return state.push(action.payload);
-      }
-      case REMOVE_ACTIVE_ITEM: {   
-        let index = state.findKey((value) => {
-          return  value.get('nickname') === action.payload.get('nickname')
-              && value.get('type') === action.payload.get('type');
-        });     
-        return state.delete(index);
-      }
-      case SET_ITEM_UNREAD: {     
-        let index = state.findKey((value) => {
-          return  value.get('nickname') === action.payload.get('nickname')
-              && value.get('type') === action.payload.get('type');
-        });
-        let count = state.get(index).get('unread') || 0;  
-        return state.update(index, val => val.set( 'unread', count++ ));
-      }
-      default:
-        return state;
+  switch( action.type ){
+
+    case ADD_ACTIVE_ITEM: {
+      return state.push(action.payload);
     }
+
+    case REMOVE_ACTIVE_ITEM: {   
+      let index = findItem(state, action.payload);     
+      return state.delete(index);
+    }
+
+    case UPDATE_ACTIVE_ITEM: {     
+      let index = findItem(state, action.payload);
+      let unread = state.get(index).get('unread') || 0;
+      let newactive = state.get(index).merge(action.payload.set('unread', unread+1));
+      return state.set(index, newactive);
+    };
+
+    case CLEAR_UNREAD: {
+      let index = findItem(state, action.payload);
+      let newactive = state.get(index).set('unread', 0);
+      return state.set(index, newactive);
+    }
+    default:
+      return state;
   }
+}
 
   export default activeList;

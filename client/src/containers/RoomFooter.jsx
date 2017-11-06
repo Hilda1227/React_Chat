@@ -1,17 +1,22 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-// import { closeChatting } from '../redux/actions/chatting';
+import { addMessageItem } from '../redux/actions/message';
 
 import RoomFooter from '../components/room/RoomFooter';
 
 function mapStateToProps(state) {
   return {
-    chatting: state.chatting
+    chatting: state.chatting,
+    user: state.user
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addMessageItem: payload => dispatch(addMessageItem(payload))
   };
 }
 
 
 
-export default connect(
-    mapStateToProps
-)(RoomFooter);
+export default connect(mapStateToProps, mapDispatchToProps)(RoomFooter);

@@ -30,12 +30,16 @@ module.exports = function socket (io){
       .catch(err => cb({isError: true, errMsg: err}))
     });
 
+    socket.on('auto login', (info, cb) => {
+      parsetoken(info)
+      .then(() => user.autoLogin(info, socket, cb))
+      .catch( err => console.log(err) )     
+    })
+
     socket.on('disconnect', (info) => {
       user.disconnect(info, socket)
-      // parsetoken(info)
-      // .then(() => user.disconnect(info, socket, cb))
-      // .catch( err => console.log(err) )
     });
+
     // 得到所有用户列表
     socket.on('getUsers', (info, cb) => {
       user.getUsers(info, socket, cb)

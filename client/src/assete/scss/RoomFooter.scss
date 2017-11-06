@@ -5,6 +5,7 @@
   height: 3.5rem;
   display: flex;
   justify-content: center;
+  flex-shrink: 0;
   .footer-wrap{
     height: 2rem;
     width: 95%;

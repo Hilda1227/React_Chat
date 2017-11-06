@@ -28,6 +28,19 @@ module.exports = {
   },
 
 
+  async autoLogin (info, socket, cb) {
+    const {user_id} = info;
+    let user = await User.findOne({ _id: user_id });
+    if(user) {      
+      sock = new Socket({ user: user._id, socket_id: socket.id }); 
+      user.socket = sock._id; user.onlineState = true;
+      await user.save(); await sock.save();
+      return cb({isError: false, msg: {user}});
+    }
+    return cb({isError: true, msg: 'token登录失败'})
+  },
+
+
   async signUp (info, socket, cb) {
     let { nickname, email, password } = info,
         repnickname = await User.find({nickname: nickname}),

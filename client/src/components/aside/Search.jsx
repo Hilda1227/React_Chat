@@ -10,9 +10,9 @@ const Search = ({onEnter}) => {
       <input placeholder = '搜索开始新的对话' id = 'search'
         ref={ (node) => input=node }
         onKeyDown = { (e) => {
-          if(e.keyCode==13){
+          if(e.keyCode == 13) {
             e.target.value.trim()
-            ? onEnter({ nickname: e.target.value })
+            ? onEnter({ nickname: e.target.value, type: 'private' })
             : alert('请输入有效的用户名');
             e.target.value = '';
           }

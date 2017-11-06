@@ -17,6 +17,7 @@ export const socketEmit = (name, payload) => {
   return new Promise(function(resolve, reject) {
     try{
       socket.emit(name, payload, function (data) {
+        console.log('收到emit返回数据: ',data)
         if(data.isError) reject(data.msg);
         resolve(data.msg);
       });
