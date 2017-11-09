@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { getHistory } from '../redux/actions/message';
+import { getHistory } from '../../redux/actions/message';
 
-import RoomMsg from '../components/room/RoomMsg';
+import RoomMsg from '../../components/chat/RoomMsg';
 
 function mapStateToProps (state) {
   return {

@@ -7,11 +7,12 @@ const RoomFooter = ({ chatting, user, addMessageItem }) => {
   let input;
   const sendMsg = () => {
     socketEmit('new message', {
-      content: input.value, to: chatting.get('to'),
-      type: chatting.get('type'), token: localStorage.getItem('token')}
+      ...chatting.toJS(),
+      content: input.value,
+      token: localStorage.getItem('token')}
     );
     addMessageItem({
-      from: user.get('nickname'), createAt: '刚刚', 
+      sender: user.get('nickname'), createAt: '刚刚', 
       content: input.value, avatar: user.get('avatar')}
     );
     input.value = '';    

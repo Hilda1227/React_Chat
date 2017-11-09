@@ -1,0 +1,35 @@
+.input-form{
+    position: absolute;
+    width: 20rem;
+    height: 12.36rem;
+    background-color: #fff;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #848484;
+    .close{
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+    input{
+        width: 80%;
+        height: 2.1rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 1rem;
+        margin: 1.5rem auto;
+    }
+    button{
+        width: 80%;
+        height: 2.1rem;
+        border-radius: 1rem;
+        background: linear-gradient(to right, #be71a9, #3f5fc2);
+        color: #fff;
+        cursor: pointer;
+    }
+}
+.input-form-hidden{
+    display: none;
+}

@@ -1,19 +1,17 @@
 import React, {Component} from 'react';
-import '../assete/scss/Layout.scss'
-import AsideHeader from '../containers/AsideHeader'
-import Search from '../containers/Search'
-import ActiveList from '../containers/ActiveList'
-import RoomHeader from '../containers/RoomHeader'
+import '../../assete/scss/Layout.scss'
+import Search from '../../containers/chat/Search'
+import ActiveList from '../../containers/chat/ActiveList'
+import RoomHeader from '../../containers/chat/RoomHeader'
 
-import RoomMsg from '../containers/RoomMsg'
-import RoomFooter from '../containers/RoomFooter'
+import RoomMsg from '../../containers/chat/RoomMsg'
+import RoomFooter from '../../containers/chat/RoomFooter'
 
 const Layout = props => {
   const { chatting } = props;
   return (
-    <div className = 'index'>
+    <div className = 'chat'>
       <div className = 'aside'>
-        <AsideHeader/>
         <Search/>
         <ActiveList/>
       </div>

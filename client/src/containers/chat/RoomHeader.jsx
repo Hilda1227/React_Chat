@@ -1,13 +1,13 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { removeActiveItem } from '../redux/actions/activeList'
-import { closeChatting } from '../redux/actions/chatting';
-import { setChatting } from '../redux/actions/chatting'
+import { removeActiveItem } from '../../redux/actions/activeList'
+import { closeChatting } from '../../redux/actions/chatting';
+import { setChatting } from '../../redux/actions/chatting'
 import Immutable from 'immutable'
-import { getHistory } from '../redux/actions/message';
+import { getHistory } from '../../redux/actions/message';
 
 
-import RoomHeader from '../components/room/RoomHeader';
+import RoomHeader from '../../components/chat/RoomHeader';
 
 function mapStateToProps(state) {
   let last = state.activeList.last();

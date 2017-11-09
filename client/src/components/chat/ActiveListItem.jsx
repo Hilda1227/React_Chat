@@ -9,12 +9,12 @@ const def = {
 }
 
 const ActiveListItem = (props) => {
-  const { setChatting , nickname, lastWord, avatar, onlineState, lastWordTime, type, unread, clearUnread } = props;
+  const { setChatting , nickname, lastWord, avatar, onlineState, lastWordTime, type, unread, clearUnread, _id } = props;
   return (
     <div className = 'active-list-item'
       onClick = {() => {
-        setChatting(Immutable.fromJS({ to: nickname, type }));
-        if(unread !== 0)  clearUnread({ nickname, type });
+        setChatting(Immutable.fromJS({ to: nickname, type, _id }));
+        if(unread !== 0)  clearUnread({ _id, type });
       }}
     >
       <div className = 'active-item-wrap'>

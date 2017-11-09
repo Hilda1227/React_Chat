@@ -1,10 +1,10 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import AsideHeader from '../components/aside/AsideHeader';
+import Layout from '../../components/chat/Layout';
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    chatting: state.chatting
   };
 }
 
@@ -12,4 +12,4 @@ function mapStateToProps(state) {
 
 export default connect(
     mapStateToProps
-)(AsideHeader);
+)(Layout);

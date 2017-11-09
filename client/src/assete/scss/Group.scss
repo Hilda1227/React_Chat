@@ -1,0 +1,20 @@
+.group{   
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    #create-group, #join-group{
+        width: 8rem;
+        height: 8rem;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 8rem;
+        margin: 3rem;
+    }
+    #create-group{
+        background-color: #8a81fd; 
+    }
+    #join-group{
+        background-color: #ce47f0;
+    }
+}

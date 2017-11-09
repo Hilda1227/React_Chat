@@ -34,7 +34,7 @@ class SignUp extends Component {
     if(info) {
       socketEmit('signUp', info)
       .then(data => {
-        this.context.router.history.push("/"); 
+        this.context.router.history.push("/chat"); 
         localStorage.setItem('token', data.token);
         dispatchAction(setUser(data.user));
       })
@@ -46,7 +46,7 @@ class SignUp extends Component {
   validateInput () {
     let regEmail = /^[0-9a-zA-Z_-]+@\w+\.\w+$/,
         nickname = this.state.nickname ? this.state.nickname.trim() : '' ,
-        email = this.state.email ? this.state.email.trim() : '' ,
+        email    = this.state.email ? this.state.email.trim() : '' ,
         password = this.state.password ? this.state.password.trim() : '' ;
     if(nickname && regEmail.test(email) && password)
       return { nickname, email, password };

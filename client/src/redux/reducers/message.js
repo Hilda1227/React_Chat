@@ -5,22 +5,20 @@ import {
   ADD_MESSAGE_ITEM
 } from '../constants/message.js'
 
-const init = Immutable.fromJS([{
-  from: 'xxx',
-  avatar: 'xxx',
-  content: 'xxx',
-  createAt: 'xxx',
-  id: 1
-}]);
+const init = Immutable.fromJS([]);
 
 const message = (state = init, action) => {
   switch( action.type ){
-    case GET_HISTORY:
+
+    case GET_HISTORY: {
       return action.payload;
-    case ADD_MESSAGE_ITEM:
+    }
+    case ADD_MESSAGE_ITEM: {
       return state.push(action.payload);
-    default:
+    }
+    default: {
       return state;
+    }
   }
 }
 

@@ -1,17 +1,17 @@
 .active-list-item{
-    height: 3.8rem;
-    width: 100%;
+    height: 4rem;
+    width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid rgba(150,150,150, .1);
     cursor: pointer;
     &:hover{
-      background-color: #ebfbfb;
+      background-color:#282240;
     }
   .active-item-wrap{
     width: 94%;
-    height: 2.7rem;
+    height: 4rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;    
@@ -29,7 +29,7 @@
       height: 2.7rem;
       .last-word{
         font-size: 13px;
-        color: #aaa;
+        color: #605a75;
       }
     }
     .other{
@@ -48,7 +48,7 @@
         height: 1.2rem;
         display: inline-block;
         border-radius: 50%;
-        background-color: #e1501b;
+        background-color: #ce47f0;
         color: #fff;
         text-align: center;
         line-height: 1.2rem;

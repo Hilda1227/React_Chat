@@ -13,9 +13,9 @@ const userSchema = mongoose.Schema({
     type: String, 
     default: 'https://cdn.dribbble.com/users/35381/screenshots/3118843/wut.png'
   },
-  rooms: [{
+  groups: [{
     type: Schema.Types.ObjectId,
-    ref: 'room'
+    ref: 'group'
   }],
   // 私聊过的人
   // privates: [{

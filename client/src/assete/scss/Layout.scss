@@ -1,13 +1,12 @@
-.index{
-    width: 80%;
+.chat{
+    flex-grow: 1;
     max-width: 1300px;
     height: 100%;
     position: relative;
     margin: 0 auto; 
     display: flex;
-    justify-content: space-between; 
+    justify-content: flex-start; 
     transition: 500ms;
-    box-shadow: 1px 1px 9px 1px #666;
     .aside{
         width: 30%;
         height: 100%;
@@ -21,7 +20,6 @@
         height: 100%;
         float: right;
         transition: 500ms;
-        background-color: #eef1f6;
         display: flex;
         align-items: center;
         flex-direction: column;

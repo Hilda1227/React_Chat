@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ActiveList from '../components/aside/ActiveList';
+import ActiveList from '../../components/chat/ActiveList';
 // import { increment } from '../actionsCreators';
 
 // 哪些 Redux 全局的 state 是我们组件想要通过 props 获取的？

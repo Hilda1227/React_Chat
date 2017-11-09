@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ActiveListitem from '../components/aside/ActiveListitem';
-import { setChatting } from '../redux/actions/chatting'
-import { clearUnread } from '../redux/actions/activeList'
+import ActiveListitem from '../../components/chat/ActiveListitem';
+import { setChatting } from '../../redux/actions/chatting'
+import { clearUnread } from '../../redux/actions/activeList'
 
 function mapDispatchToProps (dispatch) {
   return {

@@ -24,7 +24,7 @@
     "socket.io-client": "^2.0.4"
   },
   "scripts": {
-    "dev": "node server.js",
+    "dev": "node server.js --history-api-fallback",
     "build": "webpack --config webpack-prod-config.js -p"
   },
   "devDependencies": {

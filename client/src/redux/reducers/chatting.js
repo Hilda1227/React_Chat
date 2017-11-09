@@ -7,14 +7,16 @@ import {
 
 const chatting = (state = Immutable.fromJS({}), action) => {
   switch( action.type ){
+
     case SET_CHATTING: {
       return Immutable.fromJS(action.payload);
     }
     case CLOSE_CHATTING:{
       return Immutable.fromJS({});
     }
-    default:
+    default: {
       return state;
+    }
   }
 }
 

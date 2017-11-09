@@ -10,10 +10,17 @@ html, body,#root, .App{
     width: 100%;
     height: 100%;
     position: relative;
+    // background-color: #473d67;
+    color: #bdbcc2;
+    font-family:  '微软雅黑'
+}
+ul, li{
+  list-style: none;
 }
 input{
   border:none;   
   font-size: 1rem; 
+  background-color: transparent;
   &:focus{
      outline: none;
  }

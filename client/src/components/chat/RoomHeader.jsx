@@ -5,18 +5,16 @@ class RoomHeader extends Component {
   constructor (props) {
     super(props);
   }
-  // 
   componentWillReceiveProps (nextProps) {  
     const {chatting, nextChatting, getHistory} = this.props;
-
+    
     if( !this.props.nextChatting.equals( nextProps.nextChatting ) ) {
       nextProps.setChatting(nextProps.nextChatting);
     }   
     if(!chatting.equals( nextProps.chatting )) {
       console.log('调用history')
       getHistory({
-        to: nextProps.chatting.get('to'),
-        type: 'private',
+        ...nextProps.chatting.toJS(),
         token: localStorage.getItem('token')
       });
     }
@@ -30,11 +28,11 @@ class RoomHeader extends Component {
           <div id = 'close' onClick = { () => { 
             closeChatting({ nickname: chatting.get('to'), type: chatting.get('type') });       
            }}>
+          </div>
+          <span>{ chatting.get('to') || '' }</span>
+          <div id = 'sendTo'></div>
         </div>
-        <span>{ chatting.get('to') || '' }</span>
-        <div id = 'sendTo'></div>
       </div>
-    </div>
     )
   }
 }

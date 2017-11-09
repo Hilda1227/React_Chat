@@ -1,6 +1,6 @@
 import React from 'react'
 import Immutable from 'immutable'
-import ActiveListItem from '../../containers/ActiveListItem';
+import ActiveListItem from '../../containers/chat/ActiveListItem';
 import '../../assete/scss/ActiveList.scss';
 
 const ActiveList = ({ activeList }) => {

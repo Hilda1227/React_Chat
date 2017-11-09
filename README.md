@@ -177,6 +177,35 @@
 > | onlineState | true | boolean  | 无 |
 > | lastOnlineTime | true | String  | 无 |
 
+#### 根据昵称查找某用户   
+
+> 'build group'
+
+#### 请求参数
+
+> | 参数      | 必选   | 类型   | 说明   |
+> | :------ | :--- | :--- | ---- |
+> | nickname | true | String  | 群组昵称 |
+> | avatar | 可选 | String  | 群组头像 |
+
+#### 返回数据 
+
+该group的所有信息
+
+> 'join group'
+
+#### 请求参数
+
+> | 参数      | 必选   | 类型   | 说明   |
+> | :------ | :--- | :--- | ---- |
+> | nickname | true | String  | 群组昵称 |
+
+#### 返回数据 
+> 成功: {isError: false, msg: {group}}
+> 失败: {isError: true, msg: ...}
+
+
+
 
 
 
