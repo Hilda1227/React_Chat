@@ -56,7 +56,7 @@ module.exports = {
   // @param {object} info   _id(用户id)
   async initGroupList (info, socket, cb) {
     let userGroups = await User.findOne({ _id: info._id })
-          .populate({path: 'groups', select: 'avatar nickname _id lastWord'});
+          .populate({path: 'groups', select: 'avatar nickname _id lastWord lastWordTime'});
           console.log(userGroups);
     if(userGroups){
       let groups = userGroups.groups.map(group => {
@@ -66,6 +66,7 @@ module.exports = {
           _id: group._id,
           nickname: group.nickname,
           lastWord: group.lastWord,
+          lastWordTime: group.lastWordTime,
           type: 'group'
         }
       });

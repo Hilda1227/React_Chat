@@ -1,17 +1,20 @@
+$nameClolor: #000;
+$otherColor: #838383;
+$hoverBg: #eef1f6;
 .active-list-item{
     height: 4rem;
-    width: 90%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid rgba(150,150,150, .1);
+    border-bottom: 1px solid #efefef;
     cursor: pointer;
     &:hover{
-      background-color:#282240;
+      background-color: $hoverBg;
     }
   .active-item-wrap{
     width: 94%;
-    height: 4rem;
+    height: 2.7rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;    
@@ -27,13 +30,15 @@
       justify-content: space-between;
       flex-direction: column;
       height: 2.7rem;
+      width: 60%;
+      color: $nameClolor;
       .last-word{
         font-size: 13px;
-        color: #605a75;
+        color: #838383;
       }
     }
     .other{
-      height: 100%;
+      height: 2.7rem;
       align-self: flex-end;
       position: absolute;
       right: 0;
@@ -48,7 +53,7 @@
         height: 1.2rem;
         display: inline-block;
         border-radius: 50%;
-        background-color: #ce47f0;
+        background-color: #f64c33;
         color: #fff;
         text-align: center;
         line-height: 1.2rem;

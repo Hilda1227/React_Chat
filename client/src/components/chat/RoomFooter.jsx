@@ -12,7 +12,7 @@ const RoomFooter = ({ chatting, user, addMessageItem }) => {
       token: localStorage.getItem('token')}
     );
     addMessageItem({
-      sender: user.get('nickname'), createAt: '刚刚', 
+      sender: user.get('nickname'), createAt: new Date(), 
       content: input.value, avatar: user.get('avatar')}
     );
     input.value = '';    

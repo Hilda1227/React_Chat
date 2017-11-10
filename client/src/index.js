@@ -44,7 +44,6 @@ socket.on('new message', data => {
   }else{
     dispatchAction(updateActiveItem({
       type: data.type,
-      nickname: data.sender, 
       lastWord:  data.content, 
       from: data.from,
       lastWordTime: data.createAt
@@ -66,14 +65,10 @@ const handleInit = token => {
   socketEmit('auto login', {token})
   .then( data => {
     dispatchAction(setUser( data.user ));
-    return socketEmit('init groups', {_id: data.user._id})
+    console.log('这里')
+    dispatchAction(initRoomList(data.user._id));
   })
-  .then( data => {
-    dispatchAction(initRoomList(data.groups))
-  })
-  .catch( err => {
-    console.log(err);
-  })
+  .catch( err => console.log(err))
   return true;
 }
 
@@ -81,6 +76,7 @@ const handleEnter = () => {
   const token = localStorage.getItem('token'),
         user_id = store.getState().user.get('_id');
   if(token){
+    console.log(store.getState().user)
     if(!user_id) return handleInit(token);
     return true;
   }else{

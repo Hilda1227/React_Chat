@@ -9,10 +9,11 @@ function parsetoken (info) {
   return new Promise(function (resolve, reject){
     try{
       console.log('解析token',jwt.verify(info.token, SIGN_KEY))
-      info.user_id = jwt.verify(info.token, SIGN_KEY).user;
+      info.user_id = jwt.verify(info.token, SIGN_KEY).user_id;
     }catch(err){
-      reject(err);
+      reject('token解析出错：',err);
     }
+    console.log('解析出来的info：', info)
     resolve(info);
   });
   
@@ -36,7 +37,7 @@ module.exports = function socket (io){
     // 自动登录
     socket.on('auto login', (info, cb) => {
       parsetoken(info)
-      .then(() => user.autoLogin(info, socket, cb))
+      .then(info => {console.log('传入的info',info);user.autoLogin(info, socket, cb)})
       .catch( err => console.log(err) )     
     })
 

@@ -24,7 +24,7 @@ const userSchema = mongoose.Schema({
   // }],
   createAt: {
     type: Date,
-    default: Date.now()
+    default: new Date()
   },
   socket: {
     type: Schema.Types.ObjectId,
@@ -35,8 +35,8 @@ const userSchema = mongoose.Schema({
     default: true
   },
   lastOnline: {
-    type: Number,
-    default: Date.now()
+    type: Date,
+    default: new Date()
   }
 });
 

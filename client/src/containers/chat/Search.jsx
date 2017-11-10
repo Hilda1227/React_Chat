@@ -12,7 +12,7 @@ function mapDispatchToProps(dispatch) {
       socketEmit('find user', { nickname: payload.nickname })
       .then(data => {
         dispatch(addActiveItem(Immutable.fromJS({...data.user, type: 'private'})));
-        dispatch(setChatting(Immutable.fromJS({to: data.user.nickname, type: 'private'})));
+        dispatch(setChatting(Immutable.fromJS({to: data.user.nickname, type: 'private', avatar: data.user.avatar})));
       })
       .catch(err => alert(err));
     }

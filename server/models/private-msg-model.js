@@ -13,7 +13,7 @@ const privateMsgSchema = mongoose.Schema({
   content: String,
   createAt: {
     type: Date,
-    default: Date.now()
+    default: new Date()
   }
 });
 

@@ -11,8 +11,14 @@
     color: #848484;
     .close{
         position: absolute;
-        top: 5px;
-        right: 5px;
+        top: 10px;
+        right: 10px;
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        background: url('../img/close2.png') no-repeat;
+        background-size: 100%;
+        cursor: pointer;
     }
     input{
         width: 80%;
@@ -29,7 +35,21 @@
         color: #fff;
         cursor: pointer;
     }
+    animation: showform 400ms 1 forwards;
 }
 .input-form-hidden{
     display: none;
+}
+
+
+@keyframes showform {
+    0%{
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+
 }

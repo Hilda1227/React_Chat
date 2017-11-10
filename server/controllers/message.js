@@ -36,7 +36,7 @@ module.exports = {
         sender: from.nickname, createAt: newMsg.createAt, content,
         avatar: from.avatar, id: newMsg._id, type, from: _id
       });
-      await Group.update({_id: _id}, {$set: {lastWord: content}});
+      await Group.update({_id: _id}, {$set: {lastWord: content, lastWordTime: newMsg.createAt}});
       return cb({ isError: false, msg: 'ok' });
     }    
   },

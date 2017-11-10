@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #fff;
     #create-group, #join-group{
         width: 8rem;
         height: 8rem;
@@ -12,9 +13,9 @@
         margin: 3rem;
     }
     #create-group{
-        background-color: #8a81fd; 
+        background-color: #7bceca;
     }
     #join-group{
-        background-color: #ce47f0;
+        background-color: #ffc76e;
     }
 }

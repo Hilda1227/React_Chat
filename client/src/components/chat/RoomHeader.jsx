@@ -25,11 +25,9 @@ class RoomHeader extends Component {
     return (
       <div className = { `room-header${chatting.isEmpty() ? '-hidden' : ''}` }>
         <div className = 'room-header-wrap'>
-          <div id = 'close' onClick = { () => { 
-            closeChatting({ nickname: chatting.get('to'), type: chatting.get('type') });       
-           }}>
-          </div>
-          <span>{ chatting.get('to') || '' }</span>
+        <img className = 'avatar' src = { chatting.get('avatar') }></img>
+          {/*<div id = 'menu'></div>*/}
+          <span className = 'nickname'>{ chatting.get('to') || '' }</span>
           <div id = 'sendTo'></div>
         </div>
       </div>

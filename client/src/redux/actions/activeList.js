@@ -1,4 +1,5 @@
-import Immutable from 'immutable'
+import Immutable from 'immutable';
+import { socketEmit } from './common.js';
 import {
   INIT_GROUP_LIST,
   ADD_ACTIVE_ITEM,
@@ -9,11 +10,14 @@ import {
 } from '../constants/activeList.js'
 
 
-export const initRoomList = (payload) => {
-  return {
+
+export const initRoomList = (payload) => (dispatch) => {
+  socketEmit('init groups', {_id: payload})
+  .then(data => dispatch({
     type: INIT_GROUP_LIST,
-    payload: Immutable.fromJS(payload)
-  }
+    payload: Immutable.fromJS(data.groups)
+  })) 
+  .catch(err => console.log(err))
 }
 
 export const addActiveItem = (payload) => {

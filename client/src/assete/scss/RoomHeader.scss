@@ -1,27 +1,36 @@
 .room-header{
-  height: 55px;
+  height: 4rem;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #fff;
   flex-shrink: 0;
+  background-color: #cde1d1;
+  border-left:1px solid rgba(200,200,200,1); 
   .room-header-wrap{
     width: 95%;
     display: flex;
-    justify-content: space-between; 
-    #close{
-      width: 1.5rem;
-      height: 1.5rem;
-      background-image: url('../img/close.png');
-      background-size: 100%;
-      cursor: pointer;
-    } 
+    justify-content: flex-start; 
+    align-items: center;
+    position: relative;
+    .avatar{
+      width: 2.7rem;
+      height: 2.7rem;
+      border-radius: 50%;
+      margin-right: 1rem;
+      border: 2px solid #fff;
+    }
+    .nickname{
+      font-size: 0.9rem;
+    }
     #sendTo{
       width: 1.7rem;
       height: 1.7rem;
       background-image: url('../img/user.png');
       background-size: 100%;
+      right: 0px;
+      position: absolute;
       cursor: pointer;
     } 
   }

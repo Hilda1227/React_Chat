@@ -35,7 +35,7 @@ class Login extends Component {
     e.preventDefault();
     socketEmit('login', {email: this.state.email, password: this.state.password})
     .then(data => {
-      this.context.router.history.push("/chat"); 
+      this.context.router.history.push("/"); 
       localStorage.setItem('token', data.token);
       dispatchAction(setUser(data.user));
     })

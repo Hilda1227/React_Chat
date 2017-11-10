@@ -32,6 +32,8 @@ module.exports = {
   async autoLogin (info, socket, cb) {
     const {user_id} = info;
     let user = await User.findOne({ _id: user_id });
+    console.log('user_id: ', user_id);
+    console.log('user: ', user)
     if(user) {      
       sock = new Socket({ user: user._id, socket_id: socket.id }); 
       user.socket = sock._id; user.onlineState = true;
@@ -57,7 +59,7 @@ module.exports = {
     let user = new User ({ nickname, email, password }),
         sock = new Socket({user: user._id, socket_id: socket.id}),
         exp = Math.floor((new Date().getTime())/1000) + 60 * 60 * 24 * 30,
-        token = await jwt.sign({ user: user._id, exp }, SIGN_KEY); 
+        token = await jwt.sign({ user_id: user._id, exp }, SIGN_KEY); 
     user.socket = sock._id; user.onlineState = true; user.save(); 
     sock.save(); 
     socket.broadcast.emit('online', {_id: user._id, nickname: user.nickname});
@@ -70,7 +72,7 @@ module.exports = {
     if(online){
       var user = User.update({_id: online.user._id},{$set: {
         onlineState: false,
-        lastOnline: Date.now(),
+        lastOnline: new Date(),
       }});
       let sock = Socket.remove({socket_id: socket.id});
       await sock; await user;
