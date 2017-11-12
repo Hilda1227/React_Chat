@@ -5,9 +5,9 @@ import '../../assete/scss/ActiveListItem.scss'
 
 
 const ActiveListItem = (props) => {
-  const { setChatting , nickname, lastWord, avatar, onlineState, lastWordTime, type, unread, clearUnread, _id } = props;
+  const {isCur, setChatting , nickname, lastWord, avatar, onlineState, lastWordTime, type, unread, clearUnread, _id } = props;
   return (
-    <div className = 'active-list-item'
+    <div className = { `active-list-item active-list-item${isCur ? '-cur' : ''}` }
       onClick = {() => {
         setChatting(Immutable.fromJS({ to: nickname, type, _id, avatar }));
         if(unread !== 0)  clearUnread({ _id, type });
@@ -30,3 +30,11 @@ const ActiveListItem = (props) => {
 }
 
 export default ActiveListItem
+//     nickname: '',
+//     avatar: '',
+//     lastWord: '',
+//     onlineState: '',//仅私聊
+//     lastWordTime: '', 
+//     unread: Number,
+//     type: 'private or group',
+//     _id: ''// 群组_id或私聊对像的_id

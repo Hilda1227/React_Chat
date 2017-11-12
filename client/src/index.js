@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware  } from 'redux'
-import { BrowserRouter, Route, BrowserHistory, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import thunkMiddleware from 'redux-thunk'
 
 import store from './redux/store'
@@ -37,9 +37,7 @@ import './assete/scss/common.scss'
 
 
 socket.on('new message', data => {
-  console.log('收到群聊', data)
   if(data.from === store.getState().chatting.get('_id')){
-    console.log('添加消息')
     dispatchAction(addMessageItem(data))
   }else{
     dispatchAction(updateActiveItem({
@@ -65,19 +63,16 @@ const handleInit = token => {
   socketEmit('auto login', {token})
   .then( data => {
     dispatchAction(setUser( data.user ));
-    console.log('这里')
     dispatchAction(initRoomList(data.user._id));
   })
-  .catch( err => console.log(err))
-  return true;
+  .catch( err => {window.location.href='/login'; console.log(err)})
 }
 
 const handleEnter = () => {
   const token = localStorage.getItem('token'),
         user_id = store.getState().user.get('_id');
-  if(token){
-    console.log(store.getState().user)
-    if(!user_id) return handleInit(token);
+  if(token){   
+    if(!user_id) handleInit(token);
     return true;
   }else{
     return false;

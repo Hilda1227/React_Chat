@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import { socketEmit } from './common.js';
+import { setChatting } from './chatting.js'
 import {
   INIT_GROUP_LIST,
   ADD_ACTIVE_ITEM,
@@ -25,6 +26,18 @@ export const addActiveItem = (payload) => {
     type: ADD_ACTIVE_ITEM,
     payload: Immutable.fromJS(payload)
   }
+}
+
+export const searchAddItem = (payload) => (dispatch) => {
+  socketEmit('find user', { nickname: payload.nickname })
+  .then(data => {
+    dispatch(addActiveItem(Immutable.fromJS({...data.user, type: 'private'})));
+    dispatch(setChatting(Immutable.fromJS({
+      to: data.user.nickname, type: 'private', 
+      avatar: data.user.avatar, _id: data.user._id
+    })));
+  })
+  .catch(err => alert(err));
 }
 
 export const removeActiveItem = (payload) => {

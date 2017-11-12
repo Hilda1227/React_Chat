@@ -6,7 +6,7 @@
   align-items: center;
   color: #fff;
   flex-shrink: 0;
-  background-color: #cde1d1;
+  background-color: #7dcfcb;
   border-left:1px solid rgba(200,200,200,1); 
   .room-header-wrap{
     width: 95%;
@@ -24,7 +24,7 @@
     .nickname{
       font-size: 0.9rem;
     }
-    #sendTo{
+    #target{
       width: 1.7rem;
       height: 1.7rem;
       background-image: url('../img/user.png');

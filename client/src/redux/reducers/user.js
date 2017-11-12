@@ -7,9 +7,10 @@ import {
 const init = Immutable.fromJS({});
 
 const user = (state = init, action) => {
-  console.log('这里',action.payload)
+  
   switch( action.type ){
     case SET_USER: {
+      console.log('这里user',action.payload)
       return action.payload;
     }
     default: {

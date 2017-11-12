@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { setUser } from '../redux/actions/user';
 import { dispatchAction } from '../redux/actions/common'
 
-
+import { initRoomList } from '../redux/actions/activeList'
 
 class Login extends Component {
   constructor (props) {
@@ -34,10 +34,11 @@ class Login extends Component {
   handleSubmmit (e) {
     e.preventDefault();
     socketEmit('login', {email: this.state.email, password: this.state.password})
-    .then(data => {
-      this.context.router.history.push("/"); 
+    .then(data => { 
       localStorage.setItem('token', data.token);
       dispatchAction(setUser(data.user));
+      dispatchAction(initRoomList(data.user._id));
+      this.context.router.history.push("/");
     })
     .catch(err => alert(err))
   }

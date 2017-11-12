@@ -5,7 +5,8 @@ import ActiveList from '../../components/chat/ActiveList';
 
 function mapStateToProps(state) {
   return {
-    activeList: state.activeList
+    activeList: state.activeList,
+    curRoom: state.chatting.get('_id')
   };
 }
 

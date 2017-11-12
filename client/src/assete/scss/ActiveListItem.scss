@@ -1,6 +1,7 @@
 $nameClolor: #000;
 $otherColor: #838383;
 $hoverBg: #eef1f6;
+$curBg: #eef1f6;
 .active-list-item{
     height: 4rem;
     width: 100%;
@@ -64,4 +65,7 @@ $hoverBg: #eef1f6;
       }
     }
   }
+}
+.active-list-item-cur{
+  background-color: $curBg;
 }

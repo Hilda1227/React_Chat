@@ -14,7 +14,7 @@ $roomBg: #fbfbfb;
     box-shadow: 1px 1px 9px 1px #666;
     overflow-x: hidden;
     .aside{
-        width: 35.2%;
+        width: 31.2%;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -22,7 +22,7 @@ $roomBg: #fbfbfb;
         transition: 500ms;
     }
     .room{
-        width: 64.8%;
+        width: 68.8%;
         height: 100%;
         float: right;
         transition: 500ms;
@@ -32,9 +32,6 @@ $roomBg: #fbfbfb;
         justify-content: space-between;
         position: relative;
         background-color: $roomBg;
-    }
-    .room-hidden{
-      visibility: hidden;
     }
   }
   

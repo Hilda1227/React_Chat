@@ -12,14 +12,13 @@
 }
 $msgBgColor: #fff;
 $msgColor: #000;
-$msgBgColorSelf: #cde1d1;
+$msgBgColorSelf: #5db0b2;
 $msgColorSelf: #fff;
 $otherColor: #838383;
 
 .room-msg-item{
     width: 70%;
-    height: 3.5rem;
-    margin: 1.5rem 0;
+    margin: 1rem 0;
     display: flex;
     align-items: center;
   .avatar{

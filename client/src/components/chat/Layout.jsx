@@ -4,7 +4,7 @@ import Search from '../../containers/chat/Search'
 import ActiveList from '../../containers/chat/ActiveList'
 import RoomHeader from '../../containers/chat/RoomHeader'
 import AsideHeader from '../../containers/chat/AsideHeader'
-
+import Empty from './Empty'
 import RoomMsg from '../../containers/chat/RoomMsg'
 import RoomFooter from '../../containers/chat/RoomFooter'
 
@@ -13,15 +13,18 @@ const Layout = props => {
   return (
     <div className = 'layout'>
       <div className = 'aside'>
-   
         <Search/>
         <ActiveList/>
       </div>
-      <div className = { `room${ chatting.isEmpty() ? '-hidden' : '' }` }>
-        <RoomHeader/>
-        <RoomMsg/>
-        <RoomFooter/>
-      </div>
+      {
+        chatting.isEmpty() 
+        ? <Empty/>
+        :  (<div className = 'room'>
+            <RoomHeader/>
+            <RoomMsg/>
+            <RoomFooter/>
+          </div>)
+      }
     </div> 
   );
 }

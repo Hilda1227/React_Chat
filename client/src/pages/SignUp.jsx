@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 
 import { setUser } from '../redux/actions/user';
 import { dispatchAction } from '../redux/actions/common'
+import { initRoomList } from '../redux/actions/activeList'
 
 class SignUp extends Component {
   constructor (props) {
@@ -34,9 +35,10 @@ class SignUp extends Component {
     if(info) {
       socketEmit('signUp', info)
       .then(data => {
-        this.context.router.history.push("/chat"); 
         localStorage.setItem('token', data.token);
         dispatchAction(setUser(data.user));
+        dispatchAction(initRoomList(data.user._id));
+        this.context.router.history.push("/"); 
       })
       .catch(err => alert(err))
     }

@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../assete/scss/Search.scss'
 
-const Search = ({addUser}) => {
+const Search = ({searchAddItem}) => {
   let input;
   return (
     <div className = 'search'>
@@ -12,7 +12,7 @@ const Search = ({addUser}) => {
         onKeyDown = { (e) => {
           if(e.keyCode == 13) {
             e.target.value.trim()
-            ? addUser({ nickname: e.target.value, type: 'private' })
+            ? searchAddItem({ nickname: e.target.value, type: 'private' })
             : alert('请输入有效的用户名');
             e.target.value = '';
           }

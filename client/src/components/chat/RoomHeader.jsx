@@ -19,6 +19,13 @@ class RoomHeader extends Component {
       });
     }
   }
+  componentDidMount (props) {
+    const {chatting, nextChatting, getHistory} = this.props;
+    getHistory({
+        ...chatting.toJS(),
+        token: localStorage.getItem('token')
+    });
+  }
 
   render () {
     const {chatting, closeChatting, nextChatting} = this.props;
@@ -28,7 +35,7 @@ class RoomHeader extends Component {
         <img className = 'avatar' src = { chatting.get('avatar') }></img>
           {/*<div id = 'menu'></div>*/}
           <span className = 'nickname'>{ chatting.get('to') || '' }</span>
-          <div id = 'sendTo'></div>
+          <div id = 'target'></div>
         </div>
       </div>
     )

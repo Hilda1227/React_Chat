@@ -7,18 +7,21 @@ const RoomFooter = ({ chatting, user, addMessageItem }) => {
   let input;
   const sendMsg = () => {
     socketEmit('new message', {
-      ...chatting.toJS(),
+      type: chatting.get('type'),
+      toId: chatting.get('_id'),
       content: input.value,
       token: localStorage.getItem('token')}
     );
     addMessageItem({
-      sender: user.get('nickname'), createAt: new Date(), 
-      content: input.value, avatar: user.get('avatar')}
+      sender: user.get('nickname'), 
+      createAt: new Date(), 
+      content: input.value, 
+      avatar: user.get('avatar')}
     );
     input.value = '';    
   } 
   return (
-    <div className = { `room-footer${chatting.isEmpty() ? '-hidden' : ''}` }>
+    <div className = 'room-footer'>
       <div className = 'footer-wrap'>
         <input  placeholder = '说点啥呗~' type = 'text'
           ref={ (node) => input=node }
@@ -27,7 +30,10 @@ const RoomFooter = ({ chatting, user, addMessageItem }) => {
         <div  onClick = { sendMsg } className = 'tool' id = 'send'></div>
         <div  className = 'tool' id = 'emoji'>
         </div>
-      </div>
+      </div>     
+        <ul className = 'more'>
+          <li className = 'button-item' id = 'button-file'><input type = 'file'/></li>
+        </ul> 
     </div>
   )
 }

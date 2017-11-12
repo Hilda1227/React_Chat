@@ -1,0 +1,25 @@
+.empty{
+    background-color: #fbfbfb;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .welcome{
+        display: flex;
+        flex-direction: column;
+        .welcome-img{
+            width: 20rem;
+            height: 20rem;
+            border-radius: 50%;
+            background: url('../img/empty.jpg') center;
+            background-size: 100%;
+        }
+        .welcome-word{
+            display: inline-block;
+            width: 20rem;
+            margin-top: 1rem;
+            text-align: center;
+            color: #929fa6;
+        }
+    }
+}

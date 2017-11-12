@@ -1,8 +1,10 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt-nodejs');
 const SIGN_KEY = require('../config/JWT_KEY').SIGN_KEY;
+const initConfig = require('../config/init-config.js');
 const User = require('../models/user-model.js');
 const Socket = require('../models/socket-model.js');
+const Group = require('../models/group-model.js');
 
 module.exports = {
 
@@ -57,15 +59,19 @@ module.exports = {
     password = bcrypt.hashSync(password, salt);
     // 新建该用户实例
     let user = new User ({ nickname, email, password }),
-        sock = new Socket({user: user._id, socket_id: socket.id}),
+        sock = await new Socket({user: user._id, socket_id: socket.id}).save(),
         exp = Math.floor((new Date().getTime())/1000) + 60 * 60 * 24 * 30,
         token = await jwt.sign({ user_id: user._id, exp }, SIGN_KEY); 
-    user.socket = sock._id; user.onlineState = true; user.save(); 
-    sock.save(); 
-    socket.broadcast.emit('online', {_id: user._id, nickname: user.nickname});
+    user.socket = sock._id; user.onlineState = true;
+    
+    let initGroup = await Group.findOne({nickname: initConfig.AUTHER});
+    console.log('这里'+user, token, "这是group"+initGroup);
+    user.groups.push(initGroup._id); initGroup.members.push(user._id);
+    
+    await user.save();  await initGroup.save();
     return cb({ isError: false, msg: {token, user} });
   },
-
+  
 
   async disconnect (info, socket, cb) {
     let online = await Socket.findOne({socket_id:socket.id}).populate('user','_id nickname');

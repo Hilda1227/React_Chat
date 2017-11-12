@@ -11,7 +11,7 @@ class RoomMsg extends Component {
     const lists = this.props.messages.map((item, index) => (
       <RoomMsgItem
         {...item.toJS()}
-        key = { index }
+        key = { item.get('id') }
       />
     ));
     return (

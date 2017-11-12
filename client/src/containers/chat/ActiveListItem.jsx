@@ -5,6 +5,8 @@ import ActiveListitem from '../../components/chat/ActiveListitem';
 import { setChatting } from '../../redux/actions/chatting'
 import { clearUnread } from '../../redux/actions/activeList'
 
+
+
 function mapDispatchToProps (dispatch) {
   return {
     setChatting: payload => {
