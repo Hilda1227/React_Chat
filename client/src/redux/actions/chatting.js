@@ -7,7 +7,7 @@ import {
 export const setChatting = (payload) => {
   return {
     type: SET_CHATTING,
-    payload
+    payload: Immutable.fromJS(payload)
   }
 }
 export const closeChatting = () => {

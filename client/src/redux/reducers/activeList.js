@@ -11,8 +11,7 @@ import {
 
 const findItem = (state, payload) => {
   return state.findKey((value) => (
-    value.get('_id') === payload.get('nickname')
-    && value.get('type') === payload.get('type')
+    value.get('_id') === payload.get('_id')
   ));
 }
 
@@ -28,33 +27,27 @@ const activeList = (state = Immutable.fromJS([]), action) => {
       return state.delete(index);
     }
 
-    case UPDATE_ACTIVE_ITEM: {           
-      let index = state.findKey((value) => {
-        return value.get('_id') === action.payload.get('from')
-        && value.get('type') === action.payload.get('type')
-      }); 
+    case UPDATE_ACTIVE_ITEM: {      
+      let index = findItem(state, action.payload);  
       if(typeof index !== 'undefined'){  
-           
-        let unread = state.get(index).get('unread') || 0;
-        let newactive = state.get(index).merge(action.payload.set('unread', unread+1));
-        return state.set(index, newactive);
+        if(!action.payload.get('curRoom')){
+          let unread = state.get(index).get('unread') || 0;
+          let newactive = state.get(index).merge(action.payload.set('unread', unread+1));
+          return state.set(index, newactive);
+        }   
+        return state.set(index, state.get(index).merge(action.payload));
       }
       return state;
     };
 
     case CLEAR_UNREAD: {
-      let index = state.findKey((value) => {
-        return value.get('_id') === action.payload.get('_id')
-        && value.get('type') === action.payload.get('type')
-      }); 
+      let index = findItem(state, action.payload); 
       let newactive = state.get(index).set('unread', 0);
       return state.set(index, newactive);
     };
 
     case SET_ONLINE: {
-      let index = state.findKey((value) => (
-        value.get('_id') === action.payload.get('_id')
-      ));
+      let index = findItem(state, action.payload);
       if(typeof index != 'undefined'){
         let newactive = state.get(index).set('onlineState', action.payload.get('state'));
         return state.set(index, newactive);

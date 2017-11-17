@@ -15,7 +15,8 @@ function mapStateToProps(state) {
     ? {
       to: last.get('nickname'),
       type: last.get('type'),
-      avatar: last.get('avatar')
+      avatar: last.get('avatar'),
+      _id: last.get('_id')
     }
     : {};
   return {

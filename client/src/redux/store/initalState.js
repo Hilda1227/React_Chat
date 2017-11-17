@@ -12,23 +12,25 @@ const store = {
     nickname: '',
     avatar: '',
     lastWord: '',
-    onlineState: '',//仅私聊
     lastWordTime: '', 
-    lastSender: '',
+    lastWordSender: '',
     unread: Number,
-    type: 'private or group',
+    type: '', // private or group
     _id: ''// 群组_id或私聊对像的_id
   }],
   messages: [{
-    from: 'xxx',
+    from: 'xxx', //当前聊天对象_id或者当前群组的_id
+    sender: '', // 发送者昵称
     avatar: 'xxx',
-    content: 'xxx',
+    content: '',
     createAt: 'xxx',
-    _id: ''
+    type: '', // private or groups
+    msgType: '', // text or file 
+    _id: ''// 消息本身的id
   }],
   chatting: {
     to: 'xxx',
-    type: 'private',
+    type: '',
     avatar: '',
     _id: '',
   }

@@ -1,18 +1,8 @@
-@mixin triangle ($size, $rotate, $direction, $top, $color) {
-    &::after{
-        content: '';
-        position: absolute;
-        border-top: $size solid $color;
-        border-left: $size solid transparent;
-        border-right: $size solid transparent;
-        transform: rotate($rotate);
-        #{$direction}: -$size+0.2rem; 
-        top: $top;
-    }
-}
+@import './variable.scss';
+
 $msgBgColor: #fff;
 $msgColor: #000;
-$msgBgColorSelf: #5db0b2;
+$msgBgColorSelf: $mainColor;
 $msgColorSelf: #fff;
 $otherColor: #838383;
 
@@ -57,7 +47,7 @@ $otherColor: #838383;
 }
  
 .room-msg-item-other .content{
-    @include triangle (0.7rem, 10deg, left, 0.5rem, $msgBgColor)
+    @include triangle (0.8rem, 10deg, left, 0.5rem, $msgBgColor)
 }
 .room-msg-item-self{ 
     justify-content: flex-end;
@@ -81,7 +71,7 @@ $otherColor: #838383;
         .content{ 
             background-color: $msgBgColorSelf;
             color: $msgColorSelf;      
-            @include triangle(0.7rem, -10deg, right, 0.5rem, $msgBgColorSelf);
+            @include triangle(0.8rem, -10deg, right, 0.5rem, $msgBgColorSelf);
         }  
     }  
 }

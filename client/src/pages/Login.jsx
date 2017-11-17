@@ -19,7 +19,6 @@ class Login extends Component {
       email: '',
       password: ''
     }
-    this.handleSubmmit = this.handleSubmmit.bind(this);
   }
   static contextTypes = {
     router: PropTypes.object.isRequired

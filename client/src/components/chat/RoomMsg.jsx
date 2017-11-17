@@ -1,6 +1,6 @@
 import React, { Component }from 'react';
 import '../../assete/scss/RoomMsg.scss';
-import RoomMsgItem from './RoomMsgItem';
+import MessageItemBox from './MessageItemBox';
 
 class RoomMsg extends Component {
   constructor (props) {
@@ -9,9 +9,10 @@ class RoomMsg extends Component {
 
   render () {
     const lists = this.props.messages.map((item, index) => (
-      <RoomMsgItem
+      <MessageItemBox
         {...item.toJS()}
-        key = { item.get('id') }
+        isSelf = { this.props.user == item.get('sender') }
+        key = { item.get('_id') || index}
       />
     ));
     return (

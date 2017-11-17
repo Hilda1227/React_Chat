@@ -56,21 +56,25 @@ module.exports = {
   // @param {object} info   _id(用户id)
   async initGroupList (info, socket, cb) {
     let userGroups = await User.findOne({ _id: info._id })
-          .populate({path: 'groups', select: 'avatar nickname _id lastWord lastWordTime'});
-          console.log(userGroups);
+          .populate({
+            path: 'groups', select: 'avatar nickname _id lastWord lastWordTime',
+            populate: {
+              path: 'lastWord', select: 'content createAt from msgType',
+              populate: {path: 'from', select: 'nickname'}
+            }
+          });
     if(userGroups){
-      let groups = userGroups.groups.map(group => {
-        socket.join(group._id);
-        return {
-          avatar: group.avatar,
-          _id: group._id,
-          nickname: group.nickname,
-          lastWord: group.lastWord,
-          lastWordTime: group.lastWordTime,
-          type: 'group'
+      let groups = userGroups.groups.map(item => {
+        socket.join(item._id);
+        let group = {avatar: item.avatar, _id: item._id, nickname: item.nickname, type: 'group'};
+        if(item.lastWord) {
+          group.lastWord = item.lastWord.content;
+          group.msgType = item.lastWord.msgType;
+          group.lastWordTime = item.lastWord.createAt;
+          group.lastWordSender = item.lastWord.from.nickname
         }
+        return group;
       });
-      console.log(groups)
       return cb({isError: false, msg: {groups}});
     }
     return cb({isError: true, msg: '服务器好像凌乱了'});   

@@ -7,7 +7,8 @@ import RoomMsg from '../../components/chat/RoomMsg';
 function mapStateToProps (state) {
   return {
     chatting: state.chatting,
-    messages: state.message
+    messages: state.message,
+    user: state.user.get('nickname')
   };
 }
 

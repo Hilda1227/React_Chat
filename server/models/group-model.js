@@ -12,12 +12,8 @@ const groupSchema = mongoose.Schema({
     ref: 'user'
   },
   lastWord: {
-    type: String,
-    default: '您已加入该群啦，一起来聊天吧~'
-  },
-  lastWordTime: {
-    type: Date,
-    default: new Date()
+    type: Schema.Types.ObjectId,
+    ref: 'groupMsg'
   },
   members: [{
     type: Schema.Types.ObjectId,

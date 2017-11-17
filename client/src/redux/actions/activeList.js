@@ -29,7 +29,7 @@ export const addActiveItem = (payload) => {
 }
 
 export const searchAddItem = (payload) => (dispatch) => {
-  socketEmit('find user', { nickname: payload.nickname })
+  socketEmit('find user', payload)
   .then(data => {
     dispatch(addActiveItem(Immutable.fromJS({...data.user, type: 'private'})));
     dispatch(setChatting(Immutable.fromJS({

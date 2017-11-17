@@ -1,0 +1,13 @@
+@mixin triangle ($size, $rotate, $direction, $top, $color) {
+    &::after{
+        content: '';
+        position: absolute;
+        border-top: $size solid $color;
+        border-left: $size solid transparent;
+        border-right: $size solid transparent;
+        transform: rotate($rotate);
+        #{$direction}: -$size+0.2rem; 
+        top: $top;
+    }
+}
+$mainColor: #7dcfcb;

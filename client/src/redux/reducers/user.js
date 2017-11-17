@@ -10,7 +10,6 @@ const user = (state = init, action) => {
   
   switch( action.type ){
     case SET_USER: {
-      console.log('这里user',action.payload)
       return action.payload;
     }
     default: {

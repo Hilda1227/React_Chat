@@ -6,6 +6,12 @@ import { searchAddItem } from '../../redux/actions/activeList'
 import { setChatting } from '../../redux/actions/chatting'
 import Search from '../../components/chat/Search';
 
+function mapStateToProps(state) {
+  return {
+    user_id: state.user.get('_id')
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     searchAddItem: (payload) => dispatch(searchAddItem(payload))
@@ -13,4 +19,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(() => ({}), mapDispatchToProps)(Search);
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

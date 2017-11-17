@@ -1,12 +1,19 @@
 import React from 'react'
 import Immutable from 'immutable'
-import { formatDate } from '../../util'
+import { formatDate } from '../../util/date.js'
 import '../../assete/scss/ActiveListItem.scss'
 
 
 const ActiveListItem = (props) => {
-  const {isCur, setChatting , nickname, lastWord, avatar, onlineState, lastWordTime, type, unread, clearUnread, _id } = props;
-  return (
+  let {
+    isCur, setChatting , nickname, lastWord, avatar, lastWordTime,
+    type, unread, clearUnread, _id, lastWordSender, msgType
+  } = props;
+
+  lastWord = (lastWord && msgType === 'text') 
+             ? lastWord 
+             : (lastWord ? ('[' + msgType + ' message]') : null);
+  return (   
     <div className = { `active-list-item active-list-item${isCur ? '-cur' : ''}` }
       onClick = {() => {
         setChatting(Immutable.fromJS({ to: nickname, type, _id, avatar }));
@@ -17,9 +24,9 @@ const ActiveListItem = (props) => {
         <img src = { avatar } className = 'avatar'></img>
         <div className = 'info'>
           <p className = 'nickname'>{ nickname }</p>
-          <p className = 'last-word'>{ lastWord ? lastWord : (onlineState ? '[在线]' : '[离开]')}</p>
+          <p className = 'last-word'>{ lastWord ? (lastWordSender + ': ' +lastWord) : '开始对话' }</p>
         </div>
-        <div className = 'other'>
+        <div className = 'other'> 
           <time>{ formatDate(lastWordTime ? lastWordTime : new Date()) }</time>
           <span className = {`unread${ unread == 0 || unread == undefined ? '-hidden' : ''}`}>{ unread }</span>
         </div>      

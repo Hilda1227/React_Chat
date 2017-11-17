@@ -10,18 +10,18 @@ const GroupMsg = require('../models/group-msg-model.js');
 
 module.exports = {
  
-  // type: 'private' or 'group', to: 发送者昵称, _id: 发送目标对象的id 
+  // type: 'private' or 'group', to: 发送者昵称, toId: 发送目标对象的id 
   async newMessage (info, socket, cb, io) {
-    const { type, user_id, to, content, toId } = info;
+    const { type, user_id, to, content, toId, msgType} = info;
     let from = await User.findOne({ _id: user_id });
     if(type === 'private'){
       console.log('收到私聊', info)
       let target = await User.findOne({ _id: toId }).populate('socket','socket_id'),          
-          newMsg = await new PrivateMsg({from: from._id, to: target._id, content});      
+          newMsg = await new PrivateMsg({from: from._id, to: target._id, content, msgType});      
       if(target.onlineState) {
         let msg = {
           sender: from.nickname, createAt: newMsg.createAt, content,
-          avatar: from.avatar, id: newMsg._id, type, from: from._id
+          avatar: from.avatar, _id: newMsg._id, type, from: from._id, msgType
         } 
         io.to(target.socket.socket_id).emit('new message', msg);        
       }
@@ -30,12 +30,12 @@ module.exports = {
     }
     else{
       console.log('收到群聊',info)
-      let newMsg = await new GroupMsg({content, from: user_id, to: toId, createAt: new Date()}).save();     
+      let newMsg = await new GroupMsg({content, from: user_id, to: toId, createAt: new Date(), msgType}).save();     
       socket.broadcast.to(toId).emit('new message',{
         sender: from.nickname, createAt: newMsg.createAt, content,
-        avatar: from.avatar, id: newMsg._id, type, from: toId
+        avatar: from.avatar, _id: newMsg._id, type, from: toId, msgType
       });
-      await Group.update({_id: toId}, {$set: {lastWord: content, lastWordTime: newMsg.createAt}});
+      await Group.update({_id: toId}, {$set: {lastWord: newMsg._id}});
       return cb({ isError: false, msg: 'ok' });
     }    
   },
@@ -56,7 +56,8 @@ module.exports = {
         avatar: item.from.avatar,
         content: item.content,
         createAt: item.createAt,
-        id: item._id
+        _id: item._id,
+        msgType: item.msgType
       }))
       return cb({isError: false, msg: {historys}});
     }else{
@@ -69,7 +70,8 @@ module.exports = {
         avatar: item.from.avatar,
         content: item.content,
         createAt: item.createAt,
-        id: item._id
+        _id: item._id,
+        msgType: item.msgType
       }));
       cb({isError: false, msg: {historys}})
     }    

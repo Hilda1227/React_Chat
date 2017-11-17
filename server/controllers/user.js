@@ -5,6 +5,7 @@ const initConfig = require('../config/init-config.js');
 const User = require('../models/user-model.js');
 const Socket = require('../models/socket-model.js');
 const Group = require('../models/group-model.js');
+const PrivateMsg = require('../models/private-msg-model.js'); 
 
 module.exports = {
 
@@ -89,9 +90,25 @@ module.exports = {
 
 
   async findUser (info, socket, cb) {
-    let { nickname } = info;
-    user = await User.findOne({ nickname });
-    if(user) return cb({ isError: false, msg: {user} });
+    let { nickname, user_id } = info;
+    let user = await User.findOne({ nickname });
+    if(user) {
+      let historys = await PrivateMsg
+      .find({$or: [{ 'from': user_id, 'to': user._id }, { 'to': user_id, 'from': user._id }]})
+      .populate('from', 'nickname')
+      .sort({createAt: 1});
+      user = {
+        _id: user._id, avatar: user.avatar, nickname: user.nickname
+      }
+      if(historys.length !== 0){
+        let last = historys[historys.length - 1];
+        user.msgType = last.msgType;
+        user.lastWord = last.content; 
+        user.lastWordSender = last.from.nickname; 
+        user.lastWordTime = last.createAt;
+      }
+      return cb({ isError: false, msg: {user} });
+    }
     return cb({ isError: true, msg: '不存在此用户' });     
   },
   

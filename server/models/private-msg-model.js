@@ -14,7 +14,8 @@ const privateMsgSchema = mongoose.Schema({
   createAt: {
     type: Date,
     default: new Date()
-  }
+  },
+  msgType: String,
 });
 
 module.exports = mongoose.model('privateMsg', privateMsgSchema);

@@ -1,0 +1,53 @@
+@import './variable.scss';
+.file-content{
+    background-color: #fff !important;
+    &::after{
+        border-top-color: #fff !important;
+    }
+}
+.file-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 14rem;
+    height: 3rem;
+    position: relative;
+    background-color: #fff !important;
+    color: #444 !important;
+    .file-img{
+        height: 100%;
+        width: 3rem;
+        background: url('../img/file-icon.png') no-repeat;
+        background-size: 100% 100%;
+    }
+    .info{
+        width: 6rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: auto 0.6rem;
+        justify-content: space-between;
+        font-size: 12px;
+        .filename{
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            
+        }
+        .size{
+            color: #999 !important;           
+        }
+    }
+    a{
+      width: 3rem;
+      height: 100%;
+      display: inline-block;
+      background: url('../img/onload.png') center no-repeat;
+      background-size: 50%;
+      border-radius: 50%;
+      border: 1px solid #7dcfcb;
+      position: absolute;
+      right: 1rem;
+    }
+  }
