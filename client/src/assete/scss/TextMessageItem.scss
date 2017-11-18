@@ -1,0 +1,11 @@
+.content{
+    .emoji{
+        margin: auto 0.2rem;
+    }
+    .link{
+        color: #00B7FF;
+        &:hover{
+          text-decoration: underline;
+      }
+    }
+}

@@ -34,8 +34,8 @@ module.exports = {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {
-                  limit: 10000,
-                  name: 'img/[name].[hash:7].[ext]'
+                  limit: 5000,
+                  name: 'img/[name].[ext]'
                 }
               },
             //对图片进行打包
@@ -51,7 +51,7 @@ module.exports = {
         inject: 'body',
       }),
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify('development')})
+      new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify('production')})
     ],
     devServer: {
         historyApiFallback: true,
