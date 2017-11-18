@@ -10,18 +10,8 @@ import { getHistory } from '../../redux/actions/message';
 import RoomHeader from '../../components/chat/RoomHeader';
 
 function mapStateToProps(state) {
-  let last = state.activeList.last();
-  let nextChatting = typeof last !== 'undefined'
-    ? {
-      to: last.get('nickname'),
-      type: last.get('type'),
-      avatar: last.get('avatar'),
-      _id: last.get('_id')
-    }
-    : {};
   return {
     chatting: state.chatting,
-    nextChatting: Immutable.fromJS(nextChatting)
   };
 }
 

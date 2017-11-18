@@ -1,2 +1,3 @@
-export const GET_HISTORY = 'GET_HISTORY';
+export const INIT_HISTORY = 'INIT_HISTORY';
+export const ADD_HISTORY = 'ADD_HISTORY';
 export const ADD_MESSAGE_ITEM = 'ADD_MESSAGE_ITEM';

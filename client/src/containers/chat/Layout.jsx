@@ -4,7 +4,8 @@ import Layout from '../../components/chat/Layout';
 
 function mapStateToProps(state) {
   return {
-    chatting: state.chatting
+    chatting: state.chatting,
+    isLoading: state.pageUI.get('isLoading')
   };
 }
 

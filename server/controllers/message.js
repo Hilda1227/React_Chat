@@ -10,14 +10,14 @@ const GroupMsg = require('../models/group-msg-model.js');
 
 module.exports = {
  
-  // type: 'private' or 'group', to: 发送者昵称, toId: 发送目标对象的id 
+  // type: 'private' or 'group', toId: 发送目标对象的id 
   async newMessage (info, socket, cb, io) {
-    const { type, user_id, to, content, toId, msgType} = info;
+    const { type, user_id, content, toId, msgType} = info;
     let from = await User.findOne({ _id: user_id });
     if(type === 'private'){
       console.log('收到私聊', info)
       let target = await User.findOne({ _id: toId }).populate('socket','socket_id'),          
-          newMsg = await new PrivateMsg({from: from._id, to: target._id, content, msgType});      
+          newMsg = await new PrivateMsg({from: from._id, to: target._id, content, msgType, createAt: Date.now()});      
       if(target.onlineState) {
         let msg = {
           sender: from.nickname, createAt: newMsg.createAt, content,
@@ -30,7 +30,7 @@ module.exports = {
     }
     else{
       console.log('收到群聊',info)
-      let newMsg = await new GroupMsg({content, from: user_id, to: toId, createAt: new Date(), msgType}).save();     
+      let newMsg = await new GroupMsg({content, from: user_id, to: toId, msgType, createAt: Date.now()}).save();     
       socket.broadcast.to(toId).emit('new message',{
         sender: from.nickname, createAt: newMsg.createAt, content,
         avatar: from.avatar, _id: newMsg._id, type, from: toId, msgType
@@ -39,42 +39,51 @@ module.exports = {
       return cb({ isError: false, msg: 'ok' });
     }    
   },
-
-
-  async getHistory (info, socket, cb) {
-    const { user_id, type, to, _id } = info;
-    console.log(user_id)
-    if(type === 'private'){
-      console.log('获私聊历史纪录', info)
-      const target = await User.findOne({nickname: to});
-      let historys = await PrivateMsg
-          .find({$or: [{ 'from': user_id, 'to': target._id }, { 'to': user_id, 'from': target._id }]})
-          .populate('from','avatar nickname')
-          .sort({createAt: 1});
-      historys = historys.map(item => ({
-        sender: item.from.nickname,
-        avatar: item.from.avatar,
-        content: item.content,
-        createAt: item.createAt,
-        _id: item._id,
-        msgType: item.msgType
-      }))
-      return cb({isError: false, msg: {historys}});
-    }else{
-      let historys = await GroupMsg
-        .find({to: _id})
-        .populate('from', 'avatar nickname _id')
-        .sort({createAt: 1})
-      historys = historys.map(item => ({
-        sender: item.from.nickname,
-        avatar: item.from.avatar,
-        content: item.content,
-        createAt: item.createAt,
-        _id: item._id,
-        msgType: item.msgType
-      }));
-      cb({isError: false, msg: {historys}})
-    }    
-  },
   
+  // _id为聊天对象的_id
+  async getPrivateHistory (info, socket, cb) {
+    const { user_id, to, _id, timestamp, limit } = info;
+    let historys = await PrivateMsg
+        .find({
+          $or: [{ 'from': user_id, 'to': _id }, { 'to': user_id, 'from': _id }],
+          createAt: {$lt: timestamp}
+        })
+        .sort({'_id': -1})
+        .limit(limit)
+        .populate('from','avatar nickname');
+    historys = historys.map(item => ({
+      sender: item.from.nickname,
+      avatar: item.from.avatar,
+      content: item.content,
+      createAt: item.createAt,
+      _id: item._id,
+      msgType: item.msgType
+    }));
+    historys.reverse();
+    return cb({isError: false, msg: {historys}});
+  },
+
+  async getGroupHistory (info, socket, cb) {
+    const { user_id, to, _id, timestamp, limit } = info;
+    let historys = await GroupMsg
+    .find({
+      to: _id,
+      createAt: {$lt: timestamp}
+    })
+    .sort({'_id': -1})
+    .limit(limit)
+    .populate('from', 'avatar nickname _id');   
+    historys = historys.map(item => ({
+      sender: item.from.nickname,
+      avatar: item.from.avatar,
+      content: item.content,
+      createAt: item.createAt,
+      _id: item._id,
+      msgType: item.msgType
+    }));
+    historys.reverse();
+    cb({isError: false, msg: {historys}});
+  }
 }
+
+

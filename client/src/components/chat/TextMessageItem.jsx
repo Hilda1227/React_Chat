@@ -47,4 +47,4 @@ const TextMessageItem = (props) => {
     <p className = 'content' dangerouslySetInnerHTML={ {__html: handleText(props.content)}}></p>
   )
 }
-export default TextMessageItem
+export default TextMessageItem;

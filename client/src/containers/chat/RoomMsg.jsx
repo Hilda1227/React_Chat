@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { getHistory } from '../../redux/actions/message';
+import { initHistory, addHistory } from '../../redux/actions/message';
+import { setLoading } from '../../redux/actions/pageUI';
 
 import RoomMsg from '../../components/chat/RoomMsg';
 
@@ -14,7 +15,9 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    getHistory: (payload) => dispatch( getHistory(payload) )
+    initHistory: (payload) => dispatch(initHistory(payload)),
+    addHistory: (payload) => dispatch(addHistory(payload)),
+    setLoading: (payload) => dispatch(setLoading(payload))
   };
 }
 

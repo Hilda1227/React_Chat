@@ -1,22 +1,41 @@
-import Immutable from 'immutable'
-import { socketEmit } from './common.js'
+import Immutable from 'immutable';
+import { socketEmit } from './common.js';
+import store from '../store';
+import { setLoading } from './pageUI';
 import {
-    GET_HISTORY,
+    INIT_HISTORY,
+    ADD_HISTORY,
     ADD_MESSAGE_ITEM
-} from '../constants/message.js'
+} from '../constants/message.js';
 
 
 
-export const getHistory = (payload) => (dispatch) =>{
-  socketEmit('get history', payload)
+export const initHistory = (payload) => (dispatch) =>{
+  return socketEmit(`get ${payload.type} history`, {...payload, timestamp: Date.now()})
   .then(msg => {
     dispatch({
-      type:  GET_HISTORY,
+      type:  INIT_HISTORY,
       payload: Immutable.fromJS(msg.historys)
     });
+    dispatch(setLoading(false));
   })
   .catch( err => console.log(err) )
 }
+
+export const addHistory = (payload) => (dispatch) => {
+  let first = store.getState().message.first();
+  let timestamp = (first && first.get('createAt')) || Date.now();
+  socketEmit(`get ${payload.type} history`, {...payload, timestamp})
+  .then(msg => {
+    dispatch({
+      type:  ADD_HISTORY,
+      payload: Immutable.fromJS(msg.historys)
+    });
+    dispatch(setLoading(false));
+  })
+  .catch( err => console.log(err) )
+}
+
 
 // from, createAt, content, avatar,id
 export const addMessageItem = (payload) =>{

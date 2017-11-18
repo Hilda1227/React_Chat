@@ -12,8 +12,8 @@ const groupMsgSchema = mongoose.Schema({
   },
   content: String,
   createAt: {
-    type: Date,
-    default: new Date()
+    type: Number,
+    default: Date.now()
   },
   msgType: String,
 });

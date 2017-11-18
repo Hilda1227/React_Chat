@@ -1,0 +1,29 @@
+.loading{
+    position: absolute;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: rgba(255,255,255,.7);
+    box-shadow: 0px 0px 3px 3px #ccc;
+    border-radius: 50%;
+    top: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .circle{
+        width: 50%;
+        height: 50%;
+        border-radius: 50%;
+        border: 3px solid transparent;
+        border-top-color: #00B7FF;
+        border-right-color: #00B7FF;
+        animation: loading linear 1000ms infinite;
+    }
+}
+@keyframes loading {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}

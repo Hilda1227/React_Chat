@@ -66,9 +66,15 @@ module.exports = function socket (io){
     })
 
     // 聊天记录
-    socket.on('get history', (info, cb) => {
+    socket.on('get private history', (info, cb) => {
       parsetoken(info)
-      .then(() => message.getHistory(info, socket, cb))
+      .then(() => message.getPrivateHistory(info, socket, cb))
+      .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} )     
+    })
+
+    socket.on('get group history', (info, cb) => {
+      parsetoken(info)
+      .then(() => message.getGroupHistory(info, socket, cb))
       .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} )     
     })
 
