@@ -19,6 +19,9 @@
 
 > 原来只是参考了旧版的Node.js SDK说明文档，所以难怪反复的比对也找不出来啥错。。。类似react-router也是，总是参考了router3的文档，router4做的改变又比较大，一定要先找对文档= =
 
+## 如何在接受到新消息reducer调用结束的时候，紧接着调用RoomMsg组件内的方法，自动滚动到div底部，
+不能直接把这个组件export出去，
+https://github.com/redsx/zz-plugin/blob/master/src/components/UI/NotificationApi/Notification.tsx
 
 ## 接口说明
 

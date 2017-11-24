@@ -21,7 +21,7 @@ const ActiveListItem = (props) => {
       }}
     >
       <div className = 'active-item-wrap'>
-        <img src = { avatar } className = 'avatar'></img>
+        <div style = {{ 'backgroundImage': `url(${avatar})`}} className = 'avatar'></div>
         <div className = 'info'>
           <p className = 'nickname'>{ nickname }</p>
           <p className = 'last-word'>{ lastWord ? (lastWordSender + ': ' +lastWord) : '开始对话' }</p>

@@ -8,4 +8,5 @@ export default {
     PORT: '3004'
   },
   EMOJI_URL: 'http://localhost:3004/chat/emoji/',
+  DEFAULT_GROUP_URL: 'http://localhost:3004/chat/img/default_group_avatar.svg',
 }

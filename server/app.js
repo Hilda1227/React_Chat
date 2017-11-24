@@ -18,6 +18,7 @@ const io = require('socket.io').listen(server);
 socket(io);
 
 app.use(serve({rootDir: 'static/image/emoji', rootPath: '/chat/emoji'}));
+app.use(serve({rootDir: 'static/image', rootPath: '/chat/img'}));
 
 // 跨域
 app.use(cors());  

@@ -27,10 +27,6 @@ import Alert from './components/common/Alert'
 
 import './assete/scss/common.scss'
 
-
-
-
-
 socket.on('new message', data => {
   handleMessage(data);
 })
@@ -43,8 +39,6 @@ socket.on('online', data => {
   dispatchAction(setOnline({ ...data, state: true}));
 })
 
-
-
 const handleInit = token => {
   socketEmit('auto login', {token})
   .then( data => {
@@ -55,12 +49,15 @@ const handleInit = token => {
 }
 
 const handleEnter = () => {
+ 
   const token = localStorage.getItem('token'),
         user_id = store.getState().user.get('_id');
   if(token){   
+    console.log('dddd1')
     if(!user_id) handleInit(token);
     return true;
   }else{
+    console.log('dddd2')
     return false;
   }
 }

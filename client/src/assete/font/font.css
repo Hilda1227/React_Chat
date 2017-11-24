@@ -1,0 +1,18 @@
+@font-face {
+  font-family: 'FZYXJW--GB1-0';
+  src: url('FZYXJW--GB1-0.woff') format('woff'),
+       url('FZYXJW--GB1-0.ttf') format('truetype'),
+       url('FZYXJW--GB1-0.svg#FZYXJW--GB1-0') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '方正幼线简体';
+  src: url('方正幼线简体.eot');
+  src: url('方正幼线简体.woff2') format('woff2'),
+       url('方正幼线简体.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+

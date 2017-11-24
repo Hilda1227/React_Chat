@@ -1,5 +1,4 @@
-$roomBg: #fbfbfb;
-
+@import './variable.scss';
 .layout{
     flex-grow: 1;
     max-width: 1300px;
@@ -15,11 +14,21 @@ $roomBg: #fbfbfb;
     overflow: hidden;
     .aside{
         width: 31.2%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
+        height: 100%;       
         transition: 500ms;
+        position: relative;
+        .active-panel{
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+        }
+        .left-panel{
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
     }
     .room{
         width: 68.8%;
@@ -31,7 +40,7 @@ $roomBg: #fbfbfb;
         flex-direction: column;
         justify-content: space-between;
         position: relative;
-        background-color: $roomBg;
+        background-color: $roomBgColor;
     }
   }
   

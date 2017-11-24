@@ -1,6 +1,6 @@
 .expressions{
     width: 100%;
-    background-color: #eee;
+    background-color: #fff;
     transition: 200ms;
     display: flex;
     flex-shrink: 0;
@@ -17,4 +17,5 @@
 .expressions-hidden{
     transform: scaleY(0);
     height: 0px;
+    display: none;
 }

@@ -8,7 +8,7 @@
   color: #fff;
   flex-shrink: 0;
   background-color: $mainColor;
-  border-left:1px solid rgba(200,200,200,1); 
+  border-left:1px solid #fff; 
   .room-header-wrap{
     width: 95%;
     display: flex;
@@ -24,6 +24,7 @@
     }
     .nickname{
       font-size: 0.9rem;
+      font-weight: bold;
     }
     #target{
       width: 1.7rem;

@@ -46,14 +46,22 @@ class RoomFooter extends Component {
     return (
       <div className = 'room-footer'>
         <div className = 'footer-wrap'>
-          <input  placeholder = '说点啥呗~' type = 'text'
-            ref={ (node) => this.input = node }
-            onKeyDown = { this.sendText } 
-          />
-          <div  onClick = { this.sendText } className = 'tool' id = 'send'></div>
-          <div  onClick = { () => {this.togglePanel('showExpressions')} } className = 'tool' id = 'emoji'></div>
-          <div  onClick = { () => {this.togglePanel('showTools')} } className = 'tool' id = 'more'></div>
-        </div>     
+          <div className = 'send'>
+            <input  placeholder = '说点啥呗~' type = 'text'
+              ref={ (node) => this.input = node }
+              onKeyDown = { this.sendText } 
+            />
+            <button onClick = { this.sendText } id = 'send'>发送</button>
+          </div>
+          <div className = 'tool'>
+            <span  onClick = { () => {this.togglePanel('showExpressions')} } id = 'emoji'></span>
+            <span  onClick = { () => {this.togglePanel('showTools')} } id = 'more'></span>
+          </div>
+        </div>   
+
+
+
+
         <ul className =  {`more more${this.state.showTools ? '' : '-hidden'}`}>
           <li className = 'button-item' id = 'button-file'><input type = 'file' 
             onChange = { this.sendFile }/>

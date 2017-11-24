@@ -8,31 +8,24 @@ const PrivateMsg = require('../models/private-msg-model.js');
 const Group = require('../models/group-model.js'); 
 
 module.exports = {
-  
-  // @param {object} info  _id(用户id) & nickname(新群组名称) 
-  async createGroup (info, socket, cb) {
-    const { nickname, _id } = info,
-          user = await User.findOne({ _id: _id });
-          group = await new Group({ nickname, creator: user._id});
-    user.groups.push(group._id);
-    await user.save(); await group.save();
-    socket.join(group._id);
-    cb({ isError: false, msg: { group }});
-  },
 
+  async searchGroup (info, socket, cb) {
+    let groups = await Group.find({nickname: eval("/.*"+info.key+".*/i")});
+    cb({isError: false, msg: {groups}});
+  },
   
   // @param {object} info  user_id(用户id) & nickname(所要加入的群组昵称)
   async joinGroup (info, socket, cb) {
-    let group = await Group.findOne({nickname: info.nickname});
+    let group = await Group.findOne({_id: info._id});
     if(group) {
-      user = await User.findOne({ _id: info._id });
+      user = await User.findOne({ _id: info.user_id });
       if(user && user.groups.indexOf(group._id) !== -1)
         return cb({ isError: true, msg: '您已在该房间'})
       user.groups.push(group._id);
       group.members.push(user._id);
       await user.save(); await group.save();
       socket.join(group._id);
-      cb({ isError: false, msg: {group} })      
+      cb({ isError: false, msg: '您已成功加入该群组' })      
     }
     return cb({isError: true, msg: '不存在该群组'})  
   },

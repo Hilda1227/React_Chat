@@ -17,11 +17,6 @@ const userSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'group'
   }],
-  // 私聊过的人
-  // privates: [{
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'user' 
-  // }],
   createAt: {
     type: Date,
     default: new Date()
@@ -37,6 +32,10 @@ const userSchema = mongoose.Schema({
   lastOnline: {
     type: Date,
     default: new Date()
+  },
+  place: {
+    type: String,
+    default: '火星'
   }
 });
 

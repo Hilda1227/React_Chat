@@ -1,7 +1,8 @@
 import Immutable from 'immutable'
 import{ socketEmit } from './common.js'
 import {
-    SET_USER
+    SET_USER,
+    CLEAR_USER
 } from '../constants/user.js'
 
 
@@ -10,6 +11,11 @@ export const setUser = (payload) => {
   return {
     type: SET_USER,
     payload: Immutable.fromJS(payload)
+  }
+}
+export const clearUser = () => {
+  return {
+    type: CLEAR_USER
   }
 }
 

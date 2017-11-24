@@ -1,6 +1,22 @@
-import axios from 'axios'
+import axios from 'axios';
+import {
+  dispatchAction, 
+  socketEmit
+} from '../redux/actions/common';
+import { initRoomList } from '../redux/actions/activeList';
+import { setUser } from '../redux/actions/user';
 
 axios.defaults.baseURL = 'http://127.0.0.1:3004';
+
+function formData (data) {
+  let formdata = new FormData();
+  Object.keys(data).forEach(key => {
+    if(typeof data[key] !== 'null' && typeof data[key] !== 'undefined')
+      console.log(data[key])
+      formdata.append(key, data[key]);
+  })
+  return formdata;
+}
 
 export const uploadFile = (file) => {
     let formdata = new FormData();
@@ -27,3 +43,28 @@ export const fileInfo = (file) => {
     };
     return {fileName: file.name, size};
 }
+
+export const createGroup = (info) => {
+  let formdata = formData(info);
+  return axios.post('/api/createGroup', formdata, {
+    headers: {'Content-Type': 'multipart/form-data'}
+  })
+  .then(res => {
+    dispatchAction(initRoomList(info._id));
+  })
+}
+
+export const modifyInfo = (info) => {
+  let formdata = formData(info);
+  return axios.post('/api/modifyInfo', formdata, {
+    headers: {'Content-Type': 'multipart/form-data'}
+  })
+  .then(res => {
+    console.log(res.data);
+    if(!res.data.isError) {
+      return dispatchAction(setUser(res.data.msg.user));
+    }
+    alert(res.data.msg);
+  })
+}
+

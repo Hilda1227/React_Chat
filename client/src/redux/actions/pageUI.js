@@ -3,6 +3,8 @@ import Immutable from 'immutable'
 import {
     GROUP_FORM_SHOW,
     SET_LOADING,
+    SELECT_LEFT_PANEL,
+    TOGGLE_LEFT_PANEL,
 } from '../constants/pageUI.js'
 
 // true  or false
@@ -12,10 +14,20 @@ export const groupFormShow = payload => {
     payload 
   }
 }
-
 export const setLoading = payload => {
   return {
     type: SET_LOADING,
     payload 
+  }
+}
+export const selectLeftPanel = payload => {
+  return {
+    type: SELECT_LEFT_PANEL,
+    payload 
+  }
+}
+export const toggleLeftPanel = () => {
+  return {
+    type: TOGGLE_LEFT_PANEL
   }
 }

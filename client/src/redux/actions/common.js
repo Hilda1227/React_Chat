@@ -14,6 +14,7 @@ export const dispatchAction = (action) => {
 
 export const socketEmit = (name, payload) => {
   console.log('触发socketEmit: ', payload)
+  payload.token = localStorage.getItem('token');
   return new Promise(function(resolve, reject) {
     try{
       socket.emit(name, payload, function (data) {

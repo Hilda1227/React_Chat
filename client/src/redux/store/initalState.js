@@ -33,6 +33,10 @@ const store = {
     type: '',
     avatar: '',
     _id: '',
+  },
+  pageUI: {
+    isLoading: Boolean,
+    
   }
 }
 

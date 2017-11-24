@@ -5,7 +5,7 @@ const groupSchema = mongoose.Schema({
   nickname: String,
   avatar: {
     type: String,
-    default: 'http://oj7h98lzb.bkt.clouddn.com/download.svg'
+    default: 'http://localhost:3004/chat/img/default_group_avatar.svg'
   },
   creator: {
     type: Schema.Types.ObjectId,
@@ -22,6 +22,10 @@ const groupSchema = mongoose.Schema({
   createAt: {
     type: Date,
     default: new Date()
+  },
+  describe: {
+    type: String,
+    default: '群主很懒，还没有群介绍哦~'
   }
 });
 

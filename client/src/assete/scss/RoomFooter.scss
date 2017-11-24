@@ -1,3 +1,4 @@
+@import './variable.scss';
 .room-footer{
   position: relative;
   bottom: 0px;
@@ -5,47 +6,95 @@
   display: flex;
   justify-content: center;
   flex-shrink: 0;
+  align-items: center;
   flex-direction: column;
   .footer-wrap{
-    height: 2rem;
     width: 95%;
+    height: 2rem;
     display: flex;
     justify-content: flex-start;
-    margin: 1rem 1.5rem;
-    input{
-      width: 60%;
-      border-radius: 2px;
-      border: 1px solid #ececec;
-      padding-left: 5px;
-      background-color: #fff;
-      &::placeholder{
-        font-size: 13px;
+    margin-bottom: 0.8rem;
+    .send{
+      width: 75%;
+      height: 100%;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: flex-end;
+      input{
+        height: 2rem;
+        width:75%;
+        display: inline-block;
+        background-color: #fff;
+        border-radius: 5px;
+        z-index: 2;
+        padding-left: 8px;
+        
+      }
+      #send{
+        width: 3rem;
+        height: 2rem;
+        background-color: $mainColor;
+        border-radius: 0.5rem;
+        color: #fff;
+        margin: auto 1rem;
       }
     }
     .tool{
-      height: 1.6rem;
-      width: 1.6rem;
-      
-      margin: auto 1.2rem;
-      cursor: pointer;
-    }
-    #emoji{
-      background: url('../img/emoji.png') no-repeat;
-      background-size: 100%;
-    }
-    #send{
-      background: url('../img/send.png') no-repeat;
-      background-size: 100%;
-    }
-    #more{
-      background: url('../img/more.png') no-repeat;
-      background-size: 100%;
+      display: flex;
+        span{
+          height: 1.6rem;
+          width: 1.6rem;
+          margin-right: 1rem;
+          &:active{
+            opacity: 0.8;
+          }
+        }
+        #emoji{
+          background: url('../img/emoji.png') no-repeat;
+          background-size: 100%;
+        }   
+        #more{
+          background: url('../img/more.png') no-repeat;
+          background-size: 100%;
+        }
     }
   }
+}
+
+// 
+//   .footer-wrap{
+//     width: 95%;
+//     height: 100% !important;
+//     display: flex;
+//     flex-grow: 1;
+//     justify-content: flex-start;
+//     
+//     #send{
+//       width: 3rem;
+//       height: 2rem;
+//       background-color: $mainColor;
+//       border-radius: 0.5rem;
+//       color: #fff;
+//     }
+//     .tool{
+//       height: 2rem;
+//       width: 2rem;      
+//       margin: auto 1rem;
+//       cursor: pointer;
+//     }    
+//     #emoji{
+//       background: url('../img/emoji.png') no-repeat;
+//       background-size: 100%;
+//     }   
+//     #more{
+//       background: url('../img/more.png') no-repeat;
+//       background-size: 100%;
+//     }
+//   }
   .more{
     height: 7rem;
     width: 100%;
-    background-color: #eee;
+    background-color: #fff;
     justify-content: flex-start;   
     transition: 200ms;
     .button-item{
@@ -55,7 +104,7 @@
       display: inline-block;
       position: relative;
       background-color: red;
-      &:hover{
+      &:active{
         opacity: 0.8;
       }
       input{
@@ -75,6 +124,33 @@
   .more-hidden{
     transform: scaleY(0);
     height: 0px;
+    display: none;
+  }
+
+@media screen and (max-width: 650px) {
+  .footer-wrap{
+    flex-direction: column;
+    
+    height: auto !important;
+    align-content: space-around;
+    margin-bottom: 0 !important;
+    .send{
+      width: 100% !important;
+      #send{
+        margin-right: 0px !important;
+      }
+    }
+    .tool{
+      width: 100%;
+      margin: 0.5rem auto !important;
+      justify-content: flex-start;
+      span{
+        width: 1.4rem !important;
+        height: 1.4rem !important;
+      }
+    }
+    input{
+      flex-grow: 1;
+    }
   }
 }
-

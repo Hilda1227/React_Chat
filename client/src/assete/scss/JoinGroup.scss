@@ -1,0 +1,41 @@
+.join-group{
+    background-color: #fff;
+  .groups-wrap{
+    flex-grow: 1;
+    width: 100%;
+    overflow-x: hidden;    
+    .group-item-wrap{
+      height: 4rem;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid #efefef;
+      cursor: pointer;
+      transition: 300ms;
+      &:hover{
+        background-color: #eef1f6;
+      }
+      .group-item{
+        width: 94%;
+        height: 2.7rem;
+        display: flex;
+        .avatar{
+          width: 2.7rem;
+          height: 2.7rem;
+        }
+        .info{
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          .nickname{
+            color: #000;
+          }
+          .describe{
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}

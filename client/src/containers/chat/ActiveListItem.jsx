@@ -18,7 +18,4 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  () => {return {}},
-  mapDispatchToProps
-)(ActiveListitem);
+export default connect(() => {return {}},mapDispatchToProps)(ActiveListitem);

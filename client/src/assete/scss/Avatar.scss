@@ -1,0 +1,33 @@
+.avatar{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    &:hover .mask{
+        display: inline-block;
+    }
+    .preview, .mask, .upload{
+        position: absolute;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-size: 100%;
+        background-position: center;
+        top: 0;
+        left: 0;
+    }
+    .preview{
+        z-index: 18;
+        border: 3px solid #fff;
+    }
+    .mask{
+        z-index: 19;
+        display: none;
+        background:url('../img/camara.png') center no-repeat rgba(0,0,0,.4);
+    }
+    .upload{
+        z-index: 20;
+        overflow: hidden;
+        opacity: 0;
+    }
+}

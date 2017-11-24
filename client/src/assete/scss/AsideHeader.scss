@@ -1,5 +1,5 @@
 .aside-header{
-    height: 55px;
+    height: 4rem;
     width: 100%;
     background-color: #7bceca;
     display: flex;
@@ -13,9 +13,74 @@
         margin: auto 1rem;
         cursor: pointer;
     }
-    .tool{
+    .icon{
+        width: 1.2rem;
+        height: 1.2rem;
         float: right;
         margin-right: 2rem;
         cursor: pointer;
+        background-size: 100% !important;
+    }
+    #menu{
+        background: url(../img/menu.png) no-repeat;
+        .menu-list{
+            position: absolute;
+            margin: 1rem auto auto 1rem;
+            padding: 0.8rem 0;
+            background-color: #fff;
+            width: 12rem;
+            z-index: 10;
+            border-radius: 2px;
+            color: #666;
+            box-shadow: 0 1px 6px rgba(0,0,0,.117647);
+            li{
+                height: 2.5rem;
+                padding-left: 0.6rem;
+                line-height: 2.5rem;
+                transition: 200ms;
+                &:hover{
+                    background-color: #fafafa;
+                }
+            }
+            
+        }
+    }
+    #group{       
+        background: url(../img/group.png) no-repeat;
+    }
+    
+}
+.menu-list-hidden{
+    animation: hiddenList 300ms 1 forwards;
+    transform-origin: 0 0;
+}
+.menu-list-show{
+    animation: showList 300ms 1 forwards;
+    transform-origin: 0 0;
+}
+
+
+@keyframes showList {
+    0%{
+        opacity: 0;
+        transform: scale(0);        
+    }
+
+    100%{
+        opacity: 1;
+        transform: scale(1);   
+        display: inline-block;  
+    }
+}
+@keyframes hiddenList {
+    0%{
+        opacity: 1;
+        transform: scale(1);        
+    }
+
+    100%{
+        opacity: 0;
+        transform: scale(0);
+        display: none;     
     }
 }

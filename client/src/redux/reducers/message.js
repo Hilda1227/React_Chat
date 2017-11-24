@@ -1,5 +1,4 @@
 import Immutable from 'immutable'
-
 import {
   INIT_HISTORY,
   ADD_HISTORY,

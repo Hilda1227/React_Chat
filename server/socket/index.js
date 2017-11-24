@@ -104,6 +104,11 @@ module.exports = function socket (io){
       .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} )     
     })
 
+    socket.on('search groups', (info, cb) => {
+      group.searchGroup(info, socket, cb)
+      .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} )     
+    })
+
   })
 }
 

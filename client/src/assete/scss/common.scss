@@ -1,3 +1,4 @@
+@import '../font/font.css';
 *{
   margin: 0;
   padding: 0;
@@ -11,8 +12,8 @@ html, body,#root, .App{
     height: 100%;
     position: relative;
     // background-color: #473d67;
-    color: #bdbcc2;
-    font-family:  '微软雅黑';
+    color: #666;
+    font-family:  '方正幼线简体';
     
 }
 ul, li{
@@ -26,7 +27,8 @@ input{
      outline: none;
  }
  &::placeholder{
-   font-size: 1rem;
+   font-size: 12px;
+   font-family:  '方正幼线简体';
  }
 }
 
@@ -38,6 +40,13 @@ button{
   &：focus{
     outline:none;
   }
+}
+
+.avatar{
+  border-radius: 50%;
+  margin-right: 1rem;
+  background-size: 100%;
+  background-position: center;
 }
 
 @media screen and (min-width: 320px) {

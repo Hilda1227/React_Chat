@@ -25,7 +25,7 @@ export const initHistory = (payload) => (dispatch) =>{
 export const addHistory = (payload) => (dispatch) => {
   let first = store.getState().message.first();
   let timestamp = (first && first.get('createAt')) || Date.now();
-  socketEmit(`get ${payload.type} history`, {...payload, timestamp})
+  return socketEmit(`get ${payload.type} history`, {...payload, timestamp})
   .then(msg => {
     dispatch({
       type:  ADD_HISTORY,
