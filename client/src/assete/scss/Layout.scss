@@ -15,7 +15,7 @@
     .aside{
         width: 31.2%;
         height: 100%;       
-        transition: 500ms;
+        transition: 200ms;
         position: relative;
         .active-panel{
           width: 100%;
@@ -34,7 +34,7 @@
         width: 68.8%;
         height: 100%;
         float: right;
-        transition: 500ms;
+        transition: 200ms;
         display: flex;
         align-items: center;
         flex-direction: column;
@@ -53,7 +53,8 @@
     .aside{
       width: 100%;
       position: absolute;
-      left: -100%;
+      left: -100% !important;
+      display: none;
     }
     .room{
       width: 100% !important;

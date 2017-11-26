@@ -3,6 +3,7 @@ import { autobind } from 'core-decorators';
 import '../../assete/scss/JoinGroup.scss';
 import Search from '../common/Search';
 import LeftHeader from '../common/LeftHeader';
+import Loading from '../common/Loading';
 import { socketEmit } from '../../redux/actions/common.js';
 
 const GroupItem = ({avatar, nickname, describe, join}) => {
@@ -24,7 +25,8 @@ class JoinGroup extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      groups: []
+      groups: [],
+      isLoading: false
     }
   }
   @autobind
@@ -37,7 +39,10 @@ class JoinGroup extends Component {
   }
   join (_id) {
     socketEmit('join group', { _id })
-    .then(data => console.log(data.msg))
+    .then(data => {
+      this.setState({ isLoading: false })
+      this.props.close();
+    })
     .catch(err => alert(err))
   }
   render () {
@@ -52,18 +57,16 @@ class JoinGroup extends Component {
     })
     return (
       <div className = ' left-panel-wrap join-group'>
-        <LeftHeader
-          title = '加入群组'
-          close = { this.props.close }
-        />
+        <LeftHeader  title = '加入群组' />
         <Search
           placeholder = '请输入想要加入的群组'
           handleChange = { this.searchGroup }
         />
         <div className = 'groups-wrap'>
+          { this.state.isLoading && <Loading/> }
           {
             !this.state.groups.length
-            ? '没有相关的群组噢~'
+            ? <span className = 'none'>没有相关的群组噢~</span>
             : (
               <div className = 'groups'>{ groups }</div>
             )

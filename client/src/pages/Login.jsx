@@ -49,7 +49,7 @@ class Login extends Component {
         <NavLink to="/signUp" activeClassName="active-link">注册</NavLink>
         </div>
         <form>
-          <InputText inputType="text" placeholder="邮箱" onChange={(val) => this.handleValue('email', val) }/> 
+          <InputText inputType="text" placeholder="用户名或邮箱" onChange={(val) => this.handleValue('email', val) }/> 
           <InputText inputType="text" placeholder="密码" onChange={(val) => this.handleValue('password', val) }/> 
           <button onClick={ this.handleSubmmit }>GO</button> 
         </form>                 

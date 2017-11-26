@@ -3,8 +3,18 @@
   .groups-wrap{
     flex-grow: 1;
     width: 100%;
-    overflow-x: hidden;    
-    .group-item-wrap{
+    overflow-x: hidden; 
+    display: flex;
+    justify-content: center;   
+    .none{
+      align-self: center;
+    }
+    .groups{
+      width: 100%;
+      margin-top: 0;
+      overflow-y: auto;
+    }   
+    .group-item-wrap{     
       height: 4rem;
       width: 100%;
       display: flex;

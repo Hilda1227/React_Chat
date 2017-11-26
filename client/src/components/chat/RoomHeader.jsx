@@ -11,7 +11,7 @@ class RoomHeader extends Component {
     return (
       <div className = { `room-header${chatting.isEmpty() ? '-hidden' : ''}` }>
         <div className = 'room-header-wrap'>
-        <img className = 'avatar' src = { chatting.get('avatar') }></img>
+        <div style = {{backgroundImage: `url(${chatting.get('avatar')})`}} className = 'avatar'></div>
           <span className = 'nickname'>{ chatting.get('to') || '' }</span>
           <div id = 'target'></div>
         </div>

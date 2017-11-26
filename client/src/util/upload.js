@@ -50,8 +50,10 @@ export const createGroup = (info) => {
     headers: {'Content-Type': 'multipart/form-data'}
   })
   .then(res => {
-    dispatchAction(initRoomList(info._id));
+    console.log('返回',res.data)
+    return dispatchAction(initRoomList(info._id));
   })
+  .catch(err => console.log(err))
 }
 
 export const modifyInfo = (info) => {
@@ -60,11 +62,14 @@ export const modifyInfo = (info) => {
     headers: {'Content-Type': 'multipart/form-data'}
   })
   .then(res => {
-    console.log(res.data);
     if(!res.data.isError) {
+      console.log('返回',res.data.msg)
       return dispatchAction(setUser(res.data.msg.user));
     }
-    alert(res.data.msg);
+    else{
+      alert(res.data.msg);
+    }
   })
+  .catch(err => console.log(err))
 }
 

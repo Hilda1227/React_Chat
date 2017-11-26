@@ -15,7 +15,6 @@ module.exports = {
     const { type, user_id, content, toId, msgType} = info;
     let from = await User.findOne({ _id: user_id });
     if(type === 'private'){
-      console.log('收到私聊', info)
       let target = await User.findOne({ _id: toId }).populate('socket','socket_id'),          
           newMsg = await new PrivateMsg({from: from._id, to: target._id, content, msgType, createAt: Date.now()});      
       if(target.onlineState) {

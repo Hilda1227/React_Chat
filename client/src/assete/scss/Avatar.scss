@@ -1,7 +1,8 @@
-.avatar{
+.avatar-upload{
     width: 100%;
     height: 100%;
     position: relative;
+    margin: 2rem auto;
     &:hover .mask{
         display: inline-block;
     }
@@ -18,7 +19,10 @@
     }
     .preview{
         z-index: 18;
-        border: 3px solid #fff;
+        background-color: #fff;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
     }
     .mask{
         z-index: 19;

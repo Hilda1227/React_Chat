@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../assete/scss/Loading.scss';
 
-const Loaing = () => {
+const Loading = () => {
   return (
     <div className = 'loading'>
       <div className = 'circle'></div>
@@ -10,4 +10,4 @@ const Loaing = () => {
   
 }
 
-export default Loaing;
+export default Loading;

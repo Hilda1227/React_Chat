@@ -6,6 +6,10 @@ import '../../assete/scss/CreateGroup.scss';
 import config from '../../config/serverConfig';
 import { createGroup } from '../../util/upload';
 import LeftHeader from '../common/LeftHeader';
+import Loading from '../common/Loading';
+import ProfileSection from '../common/ProfileSection';
+import EditableInput from '../common/EditableInput';
+import SubmitButton from '../common/SubmitButton';
 
 class CreateGroup extends Component {
   constructor (props) {
@@ -13,7 +17,8 @@ class CreateGroup extends Component {
     this.state = {
       avatar: config.DEFAULT_GROUP_URL,
       nickname: '',
-      describe: ''
+      describe: '',
+      isLoading: false
     }
   }
   @autobind
@@ -27,11 +32,9 @@ class CreateGroup extends Component {
     }   
   }
   @autobind
-  handleSubmit () {
-    let { nickname, avatar } = this.state;
-    if(nickname.length < 2 || nickname.length > 10){      
-      return alert('请输入合法的群组名');
-    }
+  handleSubmit (e) {
+    e.preventDefault();
+    this.setState({ isLoading: true });
     let info = {
       nickname: this.state.nickname,
       describe: this.state.describe,
@@ -39,34 +42,47 @@ class CreateGroup extends Component {
               ? '' : this.state.avatar,
       _id: this.props._id
     };
-    createGroup(info);
+    createGroup(info)
+    .then(() => {
+      this.setState({ isLoading: false })
+      this.props.close();
+    })
   }
   render () {
     return (
       <div className = 'left-panel-wrap create-group'>
-        <LeftHeader
-          title = '创建群组'
-          close = { this.props.close }
-        />
-        <div className = 'avatar-wrap'>
+        <LeftHeader title = '创建群组'/>
+        <div className = 'panel-wrap'>
+          { this.state.isLoading && <Loading/> }       
           <Avatar
             setAvatar = { this.setAvatar }
             src = { this.state.avatar }
+            size = '12'
           />
+          <ProfileSection title = '昵称'>
+            <EditableInput
+              defaultValue = { this.state.nickname }
+              minLength = { 1 }
+              maxLength = { 15 }
+              placeholder = '请填写群名称（1~10个字）'
+              handleChange = { this.handleChange('nickname') }
+            />
+          </ProfileSection>
+          <ProfileSection title = '群介绍'>
+            <EditableInput
+              defaultValue = { this.state.describe }
+              minLength = { 0 }
+              maxLength = { 30 }
+              placeholder = '群介绍（0~30个字）'
+              handleChange = { this.handleChange('describe') }
+            />
+          </ProfileSection> 
+          <SubmitButton 
+            disabled = { this.state.nickname.length < 1 } 
+            isCircle = { true }
+            onClick = { this.handleSubmit }
+          ></SubmitButton>
         </div>
-        <div className = 'editor'>
-          <input className = 'editor-name'
-            onChange = { this.handleChange('nickname') }
-            value = { this.state.nickname }
-            placeholder = '请填写群名称（2~10个字）'
-          />
-          <input className = 'editor-describe'
-            onChange = { this.handleChange('describe') }
-            value = { this.state.describe }
-            placeholder = '群介绍（0~30个字）'
-          />
-        </div>
-        <button className = 'submit'  onClick = { this.handleSubmit } >提交</button>
       </div>
     );
   }

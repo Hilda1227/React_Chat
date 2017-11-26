@@ -40,7 +40,7 @@ router.post('/api/modifyInfo',async function (ctx) {
   const { nickname, sex, place, _id } = ctx.request.fields;  
   let exist = await User.findOne({nickname, _id: {$ne: _id}});
   if(exist) return ctx.body = ({ isError: true, msg: '该用户名已被使用'});
-  let info = {sex, place, _id};
+  let info = {nickname, sex, place};
   let file= ctx.request.files[0];
   if(file){
     let ret = await uploadFile(`${Date.now() + file.name}`, file.path);

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../../assete/scss/Layout.scss';
-import SearchUser from '../../containers/chat/SearchUser';
+
 import ActiveList from '../../containers/chat/ActiveList';
 import RoomHeader from '../../containers/chat/RoomHeader';
 import AsideHeader from '../../containers/chat/AsideHeader';
@@ -16,7 +16,6 @@ const Layout = ({chatting, isLoading}) => {
       <div className = 'aside'>
         <div className = 'active-panel'>
           <AsideHeader/>
-          <SearchUser/>
           <ActiveList/>
         </div>
         <LeftPanel/>
@@ -30,7 +29,7 @@ const Layout = ({chatting, isLoading}) => {
               <RoomHeader/>
               <RoomMsg/>
               <RoomFooter/>
-              { !isLoading || <Loading/> }
+              { isLoading && <Loading/> }
             </div>
           )
       }

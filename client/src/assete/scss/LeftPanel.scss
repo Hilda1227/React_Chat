@@ -11,7 +11,7 @@
   
   .example-enter.example-enter-active {
     opacity: 1;
-    transition: opacity 500ms ease-in;
+    transition: opacity 250ms ease-in;
   }
   
   .example-leave {
@@ -20,7 +20,7 @@
   
   .example-leave.example-leave-active {
     opacity: 0.01;
-    transition: opacity 300ms ease-in;
+    transition: opacity 250ms ease-in;
   }
 
 .left-panel-wrap{
@@ -35,7 +35,7 @@
   justify-content: flex-start;
   background-color: #f8f8f8;
   .header{
-    height: 5rem;
+    height: 4rem;
     width: 100%;
     background-color: $mainColor;
     color: #fff;
@@ -53,5 +53,15 @@
         left: 1rem;
         cursor: pointer;
     }
-}
+  }
+  .panel-wrap{
+    position: relative;
+    flex-flow: 1;
+    z-index: 20;
+    width: 100%;
+    overflow: auto;
+    .panel-wrap-slide{      
+      width: 100%;
+    }
+  }
 }

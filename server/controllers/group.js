@@ -43,7 +43,7 @@ module.exports = {
       await user.save(); await group.save();
       cb({ isError: false, msg: '已成功退出'});
     }
-    cb({ isError: false, msg: '您已不在该群'});  
+    cb({ isError: true, msg: '您已不在该群'});  
   },
 
   // @param {object} info   _id(用户id)

@@ -2,7 +2,7 @@
 
 $msgBgColor: #fff;
 $msgColor: #000;
-$msgBgColorSelf: $mainColor;
+$msgBgColorSelf: #e99dc3;
 $msgColorSelf: #fff;
 $otherColor: #838383;
 
@@ -15,7 +15,7 @@ $otherColor: #838383;
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
-    margin-right: 0.6rem;
+    margin-right: 0.8rem;
   }
   .msg{
       display: flex;
@@ -37,8 +37,7 @@ $otherColor: #838383;
           color: $msgColor;
           position: relative;
           padding:  0.6rem 0.8rem;
-          border: 1px solid rgba(240, 240, 240, .6);
-         
+          box-shadow: 0 1px 1px #ccc;
       }
   } 
   &:hover .top time{
@@ -54,7 +53,7 @@ $otherColor: #838383;
     align-self: flex-end;    
     .avatar{
         order: 2;
-        margin: auto 0 auto 0.6rem;
+        margin: auto 0 auto 0.8rem;
     }
     .msg{
         align-items: flex-end;

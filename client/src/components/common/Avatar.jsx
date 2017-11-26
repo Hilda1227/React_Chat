@@ -18,9 +18,9 @@ class Avatar extends Component {
     }, false);     
   }
   render () {
-    const { setAvatar } = this.props;
+    const { setAvatar, size } = this.props;
     return (
-      <div className='avatar'>
+      <div  style = {{width: size + 'rem', height: size + 'rem'}}  className='avatar-upload'>
         <div className = 'preview'
           style = {{ backgroundImage: `url(${this.state.src}` }} 
           ref = { node => this.preview = node }

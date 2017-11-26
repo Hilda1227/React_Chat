@@ -25,7 +25,7 @@ class MessageItemBox extends Component{
     }
     return (
       <div className = { `room-msg-item room-msg-item${ isSelf ? '-self' : '-other' }`  }>
-        <img src = { avatar } className = 'avatar'/>
+        <div style = {{backgroundImage: `url(${avatar})`}} className = 'avatar'></div>
         <div className = 'msg'>
           <div className = 'top'>
             <span className = 'sender'> { sender } </span> 

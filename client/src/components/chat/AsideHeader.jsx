@@ -25,7 +25,7 @@ class AsideHeader extends Component {
     const { selectLeftPanel } = this.props;
     return (
       <div className = 'aside-header'>
-      <img className = 'avatar' src = { this.props.user.get('avatar') }/>
+      <div className = 'avatar' style = {{backgroundImage: `url(${this.props.user.get('avatar')})`}}></div>
       <div  onClick = { this.toggleShow } className = 'icon' id = 'menu'>
         <ul className = {`menu-list menu-list${ this.state.showList ? '-show' : '-hidden' }`}>
           <li  onClick = { selectLeftPanel('createGroup') }>创建群组</li>

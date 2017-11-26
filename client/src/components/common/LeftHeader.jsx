@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { toggleLeftPanel } from '../../redux/actions/pageUI';
+
 const LeftHeader = ({title, close}) => {
   return (
     <div className = 'header'>
@@ -7,4 +10,11 @@ const LeftHeader = ({title, close}) => {
     </div>
   );
 }
-export default LeftHeader;
+
+function mapDispatchToProps(dispatch) {
+  return {
+    close: () => dispatch(toggleLeftPanel())
+  };
+}
+
+export default connect(() => ({}), mapDispatchToProps)(LeftHeader);

@@ -1,0 +1,37 @@
+.submit-button-wrap{
+  margin: 2rem auto;
+  display: flex;
+  width: 100%;
+  position: relative; 
+  justify-content: center;
+}
+.submit-button{
+  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
+  background: #a1e3de;
+  
+  i{
+    display: inline-block;
+    width: 40%;
+    height: 40%;
+  }
+  i.icon-disabled{
+    background: url(../img/disabled.png) no-repeat center;
+    background-size: 100% 100%;
+    cursor: not-allowed;
+  }
+  i.icon-usable{   
+    background: url(../img/usable.png) no-repeat center;
+    background-size: 100% 100%;
+    cursor: pointer;
+  }
+}
+.submit-button-usable{
+    &:active{
+      opacity: 0.8;
+    }
+  }

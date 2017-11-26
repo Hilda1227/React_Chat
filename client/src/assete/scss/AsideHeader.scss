@@ -1,7 +1,8 @@
+@import './variable.scss';
 .aside-header{
     height: 4rem;
     width: 100%;
-    background-color: #7bceca;
+    background-color: $mainColor;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,6 +13,7 @@
         border-radius: 50%;
         margin: auto 1rem;
         cursor: pointer;
+        
     }
     .icon{
         width: 1.2rem;

@@ -40,6 +40,7 @@ class RoomFooter extends Component {
   @autobind
   addEmoji (value) {
     this.input.value += value;
+    this.input.focus();
   }
   
   render () {
@@ -58,9 +59,6 @@ class RoomFooter extends Component {
             <span  onClick = { () => {this.togglePanel('showTools')} } id = 'more'></span>
           </div>
         </div>   
-
-
-
 
         <ul className =  {`more more${this.state.showTools ? '' : '-hidden'}`}>
           <li className = 'button-item' id = 'button-file'><input type = 'file' 

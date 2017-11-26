@@ -1,6 +1,7 @@
 import React from 'react'
 import Immutable from 'immutable'
 import ActiveListItem from '../../containers/chat/ActiveListItem';
+import SearchUser from '../../containers/chat/SearchUser';
 import '../../assete/scss/ActiveList.scss';
 
 const ActiveList = ({ activeList, curRoom }) => {
@@ -15,7 +16,10 @@ const ActiveList = ({ activeList, curRoom }) => {
   });
   return (
     <div className='active-list'>
-      { lists }
+      <div className='active-list-wrap'>
+        <SearchUser/>
+        { lists }
+      </div>      
     </div>
   );
 }
