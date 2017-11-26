@@ -25,11 +25,13 @@ module.exports = {
       group.members.push(user._id);
       await user.save(); await group.save();
       socket.join(group._id);
-      cb({ isError: false, msg: '您已成功加入该群组' })      
+      cb({ isError: false, msg: {group: {
+        avatar: group.avatar, _id: group._id, nickname: group.nickname, type: 'group'
+      }} })      
     }
     return cb({isError: true, msg: '不存在该群组'})  
   },
-
+ 
   // @param {object} info  user_id(用户id) & group_id(所要退出的群组id)
   async quitGroup (info, socket, cb) {
     let group = await Group.findOne({_id: info.group_id}),
@@ -48,7 +50,7 @@ module.exports = {
 
   // @param {object} info   _id(用户id)
   async initGroupList (info, socket, cb) {
-    let userGroups = await User.findOne({ _id: info._id })
+    let userGroups = await User.findOne({ _id: info._id || info.user_id })
           .populate({
             path: 'groups', select: 'avatar nickname _id lastWord lastWordTime',
             populate: {

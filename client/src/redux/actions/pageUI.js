@@ -5,6 +5,8 @@ import {
     SET_LOADING,
     SELECT_LEFT_PANEL,
     TOGGLE_LEFT_PANEL,
+    SELECT_RIGHT_PANEL,
+    TOGGLE_RIGHT_PANEL,
 } from '../constants/pageUI.js'
 
 // true  or false
@@ -29,5 +31,16 @@ export const selectLeftPanel = payload => {
 export const toggleLeftPanel = () => {
   return {
     type: TOGGLE_LEFT_PANEL
+  }
+}
+export const selectRightPanel = payload => {
+  return {
+    type: SELECT_RIGHT_PANEL,
+    payload 
+  }
+}
+export const toggleRightPanel = () => {
+  return {
+    type: TOGGLE_RIGHT_PANEL
   }
 }

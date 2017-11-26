@@ -27,4 +27,4 @@ const Search = ({handleEnter, placeholder, handleChange}) => {
   )
 }
 
-export default Search
+export default Search;

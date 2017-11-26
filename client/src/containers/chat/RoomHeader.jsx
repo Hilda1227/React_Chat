@@ -1,12 +1,9 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { removeActiveItem } from '../../redux/actions/activeList'
+import { removeActiveItem, quitGroup } from '../../redux/actions/activeList';
 import { closeChatting } from '../../redux/actions/chatting';
-import { setChatting } from '../../redux/actions/chatting'
-import Immutable from 'immutable'
+import Immutable from 'immutable';
 import { getHistory } from '../../redux/actions/message';
-
-
 import RoomHeader from '../../components/chat/RoomHeader';
 
 function mapStateToProps(state) {
@@ -17,14 +14,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    closeChatting: (payload) => {
+    delChatting: (payload) => {
       dispatch(closeChatting(payload));
       dispatch(removeActiveItem(payload));
     },
-    setChatting: (payload) => {
-      dispatch(setChatting(payload))
-    },
-    getHistory: (payload) => dispatch( getHistory(payload) )
+    quitGroup: (payload) => dispatch(quitGroup(payload))
   };
 }
 

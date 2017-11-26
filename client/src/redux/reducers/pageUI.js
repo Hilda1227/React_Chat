@@ -4,6 +4,8 @@ import {
   SET_LOADING,
   SELECT_LEFT_PANEL,
   TOGGLE_LEFT_PANEL,
+  SELECT_RIGHT_PANEL,
+  TOGGLE_RIGHT_PANEL,
 } from '../constants/pageUI.js'
 
 const init = Immutable.fromJS({
@@ -11,6 +13,9 @@ const init = Immutable.fromJS({
   isLoading: false,
   leftPanelIs: '',
   showLeftPanel: false,
+  rightPanelIs: '',
+  showLightPanel: false,
+
 });
 
 const pageUI = (state = init, action) => {
@@ -29,6 +34,15 @@ const pageUI = (state = init, action) => {
       return state.get('showLeftPanel') 
         ? state.set('showLeftPanel', false) 
         : state.set('showLeftPanel', true)
+    }
+    case SELECT_RIGHT_PANEL: {
+      state = state.set('rightPanelIs', action.payload);
+      return state.set('showRightPanel', true);
+    }
+    case TOGGLE_RIGHT_PANEL: {
+      return state.get('showRightPanel') 
+        ? state.set('showRightPanel', false) 
+        : state.set('showRightPanel', true)
     }
     default: {
       return state;

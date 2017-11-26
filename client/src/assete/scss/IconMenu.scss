@@ -1,0 +1,43 @@
+.icon-menu{
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  position: relative;
+  i{
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    background-size: 100% !important;
+    &:active{
+      opacity: 0.8;
+    }
+  }
+  .menu-wrap{
+    position: absolute;
+    padding: 0.8rem 0;
+    background-color: #fff;
+    width: 12rem;
+    z-index: 10;
+    border-radius: 2px;
+    color: #666;
+    box-shadow: 0 1px 6px rgba(0,0,0,.117647);
+  }
+  .menu-list{
+    width: 100%;
+    .list-item{
+      height: 2.5rem;
+      padding-left: 0.6rem;
+      line-height: 2.5rem;
+      transition: 200ms;
+      &:hover{
+        background-color: #f9f9f9;
+      }
+    }
+  }
+}
+i.icon-menu-1{
+  background: url(../img/menu.png) center no-repeat;
+}
+i.icon-menu-2{
+  background: url(../img/menu2.png) center no-repeat;
+}

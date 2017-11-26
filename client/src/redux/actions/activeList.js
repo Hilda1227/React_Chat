@@ -7,7 +7,8 @@ import {
   UPDATE_ACTIVE_ITEM,
   REMOVE_ACTIVE_ITEM,
   CLEAR_UNREAD,
-  SET_ONLINE
+  SET_ONLINE,
+  JOIN_GROUP
 } from '../constants/activeList.js'
 
 
@@ -20,6 +21,24 @@ export const initRoomList = (payload) => (dispatch) => {
   })) 
   .catch(err => console.log(err))
 }
+
+export const joinGroup = (payload) => (dispatch) => {
+  return socketEmit('join group', { _id: payload})
+    .then(data => {
+      dispatch(addActiveItem(data.group));
+    })
+    .catch(err => alert(err))
+}
+// payload为群组_id
+export const quitGroup = (payload) => (dispatch) => {
+  return socketEmit('quit group', { group_id: payload})
+    .then(data => {
+      console.log(data)
+      dispatch(removeActiveItem(payload));
+    })
+    .catch(err => alert(err))
+}
+
 
 export const addActiveItem = (payload) => {
   return {

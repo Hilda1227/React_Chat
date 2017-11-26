@@ -4,3 +4,5 @@ export const REMOVE_ACTIVE_ITEM = 'REMOVE_ACTIVE_ITEM';
 export const UPDATE_ACTIVE_ITEM = 'UPDATE_ACTIVE_ITEM';
 export const CLEAR_UNREAD = 'CLEAR_UNREAD';
 export const SET_ONLINE = 'SET_ONLINE';
+export const JOIN_GROUP = 'JOIN_GROUP';
+export const QUIT_GROUP = 'QUIT_GROUP';

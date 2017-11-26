@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { autobind } from 'core-decorators';
 import '../../assete/scss/AsideHeader.scss';
+import IconMenu from '../common/IconMenu';
 
 class AsideHeader extends Component {
   constructor (props) {
@@ -25,16 +26,18 @@ class AsideHeader extends Component {
     const { selectLeftPanel } = this.props;
     return (
       <div className = 'aside-header'>
-      <div className = 'avatar' style = {{backgroundImage: `url(${this.props.user.get('avatar')})`}}></div>
-      <div  onClick = { this.toggleShow } className = 'icon' id = 'menu'>
-        <ul className = {`menu-list menu-list${ this.state.showList ? '-show' : '-hidden' }`}>
-          <li  onClick = { selectLeftPanel('createGroup') }>创建群组</li>
-          <li onClick = { selectLeftPanel('addGroup') }>加入群组</li>
-          <li onClick = { selectLeftPanel('modifyInfo') }>修改资料</li>
-          <li onClick = { this.logout }>登出</li>
-        </ul>
+        <div className = 'avatar' style = {{backgroundImage: `url(${this.props.user.get('avatar')})`}}></div>
+        <span  className = 'icon-menu-wrap'>
+          <IconMenu iconClassName = 'icon-menu-1'>
+            <ul className = 'menu-list'>
+              <li className = 'list-item' onClick = { selectLeftPanel('createGroup') }>创建群组</li>
+              <li className = 'list-item' onClick = { selectLeftPanel('addGroup') }>加入群组</li>
+              <li className = 'list-item' onClick = { selectLeftPanel('modifyInfo') }>修改资料</li>
+              <li className = 'list-item' onClick = { this.logout }>登出</li>
+            </ul>
+          </IconMenu>      
+        </span>
       </div>
-    </div>
     )
   }
 }

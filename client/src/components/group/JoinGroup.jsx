@@ -4,7 +4,9 @@ import '../../assete/scss/JoinGroup.scss';
 import Search from '../common/Search';
 import LeftHeader from '../common/LeftHeader';
 import Loading from '../common/Loading';
+import { connect } from 'react-redux';
 import { socketEmit } from '../../redux/actions/common.js';
+import { joinGroup } from '../../redux/actions/activeList.js';
 
 const GroupItem = ({avatar, nickname, describe, join}) => {
   
@@ -37,9 +39,9 @@ class JoinGroup extends Component {
       this.setState({groups: data.groups});
     })
   }
-  join (_id) {
-    socketEmit('join group', { _id })
-    .then(data => {
+  joinGroup (_id) {
+    this.props.joinGroup(_id)
+    .then(() => {
       this.setState({ isLoading: false })
       this.props.close();
     })
@@ -47,13 +49,13 @@ class JoinGroup extends Component {
   }
   render () {
     let groups = this.state.groups.map( item => {
-      return (
-              <GroupItem
-                { ...item } 
-                key = { item._id }
-                join = { () => this.join(item._id) }
-              />
-             );
+    return (
+      <GroupItem
+        { ...item } 
+        key = { item._id }
+        join = { () => this.joinGroup(item._id) }
+      />
+    )
     })
     return (
       <div className = ' left-panel-wrap join-group'>
@@ -65,11 +67,9 @@ class JoinGroup extends Component {
         <div className = 'groups-wrap'>
           { this.state.isLoading && <Loading/> }
           {
-            !this.state.groups.length
-            ? <span className = 'none'>没有相关的群组噢~</span>
-            : (
-              <div className = 'groups'>{ groups }</div>
-            )
+            this.state.groups.length
+            ? (<div className = 'groups'>{ groups }</div>)
+            : (<span className = 'none'>没有相关的群组噢~</span>)
           } 
         </div>
       </div>
@@ -77,4 +77,11 @@ class JoinGroup extends Component {
   }
 }
 
-export default JoinGroup;
+
+function mapDispatchToProps(dispatch) {
+  return {
+    joinGroup: (payload) => dispatch(joinGroup(payload))
+  };
+}
+
+export default connect( () =>({}), mapDispatchToProps)(JoinGroup);

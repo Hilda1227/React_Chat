@@ -26,14 +26,9 @@
       font-size: 0.9rem;
       font-weight: bold;
     }
-    #target{
-      width: 1.7rem;
-      height: 1.7rem;
-      background-image: url('../img/user.png');
-      background-size: 100%;
+    .target{
       right: 0px;
       position: absolute;
-      cursor: pointer;
     } 
   }
 }
