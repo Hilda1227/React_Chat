@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { autobind } from 'core-decorators';
 import { connect } from 'react-redux';
-import Avatar from '../common/Avatar';
+import AvatarUpload from '../common/AvatarUpload';
 import '../../assete/scss/ModifyInfo.scss';
 import { modifyInfo } from '../../util/upload';
-import LeftHeader from '../common/LeftHeader';
+import PanelHeader from '../common/PanelHeader';
 import Loading from '../common/Loading';
 import ProfileSection from '../common/ProfileSection';
 import EditableInput from '../common/EditableInput';
@@ -47,11 +47,11 @@ class ModifyInfo extends Component {
   render () {
     return (
       <div className = 'left-panel-wrap modify-info'>
-        <LeftHeader title = '修改资料' />
+        <PanelHeader title = '修改资料' close = { this.props.close } />
         <div className = 'panel-wrap'>
           <div className = 'panel-wrap-slide'>
             { this.state.isLoading && <Loading/> }
-            <Avatar 
+            <AvatarUpload 
               setAvatar = { this.setAvatar }  
               src = { this.state.avatar } 
               size = '10' 

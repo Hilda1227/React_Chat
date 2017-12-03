@@ -34,26 +34,6 @@
   align-items: center;
   justify-content: flex-start;
   background-color: #f8f8f8;
-  .header{
-    height: 4rem;
-    width: 100%;
-    background-color: $mainColor;
-    color: #fff;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    .close{
-        width: 1.6rem;
-        height: 1.6rem;
-        background: url('../img/return.png') no-repeat;
-        background-size: 100%;
-        position: absolute;
-        left: 1rem;
-        cursor: pointer;
-    }
-  }
   .panel-wrap{
     position: relative;
     flex-flow: 1;

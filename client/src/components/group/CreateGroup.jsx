@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { autobind } from 'core-decorators';
 import { connect } from 'react-redux';
-import Avatar from '../common/Avatar';
+import AvatarUpload from '../common/AvatarUpload';
 import '../../assete/scss/CreateGroup.scss';
 import config from '../../config/serverConfig';
 import { createGroup } from '../../util/upload';
-import LeftHeader from '../common/LeftHeader';
+import PanelHeader from '../common/PanelHeader';
 import Loading from '../common/Loading';
 import ProfileSection from '../common/ProfileSection';
 import EditableInput from '../common/EditableInput';
@@ -21,14 +21,11 @@ class CreateGroup extends Component {
       isLoading: false
     }
   }
-  @autobind
-  setAvatar (value) {
-    this.setState({ avatar: value })
-  }
+
   @autobind
   handleChange (prop) {
-    return e => {
-      this.setState({ [prop]: e.target.value})
+    return val => {
+      this.setState({ [prop]: val})
     }   
   }
   @autobind
@@ -51,14 +48,14 @@ class CreateGroup extends Component {
   render () {
     return (
       <div className = 'left-panel-wrap create-group'>
-        <LeftHeader title = '创建群组'/>
+        <PanelHeader title = '创建群组' close = { this.props.close } />
         <div className = 'panel-wrap'>
           { this.state.isLoading && <Loading/> }       
-          <Avatar
-            setAvatar = { this.setAvatar }
+          {<AvatarUpload
+            setAvatar = { this.handleChange('avatar') }
             src = { this.state.avatar }
             size = '12'
-          />
+          />}
           <ProfileSection title = '昵称'>
             <EditableInput
               defaultValue = { this.state.nickname }

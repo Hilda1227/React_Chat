@@ -1,0 +1,29 @@
+@import './variable.scss';
+.panel-header{
+    height: 4rem;
+    width: 100%;
+    color: #fff;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    .close-left{
+        width: 1.6rem;
+        height: 1.6rem;
+        background: url('../img/return.png') no-repeat;
+        background-size: 100%;
+        position: absolute;
+        left: 1rem;
+        cursor: pointer;
+    }
+    .close-right{
+        width: 1.6rem;
+        height: 1.6rem;
+        background: url('../img/return-right.png') no-repeat;
+        background-size: 100%;
+        position: absolute;
+        right: 1rem;
+        cursor: pointer;
+    }
+  }

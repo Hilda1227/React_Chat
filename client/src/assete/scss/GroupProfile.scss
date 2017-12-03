@@ -1,0 +1,68 @@
+.group-profile{
+    display: flex;
+    flex-direction: column;
+    height: 100%;   
+  .group-profile-wrap{
+    width: 100%;
+    flex-grow: 1;   
+    overflow-y: auto;
+    position: relative;
+    .group-profile-slide{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  .avatar-wrap{
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .createAt{
+    color: #929fa6;
+    font-size: 0.8rem;
+  }
+  .group-member{
+    width: 100%;
+    color: #929fa6;
+    li{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+    color:#ccc;
+    li span:first-of-type{
+      color: #222;
+    }
+    li:first-of-type{
+      margin-bottom: 1.2rem;
+    }
+  }
+  .submit,.quit{
+    width: 85%;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    span:first-of-type{
+      margin-right: 3rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      display: inline-block;
+    }
+  }
+  .submit{
+    span:first-of-type{
+      background: url('../img/submit.png') center no-repeat;
+      background-size: 100%;
+    }
+  }
+  .quit{     
+    span:first-of-type{
+      background: url('../img/quit.png') center no-repeat;
+      background-size: 100%;
+    }
+    color: #cb2431;
+  }
+}

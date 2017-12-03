@@ -7,8 +7,8 @@ import AsideHeader from '../../containers/chat/AsideHeader';
 import Empty from './Empty';
 import RoomMsg from '../../containers/chat/RoomMsg';
 import RoomFooter from '../../containers/chat/RoomFooter';
-import Loading from '../common/Loading';
 import LeftPanel from '../../containers/chat/LeftPanel';
+import RightPanel from '../../containers/chat/RightPanel';
 
 const Layout = ({chatting, isLoading}) => {
   return (
@@ -20,16 +20,17 @@ const Layout = ({chatting, isLoading}) => {
         </div>
         <LeftPanel/>
       </div>
-
       {
         chatting.isEmpty() 
         ? <Empty/>
         : (
             <div className = 'room'>
-              <RoomHeader/>
-              <RoomMsg/>
-              <RoomFooter/>
-              { isLoading && <Loading/> }
+              <div className = 'chat'>
+                <RoomHeader/>
+                <RoomMsg/>
+                <RoomFooter/>
+              </div>
+              <RightPanel/>
             </div>
           )
       }

@@ -52,6 +52,11 @@ module.exports = function socket (io){
       .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} )
     })
 
+    socket.on('fetch user info', (info, cb) => {
+      user.fetchtUserInfo(info, socket, cb)
+      .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} )
+    })
+
     // 查找该用户是否存在
     socket.on('find user', (info, cb) => {
       user.findUser(info, socket, cb)
@@ -106,6 +111,11 @@ module.exports = function socket (io){
 
     socket.on('search groups', (info, cb) => {
       group.searchGroup(info, socket, cb)
+      .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} )     
+    })
+
+    socket.on('fetch group info', (info, cb) => {
+      group.fetchtGroupInfo(info, socket, cb)
       .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} )     
     })
 

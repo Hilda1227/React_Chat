@@ -112,13 +112,28 @@ module.exports = {
     return cb({ isError: true, msg: '不存在此用户' });     
   },
   
+  async fetchtUserInfo (info, socket, cb) {
+    const user = await User.findOne({_id: info._id})
+    if(user) {
+      let info = {
+        nickname: user.nickname,
+        sex: user.sex,
+        avatar: user.avatar,
+        createAt: user.createAt,
+        place: user.place,
+        onlineState: user.onlineState
+      }
+      return cb({ isError: false, msg: {info} })
+    }
+    cb({ isError: true, msg: '不存在此用户' })
+  },
+
   
   async getUsers (info, socket, cb) {
     const users = await User.find({});
     return cb({isError: false, msg: {users} });
   },
-
-
+  
 }
 
 

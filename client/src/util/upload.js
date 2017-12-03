@@ -58,7 +58,7 @@ export const createGroup = (info) => {
 
 export const modifyInfo = (info) => {
   let formdata = formData(info);
-  return axios.post('/api/modifyInfo', formdata, {
+  return axios.post('/api/modifyUserInfo', formdata, {
     headers: {'Content-Type': 'multipart/form-data'}
   })
   .then(res => {
@@ -69,6 +69,14 @@ export const modifyInfo = (info) => {
     else{
       alert(res.data.msg);
     }
+  })
+  .catch(err => console.log(err))
+}
+
+export const modifyGroupInfo = (info) => {
+  let formdata = formData(info);
+  return axios.post('/api/modifyGroupInfo', formdata, {
+    headers: {'Content-Type': 'multipart/form-data'}
   })
   .catch(err => console.log(err))
 }

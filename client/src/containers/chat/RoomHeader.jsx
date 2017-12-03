@@ -5,6 +5,7 @@ import { closeChatting } from '../../redux/actions/chatting';
 import Immutable from 'immutable';
 import { getHistory } from '../../redux/actions/message';
 import RoomHeader from '../../components/chat/RoomHeader';
+import { selectRightPanel } from '../../redux/actions/pageUI';
 
 function mapStateToProps(state) {
   return {
@@ -18,7 +19,8 @@ function mapDispatchToProps(dispatch) {
       dispatch(closeChatting(payload));
       dispatch(removeActiveItem(payload));
     },
-    quitGroup: (payload) => dispatch(quitGroup(payload))
+    quitGroup: (payload) => dispatch(quitGroup(payload)),
+    selectRightPanel: (payload) => dispatch(selectRightPanel(payload))
   };
 }
 

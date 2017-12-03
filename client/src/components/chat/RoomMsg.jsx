@@ -1,6 +1,7 @@
 import React, { Component }from 'react';
 import { socket } from '../../redux/actions/common'
 import { autobind } from 'core-decorators';
+import Loading from '../common/Loading';
 import '../../assete/scss/RoomMsg.scss';
 import MessageItemBox from './MessageItemBox';
 
@@ -8,7 +9,7 @@ class RoomMsg extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      isLoading: false,
+      isLoading: true,
       preHeight: 0,
     }
     this.limit = 8;
@@ -18,19 +19,24 @@ class RoomMsg extends Component {
     this.room.scrollTop = this.room.scrollHeight - this.room.clientHeight;
   }
 
-  initHistory(chatting) {   
+  initHistory(chatting) {  
+    this.setState({ isLoading: true }); 
     return this.props.initHistory({
       ...chatting.toJS(),
       limit: this.limit,
       token: localStorage.getItem('token')
     })
     .then(() => {this.setState({
-      preHeight: this.room.scrollHeight
+      preHeight: this.room.scrollHeight,
+      isLoading: false
     })})
   }
 
   addHistory () {
-    this.setState({preHeight: this.room.scrollHeight});
+    this.setState({
+      preHeight: this.room.scrollHeight,
+      isLoading: true
+    });
     return this.props.addHistory({
       ...this.props.chatting.toJS(),
       limit: this.limit,
@@ -54,11 +60,11 @@ class RoomMsg extends Component {
   handleScroll (e) {
     e.persist()  // 如果要以异步方式访问事件属性，则应该在事件上调用event.persist()
     if(this.room.scrollTop <= 0) {
-      this.props.setLoading(true);
       this.addHistory()
       .then(() => {
         let height = e.target.scrollHeight;
         this.room.scrollTop = height - this.state.preHeight;
+        this.setState({ isLoading: false });
       })
     }
   }
@@ -76,6 +82,7 @@ class RoomMsg extends Component {
         onScroll = { this.handleScroll } 
         ref = {node => this.room = node}
       >
+        { this.state.isLoading && <Loading/> }
         <div className = 'room-msg-wrap' >{ messages }</div>
       </div>
     )

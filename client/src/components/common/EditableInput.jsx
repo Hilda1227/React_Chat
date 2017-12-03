@@ -4,11 +4,16 @@ import '../../assete/scss/EditableInput.scss';
 
 class EditableInput extends Component {
   constructor (props) {
-    super(props);   
+    super(props);  
     this.state = {
       isFocus : false,
-      value: this.props.defaultValue ? this.props.defaultValue : '',
+      value: this.props.defaultValue || '',
     };
+  }
+  componentWillReceiveProps (nextProps) {  
+    if(nextProps.defaultValue !== this.props.defaultValue) {
+      this.setState({ value: nextProps.defaultValue});
+    }
   }
   @autobind
   setFocus () {
@@ -19,10 +24,10 @@ class EditableInput extends Component {
   @autobind
   handleChange (e) {
     this.setState({ value: e.target.value });
-    this.props.handleChange(e);
+    this.props.handleChange(e.target.value);
   }
   render () {
-    const { editable = true, placeholder, defaultValue, maxLength, minLength, type = 'text' } = this.props;
+    const { editable = true, placeholder, maxLength, minLength, type = 'text' } = this.props;
     return (
     <div className = {`editable-input editable-input${this.state.isFocus ? '-focus' : ''}`}>
       <input 

@@ -1,11 +1,12 @@
 import Immutable from 'immutable';
 import { socketEmit } from './common.js';
-import { setChatting } from './chatting.js'
+import { setChatting, closeChatting } from './chatting.js'
 import {
   INIT_GROUP_LIST,
   ADD_ACTIVE_ITEM,
   UPDATE_ACTIVE_ITEM,
   REMOVE_ACTIVE_ITEM,
+  SET_ACTIVE_ITEM,
   CLEAR_UNREAD,
   SET_ONLINE,
   JOIN_GROUP
@@ -29,16 +30,16 @@ export const joinGroup = (payload) => (dispatch) => {
     })
     .catch(err => alert(err))
 }
+
 // payload为群组_id
 export const quitGroup = (payload) => (dispatch) => {
   return socketEmit('quit group', { group_id: payload})
     .then(data => {
-      console.log(data)
       dispatch(removeActiveItem(payload));
+      dispatch(closeChatting());
     })
     .catch(err => alert(err))
 }
-
 
 export const addActiveItem = (payload) => {
   return {
@@ -70,6 +71,13 @@ export const removeActiveItem = (payload) => {
 export const updateActiveItem = (payload) => {
   return {
     type: UPDATE_ACTIVE_ITEM,
+    payload: Immutable.fromJS(payload)
+  }
+}
+
+export const setActiveItem = (payload) => {
+  return {
+    type: SET_ACTIVE_ITEM,
     payload: Immutable.fromJS(payload)
   }
 }

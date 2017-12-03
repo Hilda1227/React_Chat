@@ -1,5 +1,5 @@
-import Immutable from 'immutable'
-
+import Immutable from 'immutable';
+import { socketEmit } from './common.js';
 import {
     GROUP_FORM_SHOW,
     SET_LOADING,
@@ -7,7 +7,9 @@ import {
     TOGGLE_LEFT_PANEL,
     SELECT_RIGHT_PANEL,
     TOGGLE_RIGHT_PANEL,
-} from '../constants/pageUI.js'
+    TOGGLE_USER_INFO,
+    RESTORE_INIT,
+} from '../constants/pageUI.js';
 
 // true  or false
 export const groupFormShow = payload => {
@@ -42,5 +44,15 @@ export const selectRightPanel = payload => {
 export const toggleRightPanel = () => {
   return {
     type: TOGGLE_RIGHT_PANEL
+  }
+}
+export const toggleUserInfo = () => {
+  return {
+    type: TOGGLE_USER_INFO
+  }
+}
+export const restoreInit = () => {
+  return {
+    type: RESTORE_INIT
   }
 }

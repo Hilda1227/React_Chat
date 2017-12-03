@@ -31,16 +31,26 @@
         }
     }
     .room{
-        width: 68.8%;
+        flex-grow: 1;
         height: 100%;
-        float: right;
-        transition: 200ms;
         display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: space-between;
-        position: relative;
-        background-color: $roomBgColor;
+        border-left:1px solid #eee;
+        .chat{
+          flex-grow: 1;
+          display: flex;
+          width: 100%;
+          align-items: center;
+          flex-direction: column;
+          justify-content: space-between;
+          position: relative;
+          background-color: $roomBgColor;
+        }
+        .right-panel{
+          width: 24rem;
+          height: 100%;
+          border-left: 1px solid #eee;
+          background-color: #f8f8f8;
+        }
     }
   }
   

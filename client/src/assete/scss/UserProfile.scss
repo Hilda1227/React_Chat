@@ -1,0 +1,65 @@
+.user-profile{
+  .avatar-wrap{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    &:hover{
+      .online{
+        visibility: visible;        
+      }
+    }
+    .online{
+      height: 50%;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background: rgba(0,0,0,.3);
+      display: flex ;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      visibility: hidden;
+    }
+  }
+  .avatar-wrap + .nickname{
+    color: #222;
+    margin: 1rem auto 0.4rem 0;
+  }
+  .avatar-wrap ~ .createAt{
+    font-size: 12px;
+  }
+  .info{
+    width: 100%;
+    li{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+    color:#ccc;
+    li span:first-of-type{
+      color: #222;
+    }
+    li:first-of-type{
+      margin-bottom: 2rem;
+    }
+  }
+  .delsession{
+    display: flex;
+    align-items: center;
+    color: #cb2431;
+    width: 85%;
+    margin: auto;
+    span:first-of-type{
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-right: 3rem;
+      display: inline-block;
+      background: url('../img/delete.png') center no-repeat;
+      background-size: 100%;
+    }
+  }
+}

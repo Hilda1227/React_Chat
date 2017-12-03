@@ -1,5 +1,5 @@
-import React from 'react'
-import '../../assete/scss/Search.scss'
+import React from 'react';
+import '../../assete/scss/Search.scss';
 
 const Search = ({handleEnter, placeholder, handleChange}) => {
   let input;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { autobind } from 'core-decorators';
 import '../../assete/scss/JoinGroup.scss';
 import Search from '../common/Search';
-import LeftHeader from '../common/LeftHeader';
+import PanelHeader from '../common/PanelHeader';
 import Loading from '../common/Loading';
 import { connect } from 'react-redux';
 import { socketEmit } from '../../redux/actions/common.js';
@@ -59,7 +59,7 @@ class JoinGroup extends Component {
     })
     return (
       <div className = ' left-panel-wrap join-group'>
-        <LeftHeader  title = '加入群组' />
+        <PanelHeader  title = '加入群组' close = { this.props.close } />
         <Search
           placeholder = '请输入想要加入的群组'
           handleChange = { this.searchGroup }

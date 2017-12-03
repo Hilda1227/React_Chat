@@ -1,37 +1,11 @@
-.avatar-upload{
-    width: 100%;
-    height: 100%;
+.avatar{
+    display: inline-block;
+    border-radius: 50%;
+    background-size: 100%;
+    background-position: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     position: relative;
-    margin: 2rem auto;
-    &:hover .mask{
-        display: inline-block;
-    }
-    .preview, .mask, .upload{
-        position: absolute;
-        display: inline-block;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        background-size: 100%;
-        background-position: center;
-        top: 0;
-        left: 0;
-    }
-    .preview{
-        z-index: 18;
-        background-color: #fff;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-    .mask{
-        z-index: 19;
-        display: none;
-        background:url('../img/camara.png') center no-repeat rgba(0,0,0,.4);
-    }
-    .upload{
-        z-index: 20;
-        overflow: hidden;
-        opacity: 0;
-    }
+    overflow: hidden;
 }

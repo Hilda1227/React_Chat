@@ -6,6 +6,8 @@ import {
   TOGGLE_LEFT_PANEL,
   SELECT_RIGHT_PANEL,
   TOGGLE_RIGHT_PANEL,
+  TOGGLE_USER_INFO,
+  RESTORE_INIT
 } from '../constants/pageUI.js'
 
 const init = Immutable.fromJS({
@@ -15,7 +17,14 @@ const init = Immutable.fromJS({
   showLeftPanel: false,
   rightPanelIs: '',
   showLightPanel: false,
-
+  showUserInfo: false,
+  userInfoIs: {
+    avatar: '',
+    nickname: '',
+    sex: '',    
+    createAt: '',
+    place: ''
+  }
 });
 
 const pageUI = (state = init, action) => {
@@ -43,6 +52,14 @@ const pageUI = (state = init, action) => {
       return state.get('showRightPanel') 
         ? state.set('showRightPanel', false) 
         : state.set('showRightPanel', true)
+    }
+    case TOGGLE_USER_INFO: {
+      return state.get('showUserInfo') 
+        ? state.set('showUserInfo', false) 
+        : state.set('showUserInfo', true)
+    }
+    case RESTORE_INIT: {
+      return init;
     }
     default: {
       return state;

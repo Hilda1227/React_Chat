@@ -13,7 +13,24 @@ module.exports = {
     let groups = await Group.find({nickname: eval("/.*"+info.key+".*/i")});
     cb({isError: false, msg: {groups}});
   },
-  
+
+  async fetchtGroupInfo (info, socket, cb) {
+    const group = await Group.findOne({_id: info._id});
+    if(Group) {
+      let info = {
+        nickname: group.nickname,
+        avatar: group.avatar,
+        creator: group.creator,
+        count: group.members.length,
+        createAt: group.createAt,
+        describe: group.describe
+      }
+      console.log(info)
+      return cb({ isError: false, msg: {info} })
+    }
+    cb({ isError: true, msg: '不存在此用户' })
+  },
+
   // @param {object} info  user_id(用户id) & nickname(所要加入的群组昵称)
   async joinGroup (info, socket, cb) {
     let group = await Group.findOne({_id: info._id});
