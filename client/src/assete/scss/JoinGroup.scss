@@ -8,6 +8,7 @@
     justify-content: center;   
     .none{
       align-self: center;
+      color: #929fa6;
     }
     .groups{
       width: 100%;
@@ -31,8 +32,8 @@
         height: 2.7rem;
         display: flex;
         .avatar{
-          width: 2.7rem;
-          height: 2.7rem;
+          margin-right: 1.5rem;
+          margin-left: 0.2rem;
         }
         .info{
           display: flex;

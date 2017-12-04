@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { autobind } from 'core-decorators';
 import { connect } from 'react-redux';
 import AvatarUpload from '../common/AvatarUpload';
+import DelayAnimation from '../../components/common/DelayAnimation';
 import '../../assete/scss/CreateGroup.scss';
 import config from '../../config/serverConfig';
 import { createGroup } from '../../util/upload';
@@ -49,17 +50,23 @@ class CreateGroup extends Component {
     return (
       <div className = 'left-panel-wrap create-group'>
         <PanelHeader title = '创建群组' close = { this.props.close } />
+        { this.state.isLoading && <Loading  top = { 5 }  /> }
         <div className = 'panel-wrap'>
-          { this.state.isLoading && <Loading/> }       
-          {<AvatarUpload
-            setAvatar = { this.handleChange('avatar') }
-            src = { this.state.avatar }
-            size = '12'
-          />}
+          <ProfileSection>
+            <div className = 'avatar-wrap'> 
+              <DelayAnimation name = 'Avatar' delay = { 100 }>     
+                <AvatarUpload
+                  setAvatar = { this.handleChange('avatar') }
+                  src = { this.state.avatar }
+                  size = '12'
+                />
+              </DelayAnimation>
+            </div>           
+          </ProfileSection>
           <ProfileSection title = '昵称'>
             <EditableInput
               defaultValue = { this.state.nickname }
-              minLength = { 1 }
+              minLength = { 0 }
               maxLength = { 15 }
               placeholder = '请填写群名称（1~10个字）'
               handleChange = { this.handleChange('nickname') }
@@ -69,7 +76,7 @@ class CreateGroup extends Component {
             <EditableInput
               defaultValue = { this.state.describe }
               minLength = { 0 }
-              maxLength = { 30 }
+              maxLength = { 35 }
               placeholder = '群介绍（0~30个字）'
               handleChange = { this.handleChange('describe') }
             />

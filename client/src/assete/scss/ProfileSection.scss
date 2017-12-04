@@ -28,12 +28,9 @@
 .profile-section-hover{ 
   &:hover{
     background: #f8f8f8;
+    cursor: pointer;
   } 
   .profile-section-wrap{
     width: 100%;  
-    // .profile-content{
-    //   flex-direction: row;
-    //   justify-content: center;
-    // }
   }
 }

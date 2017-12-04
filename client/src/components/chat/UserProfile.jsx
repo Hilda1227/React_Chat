@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PanelHeader from '../common/PanelHeader';
 import ProfileSection from '../common/ProfileSection';
+import DelayAnimation from '../../components/common/DelayAnimation';
 import EditableInput from '../common/EditableInput';
 import Avatar from '../common/Avatar';
 import { socketEmit } from '../../redux/actions/common.js';
@@ -36,14 +37,15 @@ class UserProfile extends Component {
         <div className = 'user-profile-wrap'>
           <ProfileSection>
             <div className = 'avatar-wrap'>
-              <Avatar src = { avatar }>
-                <span className = 'online'>{ onlineState ? '在线' : '离开' }</span>
-              </Avatar>              
+              <DelayAnimation name = 'Avatar' delay = { 100 }>
+                <Avatar src = { avatar }>
+                  <span className = 'online'>{ onlineState ? '在线' : '离开' }</span>
+                </Avatar>
+              </DelayAnimation>              
             </div>
             <span className = 'nickname'>{ nickname }</span>
             <span className = 'createAt'>Create at{ this.state.createAt }</span>
-          </ProfileSection>
-        
+          </ProfileSection>       
           <ProfileSection>
             <ul className = 'info'>
               <li><span>性别</span> <span>{ sex }</span></li>

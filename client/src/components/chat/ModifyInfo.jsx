@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { autobind } from 'core-decorators';
 import { connect } from 'react-redux';
 import AvatarUpload from '../common/AvatarUpload';
+import DelayAnimation from '../../components/common/DelayAnimation';
 import '../../assete/scss/ModifyInfo.scss';
 import { modifyInfo } from '../../util/upload';
 import PanelHeader from '../common/PanelHeader';
@@ -23,13 +24,9 @@ class ModifyInfo extends Component {
     };
   }
   @autobind
-  setAvatar (value) {
-    this.setState({ avatar: value })
-  }
-  @autobind
   handleChange (prop) {
-    return (e) => {
-      this.setState({ [prop]: e.target.value});
+    return (val) => {
+      this.setState({ [prop]: val});
     }
   }
   @autobind
@@ -48,14 +45,20 @@ class ModifyInfo extends Component {
     return (
       <div className = 'left-panel-wrap modify-info'>
         <PanelHeader title = '修改资料' close = { this.props.close } />
+        { this.state.isLoading && <Loading top = { 5 } /> }
         <div className = 'panel-wrap'>
           <div className = 'panel-wrap-slide'>
-            { this.state.isLoading && <Loading/> }
-            <AvatarUpload 
-              setAvatar = { this.setAvatar }  
-              src = { this.state.avatar } 
-              size = '10' 
-            />
+            <ProfileSection>   
+              <div className = 'avatar-wrap'>
+                <DelayAnimation name = 'Avatar' delay = { 100 }>    
+                <AvatarUpload
+                  setAvatar = { this.handleChange('avatar') }
+                  src = { this.state.avatar }
+                  size = '12'
+                />
+                </DelayAnimation>
+              </div>
+            </ProfileSection>
             <ProfileSection title = '昵称'>
               <EditableInput
                 defaultValue = { this.state.nickname }
@@ -73,8 +76,10 @@ class ModifyInfo extends Component {
               />
             </ProfileSection> 
             <ProfileSection title = '性别'>
-              <label>男<input type = 'radio' onChange = { this.handleChange('sex') } checked = { this.state.sex == '男' } value = '男'/></label>
-              <label>女<input type = 'radio' onChange = { this.handleChange('sex') } checked = { this.state.sex == '女' } value = '女'/></label>
+              <div>
+                <label>男<input type = 'radio' onChange = { e => this.handleChange('sex')(e.target.value) } checked = { this.state.sex == '男' } value = '男'/></label>
+                <label>女<input type = 'radio' onChange = { e => this.handleChange('sex')(e.target.value) } checked = { this.state.sex == '女' } value = '女'/></label>
+              </div>
             </ProfileSection>
             <SubmitButton 
               disabled = { this.state.nickname.length < 1 || this.state.place.length < 1 } 

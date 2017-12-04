@@ -8,6 +8,7 @@ import { modifyGroupInfo } from '../../util/upload';
 import AvatarUpload from '../common/AvatarUpload';
 import Avatar from '../common/Avatar';
 import Loading from '../common/Loading';
+import DelayAnimation from '../common/DelayAnimation';
 import '../../assete/scss/GroupProfile.scss';
 
 class GroupProfile extends Component {
@@ -50,7 +51,8 @@ class GroupProfile extends Component {
     if( avatar !== this.avatar ) info.avatar = avatar;
     modifyGroupInfo(info)
     .then(res => {
-      this.props.updateModify({ ...res.data.msg.info, _id: this.props.chatting._id });
+      console.log(res.data.msg.group)
+      this.props.updateModify({ ...res.data.msg.group});
       this.setState({isLoading: false});
       this.props.close();
     })
@@ -66,22 +68,24 @@ class GroupProfile extends Component {
           title = '群组信息'
           close = { close }
         />
+        { isLoading && <Loading top = { 5 } /> }
         <div className = 'group-profile-wrap'>
-          { isLoading && <Loading/> }
           <div className = 'group-profile-slide'>
             <ProfileSection>
               <div className = 'avatar-wrap'>
-                {
-                  editable 
-                  ? 
-                  (
-                    <AvatarUpload
-                      src = { this.state.avatar }
-                      setAvatar = { this.handleChange('avatar') }
-                    />
-                  )
-                  : <Avatar src = { this.state.avatar } />
-                }
+                <DelayAnimation  name = 'Avatar' delay = { 100 }>               
+                  {
+                    editable 
+                    ? 
+                    (
+                      <AvatarUpload
+                        src = { this.state.avatar }
+                        setAvatar = { this.handleChange('avatar') }
+                      />
+                    )
+                    : <Avatar src = { this.state.avatar } />
+                  }
+                </DelayAnimation>
               </div>
               <EditableInput
                 editable = { editable }
@@ -114,7 +118,7 @@ class GroupProfile extends Component {
             }  
             <ProfileSection hover = { true }>           
               <div  className = 'quit' onClick = { () => quitGroup( chatting._id ) } ><span></span> <span>退出该群</span></div>              
-            </ProfileSection>           
+            </ProfileSection>         
           </div>
         </div>
       </div>

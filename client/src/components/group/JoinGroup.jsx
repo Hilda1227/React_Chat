@@ -7,13 +7,14 @@ import Loading from '../common/Loading';
 import { connect } from 'react-redux';
 import { socketEmit } from '../../redux/actions/common.js';
 import { joinGroup } from '../../redux/actions/activeList.js';
+import Avatar from '../common/Avatar';
 
 const GroupItem = ({avatar, nickname, describe, join}) => {
   
   return (
     <div  onClick = { join } className = 'group-item-wrap'>
       <div className = 'group-item'>
-        <div  style = {{ backgroundImage: `url(${ avatar })` }} className = 'avatar'></div>
+        <Avatar src = { avatar }  size = { 2.7 } />
         <div className = 'info'>
           <span className = 'nickname'>{ nickname }</span>
           <p className = 'describe'>{ describe }</p>
@@ -64,8 +65,8 @@ class JoinGroup extends Component {
           placeholder = '请输入想要加入的群组'
           handleChange = { this.searchGroup }
         />
+        { this.state.isLoading && <Loading  top = { 5 }  /> }
         <div className = 'groups-wrap'>
-          { this.state.isLoading && <Loading/> }
           {
             this.state.groups.length
             ? (<div className = 'groups'>{ groups }</div>)

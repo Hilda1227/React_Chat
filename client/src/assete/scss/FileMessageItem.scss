@@ -15,8 +15,8 @@
     background-color: #fff !important;
     color: #444 !important;
     .file-img{
-        height: 100%;
-        width: 3rem;
+        height: 2.8rem;
+        width: 2.3rem;
         background: url('../img/file-icon.png') no-repeat;
         background-size: 100% 100%;
     }
@@ -40,13 +40,13 @@
         }
     }
     a{
-      width: 3rem;
-      height: 100%;
+      width: 2.5rem;
+      height: 2.5rem;
       display: inline-block;
       background: url('../img/onload.png') center no-repeat;
-      background-size: 50%;
+      background-size: 60%;
       border-radius: 50%;
-      border: 1px solid #7dcfcb;
+      border: 1px solid #ccc;
       position: absolute;
       right: 1rem;
     }

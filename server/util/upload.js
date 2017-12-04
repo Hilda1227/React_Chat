@@ -4,6 +4,7 @@ const qiniu      = require("qiniu");
 const mac = new qiniu.auth.digest.Mac(initConfig.ACCESSKEY, initConfig.SECRETKEY);
 const options = {
   scope: initConfig.BUCKET,
+  expires: 7200
 };
 let putPolicy    = new qiniu.rs.PutPolicy(options),
     uploadToken  = putPolicy.uploadToken(mac),
@@ -26,6 +27,7 @@ function uploadFile (key, localFile) {
       }
     });
   })
+  .catch(err => console.log(err))
 }
 
 module.exports = uploadFile;

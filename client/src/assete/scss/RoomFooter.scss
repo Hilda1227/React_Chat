@@ -3,17 +3,18 @@
   position: relative;
   bottom: 0px;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-shrink: 0;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
   .footer-wrap{
     width: 95%;
     height: 2rem;
     display: flex;
     justify-content: flex-start;
-    margin-bottom: 0.8rem;
+    margin: 1rem auto 1rem auto;
+    
     .send{
       width: 75%;
       height: 100%;
@@ -59,41 +60,15 @@
         }
     }
   }
+  .tool-panel{
+    width: 100%;
+    background: #fff;
+  }
 }
 
-// 
-//   .footer-wrap{
-//     width: 95%;
-//     height: 100% !important;
-//     display: flex;
-//     flex-grow: 1;
-//     justify-content: flex-start;
-//     
-//     #send{
-//       width: 3rem;
-//       height: 2rem;
-//       background-color: $mainColor;
-//       border-radius: 0.5rem;
-//       color: #fff;
-//     }
-//     .tool{
-//       height: 2rem;
-//       width: 2rem;      
-//       margin: auto 1rem;
-//       cursor: pointer;
-//     }    
-//     #emoji{
-//       background: url('../img/emoji.png') no-repeat;
-//       background-size: 100%;
-//     }   
-//     #more{
-//       background: url('../img/more.png') no-repeat;
-//       background-size: 100%;
-//     }
-//   }
   .more{
     height: 7rem;
-    width: 100%;
+    width: 95%;
     background-color: #fff;
     justify-content: flex-start;   
     transition: 200ms;
@@ -121,19 +96,11 @@
       background-size: 100%;
     }
   }
-  .more-hidden{
-    transform: scaleY(0);
-    height: 0px;
-    display: none;
-  }
-
 @media screen and (max-width: 650px) {
   .footer-wrap{
-    flex-direction: column;
-    
+    flex-direction: column;   
     height: auto !important;
     align-content: space-around;
-    margin-bottom: 0 !important;
     .send{
       width: 100% !important;
       #send{
@@ -142,7 +109,7 @@
     }
     .tool{
       width: 100%;
-      margin: 0.5rem auto !important;
+      margin: 0.5rem auto 0 auto!important;
       justify-content: flex-start;
       span{
         width: 1.4rem !important;

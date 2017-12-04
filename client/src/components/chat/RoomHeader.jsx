@@ -18,7 +18,7 @@ class RoomHeader extends Component {
           <span className = 'nickname'>{ chatting.get('to') }</span>
           <div className = 'target'>
             <IconMenu iconClassName = 'icon-menu-2'
-              size = { 25 }
+              size = { 15 }
             >
               {
                 chatting.get('type') === 'private'

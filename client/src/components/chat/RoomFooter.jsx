@@ -3,9 +3,9 @@ import { autobind } from 'core-decorators';
 import { socketEmit } from '../../redux/actions/common';
 import { uploadFile, fileInfo } from '../../util/upload';
 import { createMessage } from '../../util/message';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import '../../assete/scss/RoomFooter.scss';
 import Expressions from './Expressions';
-
 
 class RoomFooter extends Component {
   constructor (props) {
@@ -52,23 +52,33 @@ class RoomFooter extends Component {
               ref={ (node) => this.input = node }
               onKeyDown = { this.sendText } 
             />
-            <button onClick = { this.sendText } id = 'send'>发送</button>
+            <button onClick = { () => createMessage(this.input.value, 'text') } id = 'send'>发送</button>
           </div>
           <div className = 'tool'>
             <span  onClick = { () => {this.togglePanel('showExpressions')} } id = 'emoji'></span>
             <span  onClick = { () => {this.togglePanel('showTools')} } id = 'more'></span>
           </div>
-        </div>   
-
-        <ul className =  {`more more${this.state.showTools ? '' : '-hidden'}`}>
-          <li className = 'button-item' id = 'button-file'><input type = 'file' 
-            onChange = { this.sendFile }/>
-          </li>
-        </ul>
-        <Expressions
-          isShow = { this.state.showExpressions }
-          onClick = { this.addEmoji }
-        /> 
+        </div>
+        <div className = 'tool-panel'>
+          <ReactCSSTransitionGroup transitionName="ToolPanel" transitionEnterTimeout={500} transitionLeaveTimeout={300}> 
+            { 
+              this.state.showTools 
+              ? (<ul className = 'more'>
+                  <li className = 'button-item' id = 'button-file'><input type = 'file' 
+                    onChange = { this.sendFile }/>
+                  </li>
+                </ul>) 
+              : null
+            }
+            { 
+              this.state.showExpressions
+              ? (<Expressions
+                  onClick = { this.addEmoji }
+                />)
+              : null        
+            }
+          </ReactCSSTransitionGroup>
+        </div>
       </div>
     )
   }

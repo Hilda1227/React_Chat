@@ -79,7 +79,8 @@ router.post('/api/modifyGroupInfo',async function (ctx) {
     info.avatar = ret.src;
   }
   await Group.update({_id: _id},{$set: {...info}});
-  ctx.body = ({ isError: false, msg: { info }});
+  group = await Group.findOne({_id});
+  ctx.body = ({ isError: false, msg: { group }});
 })
 
 module.exports = router.routes();

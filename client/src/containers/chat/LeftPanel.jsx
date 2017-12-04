@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import { connect } from 'react-redux';
-var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import '../../assete/scss/LeftPanel.scss'
 import { toggleLeftPanel } from '../../redux/actions/pageUI';
 import CreateGroup from '../../components/group/CreateGroup';
@@ -17,7 +17,7 @@ const LeftPanel = ({ leftPanelIs, showLeftPanel, toggleLeftPanel }) => {
     }
   }
   return (
-    <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+    <ReactCSSTransitionGroup transitionName="Left" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
      { showLeftPanel ? show(leftPanelIs) : null}
     </ReactCSSTransitionGroup>  
   )

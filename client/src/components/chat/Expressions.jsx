@@ -6,7 +6,6 @@ class Expressions extends Component {
   constructor (props) {
     super(props);
   }
-
   render () {
     let emojis = new Array(27).fill(0).map((item, index) => {
       return (
@@ -18,8 +17,8 @@ class Expressions extends Component {
       )
     })
     return (
-      <div className = { `expressions expressions${this.props.isShow ? '' : '-hidden'}` } >
-          { emojis }
+      <div className = 'expressions' >
+        { emojis }
       </div>
     )
   }

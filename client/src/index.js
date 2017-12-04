@@ -1,31 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware  } from 'redux'
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware  } from 'redux';
 import { BrowserRouter, Route, withRouter, Switch, Redirect } from 'react-router-dom';
 
-import store from './redux/store'
+import store from './redux/store';
 import {
   socket, 
   dispatchAction, 
   socketEmit
-} from './redux/actions/common' 
+} from './redux/actions/common' ;
 
-import { handleMessage } from './util/message.js'
+import { handleMessage } from './util/message.js';
 
 import {
   setOnline, 
   initRoomList
-} from './redux/actions/activeList'
+} from './redux/actions/activeList';
 
-import { setUser } from './redux/actions/user'
+import { setUser } from './redux/actions/user';
 
-import Login from './pages/Login'
-import SignUp from './pages/SignUp'
-import Index from './pages/Index'
-import Alert from './components/common/Alert'
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import Index from './pages/Index';
+import Alert from './components/common/Alert';
 
-import './assete/scss/common.scss'
+import './assete/scss/common.scss';
+import './assete/scss/CSSTransition.scss';
 
 socket.on('new message', data => {
   handleMessage(data);

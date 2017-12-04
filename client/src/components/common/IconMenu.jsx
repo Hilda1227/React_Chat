@@ -38,9 +38,10 @@ class IconMenu extends Component {
   }
   render () {
     const { iconClassName, children } = this.props;
+    let size = this.props.size + 'px';
     return (
       <div  onClick = { this.toggleShow }  className = 'icon-menu'>
-        <i className = { iconClassName }></i>       
+        <i className = { iconClassName } style = {{ width: size, height: size  }}></i>       
         { 
           this.state.isShow &&
           (<div className = 'menu-wrap' style = { this.state.style }>

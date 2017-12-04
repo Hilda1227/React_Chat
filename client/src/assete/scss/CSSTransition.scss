@@ -1,0 +1,66 @@
+
+/* 左边panel */
+.Left-enter {
+  transform: translateX(-100%) 
+}
+.Left-enter.Left-enter-active {
+  transform: translateX(0);
+  transition: 250ms;
+}
+.Left-leave {
+  transform: translateX(0);
+} 
+.Left-leave.Left-leave-active {
+  transform: translateX(-100%);
+  transition: 250ms;
+}
+
+/* 右边panel */
+.Right-enter {
+  transform: translateX(100%);
+}
+.Right-enter.Right-enter-active {
+  transform: translateX(0);
+  transition: 250ms;
+}
+.Right-leave {
+  transform: translateX(0);
+} 
+.Right-leave.Right-leave-active {
+  transform: translateX(100%);
+  transition: 250ms;
+}
+
+/* avatar */
+.Avatar-enter {
+  transform: scale(0);
+}
+.Avatar-enter.Avatar-enter-active {
+  transform: scale(1);
+  transition: 250ms;
+}
+.Avatar-leave {
+  transform: scale(1)
+} 
+.Avatar-leave.Avatar-leave-active {
+  transform: scale(0);
+  transition: 250ms;
+}
+
+/* 底部工具栏 */
+.ToolPanel-enter {
+  transform: translateY(100%);
+}
+.ToolPanel-enter.ToolPanel-enter-active {
+  transform: translateY(0);
+  transition: 250ms;
+}
+.ToolPanel-leave {
+  transform: translateY(0);
+} 
+.ToolPanel-leave.ToolPanel-leave-active {
+  transform: translateY(100%);
+  transition: 250ms;
+}
+
+  

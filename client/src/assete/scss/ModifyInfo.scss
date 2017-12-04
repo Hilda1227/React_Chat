@@ -1,7 +1,10 @@
 @import './variable.scss';
 .modify-info{
-  .panel-wrap{
-    position: relative;
+  .avatar-wrap{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   input[type=radio]{
     margin-right: 2rem;

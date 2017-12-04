@@ -1,15 +1,24 @@
+@import 'variable.scss';
 .room-msg{
   width: 100%;
   flex-grow: 1;
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
+  &::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    background: $mainColor;
+  } 
   .room-msg-wrap{
     width: 95%;
     height: 100%;
     margin: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;   
+    .room-msg-slide{
+      width: 100%;
+      height: 100%;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
   }
 }

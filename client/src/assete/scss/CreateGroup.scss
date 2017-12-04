@@ -1,7 +1,9 @@
 @import './variable.scss';
 .create-group{
-.panel-wrap{
-    position: relative;
-}
-
+  .avatar-wrap{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

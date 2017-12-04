@@ -7,7 +7,7 @@ $msgColorSelf: #fff;
 $otherColor: #838383;
 
 .room-msg-item{
-    width: 70%;
+    width: 90%;
     margin: 1rem 0;
     display: flex;
     align-items: center;
@@ -16,11 +16,13 @@ $otherColor: #838383;
     height: 2.5rem;
     border-radius: 50%;
     margin-right: 0.8rem;
+    flex-shrink: 0;
   }
   .msg{
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      max-width: 100%;
       .top{
           color: $otherColor;
           font-size: 12px;
@@ -38,6 +40,7 @@ $otherColor: #838383;
           position: relative;
           padding:  0.6rem 0.8rem;
           box-shadow: 0 1px 1px #ccc;
+          max-width: 100%;
       }
   } 
   &:hover .top time{

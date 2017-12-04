@@ -12,7 +12,7 @@ class RoomMsg extends Component {
       isLoading: true,
       preHeight: 0,
     }
-    this.limit = 8;
+    this.limit = 20;
   }
   @autobind
   scrollToBottom () {
@@ -83,7 +83,9 @@ class RoomMsg extends Component {
         ref = {node => this.room = node}
       >
         { this.state.isLoading && <Loading/> }
-        <div className = 'room-msg-wrap' >{ messages }</div>
+        <div className = 'room-msg-wrap' >
+          <div className = 'room-msg-slide' >{ messages }</div>
+        </div>
       </div>
     )
   }

@@ -10,7 +10,7 @@ import RoomFooter from '../../containers/chat/RoomFooter';
 import LeftPanel from '../../containers/chat/LeftPanel';
 import RightPanel from '../../containers/chat/RightPanel';
 
-const Layout = ({chatting, isLoading}) => {
+const Layout = ({ chatting }) => {
   return (
     <div className = 'layout'>
       <div className = 'aside'>
