@@ -5,12 +5,10 @@ export function formatDate (date) {
   if(dis < day){
     return date.getHours() + ':' + date.getMinutes();
   }else if(dis <= day * 2) {
-    console.log('test1');
     return '昨天';
   }else if(dis <= day * 7) {
     return '星期' + (date.getDay() === 0 ? '日' : date.getDay());
   }else {
-    console.log('test3');
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   }
 }

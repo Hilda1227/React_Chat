@@ -63,12 +63,19 @@
   .tool-panel{
     width: 100%;
     background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span{
+      position: relative;
+      width: 100%;
+    }
   }
 }
-
   .more{
     height: 7rem;
     width: 95%;
+    display: inline-block;
     background-color: #fff;
     justify-content: flex-start;   
     transition: 200ms;

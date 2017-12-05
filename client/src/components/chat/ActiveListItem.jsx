@@ -36,12 +36,4 @@ const ActiveListItem = (props) => {
   ) 
 }
 
-export default ActiveListItem
-//     nickname: '',
-//     avatar: '',
-//     lastWord: '',
-//     onlineState: '',//仅私聊
-//     lastWordTime: '', 
-//     unread: Number,
-//     type: 'private or group',
-//     _id: ''// 群组_id或私聊对像的_id
+export default ActiveListItem;

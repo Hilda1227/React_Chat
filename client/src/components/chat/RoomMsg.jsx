@@ -13,12 +13,12 @@ class RoomMsg extends Component {
       preHeight: 0,
     }
     this.limit = 20;
+    this.needScroll = false;
   }
   @autobind
   scrollToBottom () {
     this.room.scrollTop = this.room.scrollHeight - this.room.clientHeight;
   }
-
   initHistory(chatting) {  
     this.setState({ isLoading: true }); 
     return this.props.initHistory({
@@ -31,7 +31,6 @@ class RoomMsg extends Component {
       isLoading: false
     })})
   }
-
   addHistory () {
     this.setState({
       preHeight: this.room.scrollHeight,
@@ -40,19 +39,28 @@ class RoomMsg extends Component {
     return this.props.addHistory({
       ...this.props.chatting.toJS(),
       limit: this.limit,
-      token: localStorage.getItem('token')
     })
   }
-
   componentDidMount () {
     this.initHistory(this.props.chatting)
     .then(() => {this.scrollToBottom()})
   }
+  componentDidUpdate () {
+    if(this.needScroll) this.scrollToBottom();
+    this.needScroll = false;
+  }
 
   componentWillReceiveProps (nextProps) {  
     if(!this.props.chatting.equals( nextProps.chatting )) {
-      this.initHistory(nextProps.chatting)
-      .then(() => {this.scrollToBottom()})
+      return this.initHistory(nextProps.chatting)
+             .then(() => {this.scrollToBottom()})
+    }
+    if(this.room.scrollHeight - this.room.clientHeight - this.room.scrollTop < 20){
+     
+      return this.needScroll = true;
+    }
+    if( nextProps.messages.last() && nextProps.messages.last().get('sender') === this.props.user){
+      this.needScroll = true;
     }
   }
 
@@ -73,7 +81,7 @@ class RoomMsg extends Component {
     const messages = this.props.messages.map((item, index) => (
       <MessageItemBox
         {...item.toJS()}
-        isSelf = { this.props.user == item.get('sender') }       
+        isSelf = { this.props.user === item.get('sender') }       
         key = { item.get('_id') || index}
       />
     ));

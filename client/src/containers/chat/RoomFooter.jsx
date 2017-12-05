@@ -11,10 +11,4 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addMessageItem: payload => dispatch(addMessageItem(payload))
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(RoomFooter);
+export default connect(mapStateToProps)(RoomFooter);

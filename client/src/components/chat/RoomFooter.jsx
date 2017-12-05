@@ -30,11 +30,9 @@ class RoomFooter extends Component {
   }
 
   @autobind
-  sendText (e) {
-    if(e.keyCode === 13){
-      createMessage(this.input.value, 'text');
-      this.input.value = '';
-    }   
+  sendText () {
+    createMessage(this.input.value, 'text');
+    this.input.value = '';   
   }
 
   @autobind
@@ -50,9 +48,9 @@ class RoomFooter extends Component {
           <div className = 'send'>
             <input  placeholder = '说点啥呗~' type = 'text'
               ref={ (node) => this.input = node }
-              onKeyDown = { this.sendText } 
+              onKeyDown = { (e)  => { if(e.keyCode === 13) this.sendText() } } 
             />
-            <button onClick = { () => createMessage(this.input.value, 'text') } id = 'send'>发送</button>
+            <button onClick = { () => { this.sendText() } } id = 'send'>发送</button>
           </div>
           <div className = 'tool'>
             <span  onClick = { () => {this.togglePanel('showExpressions')} } id = 'emoji'></span>
