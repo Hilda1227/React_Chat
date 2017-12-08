@@ -31,7 +31,6 @@ class AsideHeader extends Component {
           <IconMenu iconClassName = 'icon-menu-1'>
             <ul className = 'menu-list'>
               <li className = 'list-item' onClick = { selectLeftPanel('createGroup') }>创建群组</li>
-              <li className = 'list-item' onClick = { selectLeftPanel('addGroup') }>加入群组</li>
               <li className = 'list-item' onClick = { selectLeftPanel('modifyInfo') }>修改资料</li>
               <li className = 'list-item' onClick = { this.logout }>登出</li>
             </ul>

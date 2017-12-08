@@ -6,6 +6,7 @@ import { toggleLeftPanel } from '../../redux/actions/pageUI';
 import CreateGroup from '../../components/group/CreateGroup';
 import JoinGroup from '../../components/group/JoinGroup';
 import ModifyInfo from '../../components/chat/ModifyInfo';
+import AddPrivate from '../../components/chat/AddPrivate';
 
 const LeftPanel = ({ leftPanelIs, showLeftPanel, toggleLeftPanel }) => {
   function show (value) {
@@ -13,6 +14,7 @@ const LeftPanel = ({ leftPanelIs, showLeftPanel, toggleLeftPanel }) => {
       case 'createGroup': return <CreateGroup close = { toggleLeftPanel } />;
       case 'addGroup': return <JoinGroup close = { toggleLeftPanel } />;
       case 'modifyInfo': return <ModifyInfo close = { toggleLeftPanel } />;
+      case 'addPrivate': return <AddPrivate close = { toggleLeftPanel } />;
       default: null;
     }
   }

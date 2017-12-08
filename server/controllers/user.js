@@ -128,10 +128,31 @@ module.exports = {
     cb({ isError: true, msg: '不存在此用户' })
   },
 
-  
-  async getUsers (info, socket, cb) {
-    const users = await User.find({});
-    return cb({isError: false, msg: {users} });
+  async searchUser (info, socket, cb) {
+    let users = await User.find({nickname: eval("/.*"+info.key+".*/i")});
+    if(users.length) {
+      let results = users.map(item => {
+        let user =  { _id: item._id, avatar: item.avatar, nickname: item.nickname};
+        let lastMsg = PrivateMsg
+          .find({
+            $or: [{ 'from': info.user_id, 'to': item._id }, { 'to': info.user_id, 'from': item._id }],
+            createAt: {$lt: Date.now()}
+          })
+          .sort({'_id': -1})
+          .limit(1)
+          .populate('from', 'nickname')[0];
+        if(lastMsg){
+          user.msgType = lastMsg.msgType;
+          user.lastWord = lastMsg.content; 
+          user.lastWordSender = lastMsg.from.nickname; 
+          user.lastWordTime = lastMsg.createAt;
+        }
+        return user;
+      })
+      users = await Promise.all(results);
+      return cb({ isError: false, msg: {users} });
+    }
+    return cb({ isError: false, msg: {users: []} });  
   },
   
 }

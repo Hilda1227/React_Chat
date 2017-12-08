@@ -1,4 +1,4 @@
-import Immutable from 'immutable'
+import Immutable from 'immutable';
 
 import {
   INIT_GROUP_LIST,
@@ -20,7 +20,9 @@ const activeList = (state = Immutable.fromJS([]), action) => {
   switch( action.type ){
 
     case ADD_ACTIVE_ITEM: {
-      return state.push(action.payload);
+      if(findItem(state, action.payload.get('_id')) == undefined){
+        return state.push(action.payload);
+      }
     }
 
     case REMOVE_ACTIVE_ITEM: {   

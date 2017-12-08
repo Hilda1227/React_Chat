@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { toggleLeftPanel } from '../../redux/actions/pageUI';
 import '../../assete/scss/PanelHeader.scss'
 
-const PanelHeader = ({ direction = 'left', title, close, color = '#e8bbc5' }) => { 
+const PanelHeader = ({ direction = 'left', title, close, color = '#abcbf6' }) => { 
   return (
     <div className = 'panel-header' style = {{ backgroundColor: color, }} >
       <span onClick = { close } className = {`close-${direction}`}></span>

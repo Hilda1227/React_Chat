@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import {selectLeftPanel } from '../../redux/actions/pageUI';
 
 import ActiveList from '../../components/chat/ActiveList';
 
@@ -9,5 +10,10 @@ function mapStateToProps(state) {
     curRoom: state.chatting.get('_id')
   };
 }
+function mapDispatchToProps(dispatch) {
+  return {
+    selectLeftPanel: payload  => dispatch(selectLeftPanel(payload)),
+  }
+}
 
-export default connect(mapStateToProps)(ActiveList);
+export default connect(mapStateToProps, mapDispatchToProps)(ActiveList);

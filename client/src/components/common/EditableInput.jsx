@@ -44,7 +44,7 @@ class EditableInput extends Component {
       ></input>
       <span className = 'icon'>
        { !this.state.isFocus && editable &&  <i className = 'editable' onClick = { () => {this.input.focus()} }></i> }
-       { maxLength && this.state.isFocus && editable && (<i>{ maxLength-this.state.value.length }</i>) }
+       { maxLength && this.state.isFocus && editable && (<span className = 'rest'>{ maxLength-this.state.value.length }</span>) }
       </span>
     </div>
   )

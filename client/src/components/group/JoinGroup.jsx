@@ -12,12 +12,12 @@ import Avatar from '../common/Avatar';
 const GroupItem = ({avatar, nickname, describe, join}) => {
   
   return (
-    <div  onClick = { join } className = 'group-item-wrap'>
-      <div className = 'group-item'>
+    <div  onClick = { join } className = 'item-wrap'>
+      <div className = 'item'>
         <Avatar src = { avatar }  size = { 2.7 } />
         <div className = 'info'>
           <span className = 'nickname'>{ nickname }</span>
-          <p className = 'describe'>{ describe }</p>
+          <p className = 'other'>{ describe }</p>
         </div>
       </div>
     </div>
@@ -32,9 +32,18 @@ class JoinGroup extends Component {
       isLoading: false
     }
   }
+  componentDidMount () {
+    this.setState({isLoading: true});
+    socketEmit('search groups', {key: ''})
+    .then(data => {
+      this.setState({
+        groups: data.groups,
+        isLoading: false
+      });
+    })
+  }
   @autobind
   searchGroup (val) {
-    val
     socketEmit('search groups', {key: val})
     .then(data => {
       this.setState({groups: data.groups});
@@ -59,17 +68,17 @@ class JoinGroup extends Component {
     )
     })
     return (
-      <div className = ' left-panel-wrap join-group'>
+      <div className = ' left-panel-wrap add-chat'>
         <PanelHeader  title = '加入群组' close = { this.props.close } />
         <Search
           placeholder = '请输入想要加入的群组'
           handleChange = { this.searchGroup }
         />
         { this.state.isLoading && <Loading  top = { 5 }  /> }
-        <div className = 'groups-wrap'>
+        <div className = 'results-wrap'>
           {
             this.state.groups.length
-            ? (<div className = 'groups'>{ groups }</div>)
+            ? (<div className = 'results'>{ groups }</div>)
             : (<span className = 'none'>没有相关的群组噢~</span>)
           } 
         </div>

@@ -1,6 +1,6 @@
-.join-group{
+.add-chat{
     background-color: #fff;
-  .groups-wrap{
+  .results-wrap{
     flex-grow: 1;
     width: 100%;
     overflow-x: hidden; 
@@ -10,12 +10,12 @@
       align-self: center;
       color: #929fa6;
     }
-    .groups{
+    .results{
       width: 100%;
       margin-top: 0;
       overflow-y: auto;
     }   
-    .group-item-wrap{     
+    .item-wrap{     
       height: 4rem;
       width: 100%;
       display: flex;
@@ -27,7 +27,7 @@
       &:hover{
         background-color: #eef1f6;
       }
-      .group-item{
+      .item{
         width: 94%;
         height: 2.7rem;
         display: flex;
@@ -42,7 +42,7 @@
           .nickname{
             color: #000;
           }
-          .describe{
+          .other{
             font-size: 12px;
           }
         }

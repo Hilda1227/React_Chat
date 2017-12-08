@@ -9,4 +9,10 @@
     justify-content: flex-start;
     align-items: center;
   }
+  .add{
+    position: absolute !important;
+    bottom: 2.5rem;
+    right: 1.5rem;
+    align-self: flex-end;
+  }
 }

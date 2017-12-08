@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import AsideHeader from '../../components/chat/AsideHeader';
-import { toggleLeftPanel, selectLeftPanel } from '../../redux/actions/pageUI';
+import { selectLeftPanel } from '../../redux/actions/pageUI';
 import { clearUser } from '../../redux/actions/user';
 
 function mapStateToProps(state) {
@@ -11,7 +11,6 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    toggleLeftPanel: () => dispatch(toggleLeftPanel()),
     selectLeftPanel: payload => () => dispatch(selectLeftPanel(payload)),
     clearUser: () => dispatch(clearUser()) 
   };

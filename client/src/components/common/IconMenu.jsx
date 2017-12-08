@@ -11,23 +11,23 @@ class IconMenu extends Component {
     }
   }
   @autobind
-  toggleShow (e) {
-    
+  toggleShow (e) {   
     if(this.state.isShow){
       this.setState({ isShow: false });
     } 
     else {
       let x     = e.pageX, 
-          y     = e.target.pageY,
+          y     = e.pageY,
           winX  = window.innerWidth, 
           winY  = window.innerHeight,
           width = this.props.width || 180,
           size  = this.props.size || 20,
-          distence = 5,
+          distence = 0,
           pX = distence + size,
           pY = pX,
           dX = winX / 2 > x ? 'left' : 'right',
-          dY = winY / 2 > y ? 'bottom' : 'top'; 
+          dY = winY / 2 > y ? 'top' : 'bottom'; 
+          console.log(winY / 2, y)
       let style = {
         width: width + 'px',
         [dX]: pX + 'px',
@@ -38,10 +38,10 @@ class IconMenu extends Component {
   }
   render () {
     const { iconClassName, children } = this.props;
-    let size = this.props.size + 'px';
+    let size = this.props.size || 20 + 'px';
     return (
-      <div  onClick = { this.toggleShow }  className = 'icon-menu'>
-        <i className = { iconClassName } style = {{ width: size, height: size  }}></i>       
+      <div  onClick = { this.toggleShow }  className = 'icon-menu' style = {{width: size, height: size}}>
+        <span className = { 'icon ' + iconClassName } style = {{ width: size, height: size  }}></span>       
         { 
           this.state.isShow &&
           (<div className = 'menu-wrap' style = { this.state.style }>

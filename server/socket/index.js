@@ -46,17 +46,6 @@ module.exports = function socket (io){
       user.disconnect(info, socket)
     });
 
-    // 得到所有用户列表
-    socket.on('get all users', (info, cb) => {
-      user.getUsers(info, socket, cb)
-      .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} )
-    })
-
-    socket.on('fetch user info', (info, cb) => {
-      user.fetchtUserInfo(info, socket, cb)
-      .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} )
-    })
-
     // 查找该用户是否存在
     socket.on('find user', (info, cb) => {
       user.findUser(info, socket, cb)
@@ -117,6 +106,17 @@ module.exports = function socket (io){
     socket.on('fetch group info', (info, cb) => {
       group.fetchtGroupInfo(info, socket, cb)
       .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} )     
+    })
+
+    socket.on('search users', (info, cb) => {
+      parsetoken(info)
+      .then(() => user.searchUser(info, socket, cb))
+      .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} ) 
+    })
+
+    socket.on('fetch user info', (info, cb) => {
+      user.fetchtUserInfo(info, socket, cb)
+      .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} )
     })
 
   })

@@ -4,7 +4,7 @@ import '../../assete/scss/Search.scss';
 const Search = ({handleEnter, placeholder, handleChange}) => {
   let input;
   let handlers = {
-    onChange: handleChange ? () => { input.value.trim() && handleChange(input.value) } : null,
+    onChange: handleChange ? () => { handleChange(input.value) } : null,
     onKeyDown: handleEnter 
                 ? function (e) {
                   let val = input.value.trim();

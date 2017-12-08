@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import { socketEmit } from './common.js';
-import { setChatting, closeChatting } from './chatting.js'
+import { setChatting, closeChatting } from './chatting.js';
 import {
   INIT_GROUP_LIST,
   ADD_ACTIVE_ITEM,
@@ -9,8 +9,8 @@ import {
   SET_ACTIVE_ITEM,
   CLEAR_UNREAD,
   SET_ONLINE,
-  JOIN_GROUP
-} from '../constants/activeList.js'
+  JOIN_GROUP,
+} from '../constants/activeList.js';
 
 
 
