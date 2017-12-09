@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TextMessageItem from './TextMessageItem';
 import FileMessageItem from './FileMessageItem';
+import ImageMessageItem from './ImageMessageItem';
 import '../../assete/scss/MessageItemBox.scss';
 import { formatDate } from '../../util/date.js'
 
@@ -18,6 +19,10 @@ class MessageItemBox extends Component{
       }
       case 'file': {
         message = <FileMessageItem content = { content }/>;
+        break;
+      }
+      case 'image': {
+        message = <ImageMessageItem content = { content }/>;
         break;
       }
       default:

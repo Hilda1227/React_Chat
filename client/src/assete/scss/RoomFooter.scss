@@ -80,9 +80,9 @@
     justify-content: flex-start;   
     transition: 200ms;
     .button-item{
-      width: 2.5rem;
-      height: 2.5rem;
-      margin: 0.6rem 1.5rem;      
+      width: 2rem;
+      height: 2rem;
+      margin: 0.6rem 1rem;      
       display: inline-block;
       position: relative;
       background-color: red;
@@ -100,6 +100,10 @@
     }
     #button-file{
       background: url('../img/file.png') no-repeat;
+      background-size: 100%;
+    }
+    #button-image{
+      background: url('../img/image.png') no-repeat;
       background-size: 100%;
     }
   }

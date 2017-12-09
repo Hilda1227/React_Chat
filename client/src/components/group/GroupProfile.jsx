@@ -51,7 +51,6 @@ class GroupProfile extends Component {
     if( avatar !== this.avatar ) info.avatar = avatar;
     modifyGroupInfo(info)
     .then(res => {
-      console.log(res.data.msg.group)
       this.props.updateModify({ ...res.data.msg.group});
       this.setState({isLoading: false});
       this.props.close();

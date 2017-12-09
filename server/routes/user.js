@@ -67,12 +67,12 @@ router.post('/api/modifyUserpInfo',async function (ctx) {
 })
 
 router.post('/api/modifyGroupInfo',async function (ctx) { 
-  const { nickname, discribe, _id, user_id } = ctx.request.fields;
+  const { nickname, describe, _id, user_id } = ctx.request.fields;
   let group = await Group.findOne({ _id });
   if(!group.creator === user_id){
     return ctx.body = ({ isError: true, msg: '权限不足'});    
   }
-  let info = { nickname, discribe };
+  let info = { nickname, describe };
   let file= ctx.request.files[0];
   if(file){
     let ret = await uploadFile(`${Date.now() + file.name}`, file.path);

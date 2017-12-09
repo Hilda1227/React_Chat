@@ -36,6 +36,12 @@ class RoomFooter extends Component {
   }
 
   @autobind
+  sendImage (e) {
+    let file = e.target.files[0];
+    createMessage(file, 'image')
+  }
+
+  @autobind
   addEmoji (value) {
     this.input.value += value;
     this.input.focus();
@@ -64,6 +70,9 @@ class RoomFooter extends Component {
               ? (<ul className = 'more'>
                   <li className = 'button-item' id = 'button-file'><input type = 'file' 
                     onChange = { this.sendFile }/>
+                  </li>
+                  <li className = 'button-item' id = 'button-image'><input type = 'file' 
+                    accept = "image/*"  onChange = { this.sendImage }/>
                   </li>
                 </ul>) 
               : null

@@ -24,14 +24,13 @@ const ActiveListItem = (props) => {
         <div style = {{ 'backgroundImage': `url(${avatar})`}} className = 'avatar'></div>
         <div className = 'info'>
           <p className = 'nickname'>{ nickname }</p>
-          <p className = 'last-word'>{ lastWord ? (lastWordSender + ': ' +lastWord) : '开始对话' }</p>
+          <p className = 'last-word'>{ lastWord ? ((type === 'group' ? (lastWordSender + ': ') : '') +lastWord) : '开始对话' }</p>
         </div>
         <div className = 'other'> 
           <time>{ formatDate(lastWordTime ? lastWordTime : new Date()) }</time>
           <span className = {`unread${ unread == 0 || unread == undefined ? '-hidden' : ''}`}>{ unread }</span>
         </div>      
-      </div>
-      
+      </div>      
      </div>
   ) 
 }

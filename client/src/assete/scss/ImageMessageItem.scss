@@ -1,0 +1,17 @@
+.image-content{
+    position: relative;
+    display: inline-block;
+    word-break: break-all;
+    background: #fff;
+    text-align: left;
+    padding: 6px 12px;
+    max-width: 90%;
+    min-height: 35px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    img{
+        width: 100%;
+        max-width: 300px;
+        display: block;
+    }
+}

@@ -26,7 +26,7 @@ function matchLink (value) {
   })
 }
 
-// 匹配表情图片
+// 匹配表情
 function matchEmoji (value) {
   return value.replace(/#emoji\(([^)]*)\)/g, (match, p1) => {
     return `<img src = '${config.EMOJI_URL}${p1}.png' class = 'emoji' />`;
@@ -40,7 +40,6 @@ function handleText (value) {
   value = matchEmoji(value);
   return value;
 }
-
 
 const TextMessageItem = (props) => {
   return (
