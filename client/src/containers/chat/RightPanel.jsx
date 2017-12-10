@@ -9,13 +9,14 @@ import GroupProfile from '../../containers/chat/GroupProfile';
 const RightPanel = ({ rightPanelIs, showRightPanel, toggleRightPanel }) => {
   function show (value) {
     switch (value) {
-      case 'UserProfile': return (<div className = 'right-panel'><UserProfile close = { toggleRightPanel } /></div>);
-      case 'GroupProfile': return (<div className = 'right-panel'><GroupProfile close = { toggleRightPanel } /></div>);
+      case 'UserProfile': return <UserProfile close = { toggleRightPanel } />;
+      case 'GroupProfile': return <GroupProfile close = { toggleRightPanel } />;
       default: null;
     }
   }
   return (
-    <ReactCSSTransitionGroup transitionName="Right" 
+    <ReactCSSTransitionGroup 
+      transitionName="Right" 
       transitionEnterTimeout={250} 
       transitionLeaveTimeout={250}
     >
@@ -26,8 +27,8 @@ const RightPanel = ({ rightPanelIs, showRightPanel, toggleRightPanel }) => {
 
 function mapStateToProps(state) {
   return {
-    rightPanelIs: state.pageUI.get('rightPanelIs'),
-    showRightPanel: state.pageUI.get('showRightPanel'),
+    rightPanelIs: state.pageUI.getIn(['layout', 'rightPanelIs']),
+    showRightPanel: state.pageUI.getIn(['layout', 'showRightPanel']),
   };
 }
 function mapDispatchToProps(dispatch) {

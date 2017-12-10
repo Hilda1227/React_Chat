@@ -14,6 +14,7 @@ $triangle-size: 0.8rem;
     color: #fff;
     text-align: center;
     line-height: 4.5rem;
+    z-index: 100;
     &::after{
         content: '';
         border-left: $triangle-size solid transparent;
@@ -26,32 +27,4 @@ $triangle-size: 0.8rem;
         left: 50%;
         transform: translateX(-50%);
     }
-    display: none;
-}
-
-.alert-show{
-    animation: show 3s 1 forwards;
-    display: inline-block;
-}
-
-@keyframes show {
-    0%{
-        opacity: 0;
-        transform: translateY(100px);
-        display: inline-block;
-    }
-    20%{
-        opacity: 1;
-        transform: translateY(0);
-    }
-    90%{
-        opacity: 1;
-        transform: translateY(0);
-    }
-    100%{
-        opacity: 0;
-        transform: translateY(-100px);
-        display: none;
-    }
-
 }

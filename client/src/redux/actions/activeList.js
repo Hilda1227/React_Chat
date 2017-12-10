@@ -1,6 +1,7 @@
 import Immutable from 'immutable';
 import { socketEmit } from './common.js';
 import { setChatting, closeChatting } from './chatting.js';
+import { showAlert } from './pageUI.js';
 import {
   INIT_GROUP_LIST,
   ADD_ACTIVE_ITEM,
@@ -28,7 +29,7 @@ export const joinGroup = (payload) => (dispatch) => {
     .then(data => {
       dispatch(addActiveItem(data.group));
     })
-    .catch(err => alert(err))
+    .catch(err => dispatch(showAlert(err)))
 }
 
 // payload为群组_id
@@ -37,8 +38,9 @@ export const quitGroup = (payload) => (dispatch) => {
     .then(data => {
       dispatch(removeActiveItem(payload));
       dispatch(closeChatting());
+      dispatch(showAlert('已成功退出'))
     })
-    .catch(err => alert(err))
+    .catch(err => dispatch(showAlert(err)))
 }
 
 export const addActiveItem = (payload) => {
@@ -57,7 +59,7 @@ export const searchAddItem = (payload) => (dispatch) => {
       avatar: data.user.avatar, _id: data.user._id
     })));
   })
-  .catch(err => alert(err));
+  .catch(err => dispatch(showAlert(err)))
 }
 
 export const removeActiveItem = (payload) => {

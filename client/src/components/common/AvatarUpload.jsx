@@ -24,11 +24,11 @@ class AvatarUpload extends Component {
     }, false);     
   }
   render () {
-    const { setAvatar, size = 12 } = this.props;
+    const { setAvatar, size = '12rem' } = this.props;
     return (
-      <div  style = {{width: size + 'rem', height: size + 'rem'}}  className='avatar-upload'>
+      <div  style = {{width: size, height: size}}  className='avatar-upload'>
         <Avatar src = { this.state.src } size = { size }/>
-        <input type = 'file' className = 'upload'
+        <input type = 'file' className = 'upload' accept = "image/*"
           onChange = { this.handleChange }
         />
         <div className = 'mask'></div>

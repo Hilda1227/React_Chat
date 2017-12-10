@@ -28,8 +28,8 @@ const LeftPanel = ({ leftPanelIs, showLeftPanel, toggleLeftPanel }) => {
 
 function mapStateToProps(state) {
   return {
-    leftPanelIs: state.pageUI.get('leftPanelIs'),
-    showLeftPanel: state.pageUI.get('showLeftPanel'),
+    leftPanelIs: state.pageUI.getIn(['layout', 'leftPanelIs']),
+    showLeftPanel: state.pageUI.getIn(['layout', 'showLeftPanel']),
   };
 }
 

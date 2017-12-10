@@ -63,4 +63,25 @@
   transition: 250ms;
 }
 
+
+/* Alert弹窗 */
+.Alert-enter {
+  opacity: 0;
+  transform: translateY(100px);
+}
+.Alert-enter.Alert-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 250ms;
+}
+.Alert-leave {
+  opacity: 1;
+  transform: translateY(0);
+} 
+.Alert-leave.Alert-leave-active {
+  opacity: 0;
+  transform: translateY(-100px);
+  transition: 250ms;
+}
+
   

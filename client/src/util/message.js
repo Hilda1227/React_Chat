@@ -34,9 +34,9 @@ export function handleMessage (message) {
 
 export function createMessage (message, msgType) {
   switch (msgType) {
-    case 'file': {createFileMessage (message, msgType); return;}
-    case 'text':  {createTextMessage (message, msgType); return;}
-    case 'image': {createImageMessage (message, msgType); return;}
+    case 'file': return createFileMessage (message, msgType);
+    case 'text': return createTextMessage (message, msgType);
+    case 'image': return createImageMessage (message, msgType);
     default: return;
   }
 }
@@ -45,17 +45,14 @@ function createFileMessage (message, msgType) {
   let isImage = /image\/\w+/.test(message.type);
   console.log(isImage)
   if(isImage){
-    createImageMessage (message, 'image');
+    return createImageMessage (message, 'image');    
   }
-  else{
-    uploadFile(message)
-    .then(ret => {
-      let content = JSON.stringify({...fileInfo(message), src: ret.data.src});  
-       
-      sendMessage(content, msgType)
-    })
-    .catch(err => console.log('发送失败',err))
-  }
+  uploadFile(message)
+  .then(ret => {
+    let content = JSON.stringify({...fileInfo(message), src: ret.data.src});      
+    sendMessage(content, msgType)
+  })
+  .catch(err => console.log('发送失败',err))
 }
 
 function createTextMessage (message, msgType) {
@@ -72,7 +69,16 @@ function createImageMessage (message, msgType) {
 
 function sendMessage (message, msgType) {
   const chatting = store.getState().chatting,
-  user = store.getState().user;
+        user = store.getState().user;
+  dispatchAction(addMessageItem({
+    msgType,
+    type: chatting.get('type'),
+    sender: user.get('nickname'), 
+    createAt: new Date(), 
+    content: message, 
+    avatar: user.get('avatar'),
+  }));
+
   socketEmit('new message', {
     msgType, 
     type: chatting.get('type'), 
@@ -80,16 +86,8 @@ function sendMessage (message, msgType) {
     content: message, 
     token: localStorage.getItem('token'),
   })
-  let data = {
-    msgType,
-    type: chatting.get('type'),
-    sender: user.get('nickname'), 
-    createAt: new Date(), 
-    content: message, 
-    avatar: user.get('avatar'),
-  }
-  dispatchAction(addMessageItem(data));
-  let active = {
+  
+  dispatchAction(updateActiveItem({
     msgType,
     type: chatting.get('type'),
     lastWord:  message, 
@@ -97,6 +95,5 @@ function sendMessage (message, msgType) {
     _id: chatting.get('_id'),
     lastWordTime: new Date(),         
     curRoom: true
-  }
-  dispatchAction(updateActiveItem(active));
+  }));
 }

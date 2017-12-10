@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import { Route, NavLink } from 'react-router-dom';
 import InputText from '../components/common/InputText';
-import '../assete/scss/sign.scss'
+import '../assete/scss/sign.scss';
 import { autobind } from 'core-decorators';
 import { socketEmit } from '../redux/actions/common';
 import { login} from '../redux/actions/user';
 import PropTypes from 'prop-types';
-
 import { setUser } from '../redux/actions/user';
-import { dispatchAction } from '../redux/actions/common'
-
-import { initRoomList } from '../redux/actions/activeList'
+import { dispatchAction } from '../redux/actions/common';
+import { initRoomList } from '../redux/actions/activeList';
+import { connect } from 'react-redux';
+import { showAlert } from '../redux/actions/pageUI';
 
 class Login extends Component {
   constructor (props) {
@@ -39,7 +39,7 @@ class Login extends Component {
       dispatchAction(initRoomList(data.user._id));
       this.context.router.history.push("/");
     })
-    .catch(err => alert(err))
+    .catch(err => this.props.showAlert(err))
   }
   render () {
     return (
@@ -57,5 +57,11 @@ class Login extends Component {
     )
   }
 }
-
-export default Login;
+export default connect(
+  state => ({}),
+  dispatch => {
+    return {
+      showAlert: (payload) => dispatch(showAlert(payload))
+    }
+  }
+)(Login);

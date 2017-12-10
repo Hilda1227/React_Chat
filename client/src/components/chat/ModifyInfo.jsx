@@ -54,7 +54,7 @@ class ModifyInfo extends Component {
                 <AvatarUpload
                   setAvatar = { this.handleChange('avatar') }
                   src = { this.state.avatar }
-                  size = '12'
+                  size = '12rem'
                 />
                 </DelayAnimation>
               </div>

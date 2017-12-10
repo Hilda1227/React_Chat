@@ -7,6 +7,7 @@ import Loading from '../common/Loading';
 import { connect } from 'react-redux';
 import { socketEmit } from '../../redux/actions/common.js';
 import { joinGroup } from '../../redux/actions/activeList.js';
+import { showAlert } from '../../redux/actions/pageUI.js';
 import Avatar from '../common/Avatar';
 
 const GroupItem = ({avatar, nickname, describe, join}) => {
@@ -14,7 +15,7 @@ const GroupItem = ({avatar, nickname, describe, join}) => {
   return (
     <div  onClick = { join } className = 'item-wrap'>
       <div className = 'item'>
-        <Avatar src = { avatar }  size = { 2.7 } />
+        <Avatar src = { avatar }  size = '2.7rem' />
         <div className = 'info'>
           <span className = 'nickname'>{ nickname }</span>
           <p className = 'other'>{ describe }</p>
@@ -55,7 +56,6 @@ class JoinGroup extends Component {
       this.setState({ isLoading: false })
       this.props.close();
     })
-    .catch(err => alert(err))
   }
   render () {
     let groups = this.state.groups.map( item => {
@@ -90,7 +90,8 @@ class JoinGroup extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    joinGroup: (payload) => dispatch(joinGroup(payload))
+    joinGroup: (payload) => dispatch(joinGroup(payload)),
+    showAlert: (payload) => dispatch(showAlert(payload))
   };
 }
 

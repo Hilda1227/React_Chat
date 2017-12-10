@@ -16,9 +16,10 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     delChatting: (payload) => {
-      dispatch(closeChatting(payload));
+      dispatch(closeChatting());
       dispatch(removeActiveItem(payload));
     },
+    closeChatting: () => dispatch(closeChatting()),
     quitGroup: (payload) => dispatch(quitGroup(payload)),
     selectRightPanel: (payload) => dispatch(selectRightPanel(payload))
   };

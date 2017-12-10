@@ -10,6 +10,7 @@ import Avatar from '../common/Avatar';
 import Loading from '../common/Loading';
 import DelayAnimation from '../common/DelayAnimation';
 import '../../assete/scss/GroupProfile.scss';
+import { formatCompleteDate } from '../../util/date.js';
 
 class GroupProfile extends Component {
   constructor (props) {
@@ -75,8 +76,7 @@ class GroupProfile extends Component {
                 <DelayAnimation  name = 'Avatar' delay = { 100 }>               
                   {
                     editable 
-                    ? 
-                    (
+                    ?(
                       <AvatarUpload
                         src = { this.state.avatar }
                         setAvatar = { this.handleChange('avatar') }
@@ -92,7 +92,7 @@ class GroupProfile extends Component {
                 handleChange = { this.handleChange('nickname') }
                 maxLength = { 15 }
               />
-              <span className = 'createAt'>Create at{ this.state.createAt }</span>
+              <span className = 'createAt'>Create at { formatCompleteDate(this.state.createAt, '-') }</span>
             </ProfileSection>
             <ProfileSection title = '群介绍'>           
               <EditableInput

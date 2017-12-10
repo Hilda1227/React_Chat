@@ -1,4 +1,4 @@
-import Immutable from 'immutable'
+import Immutable from 'immutable';
 import {
   GROUP_FORM_SHOW,
   SET_LOADING,
@@ -7,17 +7,23 @@ import {
   SELECT_RIGHT_PANEL,
   TOGGLE_RIGHT_PANEL,
   TOGGLE_USER_INFO,
-  RESTORE_INIT
+  RESTORE_INIT,
+  SHOW_ALERT,
+  HIDDEN_ALERT,
 } from '../constants/pageUI.js'
 
 const init = Immutable.fromJS({
-  groupFormShow: false,
-  isLoading: false,
-  leftPanelIs: '',
-  showLeftPanel: false,
-  rightPanelIs: '',
-  showLightPanel: false,
-  showUserInfo: false,
+  layout: {
+    groupFormShow: false,
+    isLoading: false,
+    leftPanelIs: '',
+    showLeftPanel: false,
+    rightPanelIs: '',
+    showRightPanel: false,
+    showUserInfo: false,
+  },
+  showAlert: false,
+  alertContent: '',
   userInfoIs: {
     avatar: '',
     nickname: '',
@@ -30,36 +36,42 @@ const init = Immutable.fromJS({
 const pageUI = (state = init, action) => {
   switch( action.type ){
     case GROUP_FORM_SHOW: {
-      return state.set('groupFormShow', action.payload);
+      return state.setIn(['layout', 'groupFormShow'], action.payload);
     }
     case SET_LOADING: {
       return state.set('isLoading', action.payload);
     }
     case SELECT_LEFT_PANEL: {
-      state = state.set('leftPanelIs', action.payload);
-      return state.set('showLeftPanel', true);
+      state = state.setIn(['layout', 'leftPanelIs'], action.payload);
+      return state.setIn(['layout', 'showLeftPanel'], true);
     }
     case TOGGLE_LEFT_PANEL: {
-      return state.get('showLeftPanel') 
-        ? state.set('showLeftPanel', false) 
-        : state.set('showLeftPanel', true)
+      return state.getIn(['layout','showLeftPanel']) 
+        ? state.setIn(['layout', 'showLeftPanel'], false) 
+        : state.setIn(['layout', 'showLeftPanel'], true)
     }
     case SELECT_RIGHT_PANEL: {
-      state = state.set('rightPanelIs', action.payload);
-      return state.set('showRightPanel', true);
+      state = state.setIn(['layout', 'rightPanelIs'], action.payload);
+      return state.setIn(['layout', 'showRightPanel'], true);
     }
     case TOGGLE_RIGHT_PANEL: {
-      return state.get('showRightPanel') 
-        ? state.set('showRightPanel', false) 
-        : state.set('showRightPanel', true)
+      return state.getIn(['layout', 'showRightPanel']) 
+        ? state.setIn(['layout', 'showRightPanel'], false) 
+        : state.setIn(['layout', 'showRightPanel'], true)
     }
     case TOGGLE_USER_INFO: {
-      return state.get('showUserInfo') 
-        ? state.set('showUserInfo', false) 
-        : state.set('showUserInfo', true)
+      return state.getIn(['layout','showUserInfo']) 
+        ? state.setIn(['layout', 'showUserInfo'], false) 
+        : state.setIn(['layout', 'showUserInfo'], true)
     }
     case RESTORE_INIT: {
-      return init;
+      return state.set('layout', init.get('layout'));
+    }
+    case SHOW_ALERT: {
+      return state.merge({ showAlert: true, alertContent: action.payload });
+    }
+    case HIDDEN_ALERT: {
+      return state.set('showAlert', false);
     }
     default: {
       return state;

@@ -13,7 +13,7 @@ const ResultItem = ({avatar, nickname, add, onlineState}) => {
   return (
     <div  onClick = { add } className = 'item-wrap'>
       <div className = 'item'>
-        <Avatar src = { avatar }  size = { 2.7 } />
+        <Avatar src = { avatar }  size = '2.7rem' />
         <div className = 'info'>
           <span className = 'nickname'>{ nickname }</span>
           <p className = 'other'>{ '[' + (onlineState ? '在线' : '离开') + ']' }</p>

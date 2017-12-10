@@ -53,10 +53,9 @@ class RoomMsg extends Component {
   componentWillReceiveProps (nextProps) {  
     if(!this.props.chatting.equals( nextProps.chatting )) {
       return this.initHistory(nextProps.chatting)
-             .then(() => {this.scrollToBottom()})
+        .then(() => {this.scrollToBottom()})
     }
-    if(this.room.scrollHeight - this.room.clientHeight - this.room.scrollTop < 20){
-     
+    if(this.room.scrollHeight - this.room.clientHeight - this.room.scrollTop < 20){    
       return this.needScroll = true;
     }
     if( nextProps.messages.last() && nextProps.messages.last().get('sender') === this.props.user){

@@ -58,7 +58,7 @@ class CreateGroup extends Component {
                 <AvatarUpload
                   setAvatar = { this.handleChange('avatar') }
                   src = { this.state.avatar }
-                  size = '12'
+                  size = '12rem'
                 />
               </DelayAnimation>
             </div>           
@@ -68,7 +68,7 @@ class CreateGroup extends Component {
               defaultValue = { this.state.nickname }
               minLength = { 0 }
               maxLength = { 15 }
-              placeholder = '请填写群名称（1~10个字）'
+              placeholder = '请填写群名称（1~15个字）'
               handleChange = { this.handleChange('nickname') }
             />
           </ProfileSection>
@@ -77,7 +77,7 @@ class CreateGroup extends Component {
               defaultValue = { this.state.describe }
               minLength = { 0 }
               maxLength = { 35 }
-              placeholder = '群介绍（0~30个字）'
+              placeholder = '群介绍（0~35个字）'
               handleChange = { this.handleChange('describe') }
             />
           </ProfileSection> 

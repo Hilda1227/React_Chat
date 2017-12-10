@@ -5,10 +5,11 @@ import { autobind } from 'core-decorators';
 import { signUp, login} from '../redux/actions/user';
 import { socketEmit } from '../redux/actions/common';
 import PropTypes from 'prop-types';
-
+import { showAlert } from '../redux/actions/pageUI';
 import { setUser } from '../redux/actions/user';
-import { dispatchAction } from '../redux/actions/common'
-import { initRoomList } from '../redux/actions/activeList'
+import { dispatchAction } from '../redux/actions/common';
+import { initRoomList } from '../redux/actions/activeList';
+import { connect } from 'react-redux';
 
 class SignUp extends Component {
   constructor (props) {
@@ -40,9 +41,9 @@ class SignUp extends Component {
         dispatchAction(initRoomList(data.user._id));
         this.context.router.history.push("/"); 
       })
-      .catch(err => alert(err))
+      .catch(err => this.props.showAlert(err))
     }
-    else alert("输入不合法");
+    else this.props.showAlert('输入不合法')
   }
   @autobind
   validateInput () {
@@ -72,4 +73,11 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default connect(
+  state => ({}),
+  dispatch => {
+    return {
+      showAlert: (payload) => dispatch(showAlert(payload))
+    }
+  }
+)(SignUp);

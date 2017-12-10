@@ -14,6 +14,13 @@
     justify-content: flex-start; 
     align-items: center;
     position: relative;
+    .close{
+      width: 15px;
+      height: 15px;
+      margin-right: 1rem;
+      background: url('../img/menu3.png');
+      background-size: 100%;
+    }
     .avatar{
       width: 2.7rem;
       height: 2.7rem;

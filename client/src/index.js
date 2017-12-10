@@ -70,7 +70,7 @@ ReactDOM.render(
     <Provider store={ store }>
       <BrowserRouter basename="/">
         <div className = 'App'>
-        <Alert/>
+          <Alert/>
           <Switch>
             <Route path = '/login' component = { Login }/>
             <Route path = '/signUp' component = { SignUp }/>

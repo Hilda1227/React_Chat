@@ -5,8 +5,6 @@ import {
     CLEAR_USER
 } from '../constants/user.js'
 
-
-
 export const setUser = (payload) => {
   return {
     type: SET_USER,

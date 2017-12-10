@@ -9,6 +9,8 @@ import {
     TOGGLE_RIGHT_PANEL,
     TOGGLE_USER_INFO,
     RESTORE_INIT,
+    SHOW_ALERT,
+    HIDDEN_ALERT,
 } from '../constants/pageUI.js';
 
 // true  or false
@@ -54,5 +56,18 @@ export const toggleUserInfo = () => {
 export const restoreInit = () => {
   return {
     type: RESTORE_INIT
+  }
+}
+
+export const showAlert = (payload) => {
+  return {
+    type: SHOW_ALERT,
+    payload
+  }
+}
+
+export const hiddenAlert = (payload) => {
+  return {
+    type: HIDDEN_ALERT,
   }
 }

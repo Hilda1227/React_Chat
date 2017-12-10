@@ -3,7 +3,8 @@ import {
   dispatchAction, 
   socketEmit
 } from '../redux/actions/common';
-import { initRoomList } from '../redux/actions/activeList';
+import { initRoomList } from '../redux/actions/activeList.js';
+import { showAlert } from '../redux/actions/pageUI.js';
 import { setUser } from '../redux/actions/user';
 
 axios.defaults.baseURL = 'http://127.0.0.1:3004';
@@ -53,7 +54,7 @@ export const createGroup = (info) => {
     console.log('返回',res.data)
     return dispatchAction(initRoomList(info._id));
   })
-  .catch(err => console.log(err))
+  .catch(err => dispatchAction(showAlert(err)))
 }
 
 export const modifyInfo = (info) => {
@@ -67,10 +68,10 @@ export const modifyInfo = (info) => {
       return dispatchAction(setUser(res.data.msg.user));
     }
     else{
-      alert(res.data.msg);
+      dispatchAction(showAlert(res.data.msg));
     }
   })
-  .catch(err => console.log(err))
+  .catch(err => dispatchAction(showAlert(err)))
 }
 
 export const modifyGroupInfo = (info) => {
@@ -78,6 +79,10 @@ export const modifyGroupInfo = (info) => {
   return axios.post('/api/modifyGroupInfo', formdata, {
     headers: {'Content-Type': 'multipart/form-data'}
   })
-  .catch(err => console.log(err))
+  .then( (res) => {
+    dispatchAction(showAlert('修改成功'));
+    return res;
+  } )
+  .catch(err => dispatchAction(showAlert(err)))
 }
 

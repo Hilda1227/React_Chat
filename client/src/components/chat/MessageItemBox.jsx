@@ -7,7 +7,7 @@ import { formatDate } from '../../util/date.js'
 
 class MessageItemBox extends Component{
   constructor (props) {
-    super(props)
+    super(props);
   }
   render () {
     const {sender, avatar, content, createAt, isSelf, msgType} = this.props;
@@ -28,6 +28,7 @@ class MessageItemBox extends Component{
       default:
         message = null;
     }
+    let sending = (<div className = 'isSending'><img src = 'https://ooo.0o0.ooo/2017/01/17/587dd9f639872.gif'/></div>);
     return (
       <div className = { `room-msg-item room-msg-item${ isSelf ? '-self' : '-other' }`  }>
         <div style = {{backgroundImage: `url(${avatar})`}} className = 'avatar'></div>
@@ -36,7 +37,7 @@ class MessageItemBox extends Component{
             <span className = 'sender'> { sender } </span> 
             <time> { formatDate(createAt) } </time>
           </div>
-          { message }                      
+          <div className = 'message'>{ this.props.isSending && sending } { message }</div>                      
         </div>
       </div>
     )

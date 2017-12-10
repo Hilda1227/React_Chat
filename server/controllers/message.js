@@ -25,7 +25,7 @@ module.exports = {
         io.to(target.socket.socket_id).emit('new message', msg);        
       }
       await newMsg.save();
-      return cb({ isError: false, msg: 'ok' });
+      return cb({ isError: false, msg: {_id: newMsg._id} });
     }
     else{
       console.log('收到群聊',info)
@@ -35,7 +35,7 @@ module.exports = {
         avatar: from.avatar, _id: newMsg._id, type, from: toId, msgType
       });
       await Group.update({_id: toId}, {$set: {lastWord: newMsg._id}});
-      return cb({ isError: false, msg: 'ok' });
+      return cb({ isError: false, msg: {_id: newMsg._id} });
     }    
   },
   
