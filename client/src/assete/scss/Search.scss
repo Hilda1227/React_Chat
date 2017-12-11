@@ -20,8 +20,8 @@
     label{
       width: 1.5rem;
       height: 1.5rem;
-      background-image: url(../img/search.png);
-      background-size: 100%;
+      background: url(../img/search.png) center no-repeat;
+      background-size: 100% auto;
       margin: auto 0.8rem;
     }
     #search{

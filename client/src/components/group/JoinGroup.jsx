@@ -55,6 +55,7 @@ class JoinGroup extends Component {
     .then(() => {
       this.setState({ isLoading: false })
       this.props.close();
+      this.props.showAlert('加入成功')
     })
   }
   render () {

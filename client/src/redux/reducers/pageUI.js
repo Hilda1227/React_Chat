@@ -10,6 +10,8 @@ import {
   RESTORE_INIT,
   SHOW_ALERT,
   HIDDEN_ALERT,
+  TOGGLE_TOOLS,
+  TOGGLE_EXPRESSIONS,
 } from '../constants/pageUI.js'
 
 const init = Immutable.fromJS({
@@ -21,6 +23,8 @@ const init = Immutable.fromJS({
     rightPanelIs: '',
     showRightPanel: false,
     showUserInfo: false,
+    showTools: false,
+    showExpressions: false
   },
   showAlert: false,
   alertContent: '',
@@ -63,6 +67,16 @@ const pageUI = (state = init, action) => {
       return state.getIn(['layout','showUserInfo']) 
         ? state.setIn(['layout', 'showUserInfo'], false) 
         : state.setIn(['layout', 'showUserInfo'], true)
+    }
+    case TOGGLE_TOOLS: {
+      return state.getIn(['layout','showTools']) 
+        ? state.setIn(['layout', 'showTools'], false) 
+        : state.setIn(['layout', 'showTools'], true)
+    }
+    case TOGGLE_EXPRESSIONS: {
+      return state.getIn(['layout','showExpressions']) 
+        ? state.setIn(['layout', 'showExpressions'], false) 
+        : state.setIn(['layout', 'showExpressions'], true)
     }
     case RESTORE_INIT: {
       return state.set('layout', init.get('layout'));

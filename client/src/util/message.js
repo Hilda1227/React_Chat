@@ -1,17 +1,17 @@
-import store from '../redux/store'
+import store from '../redux/store';
 import {
   dispatchAction, 
   socketEmit
-} from '../redux/actions/common' 
+} from '../redux/actions/common';
 
 import {
   uploadFile, 
   fileInfo
-} from './upload'
+} from './upload';
   
-import { addMessageItem } from '../redux/actions/message'
-import { updateActiveItem } from '../redux/actions/activeList'
-
+import { addMessageItem } from '../redux/actions/message';
+import { updateActiveItem } from '../redux/actions/activeList';
+import { showAlert } from '../redux/actions/pageUI.js';
   
 export function handleMessage (message) {
     // 如果消息的来源是正在聊天的对象
@@ -43,16 +43,21 @@ export function createMessage (message, msgType) {
 
 function createFileMessage (message, msgType) {
   let isImage = /image\/\w+/.test(message.type);
-  console.log(isImage)
   if(isImage){
     return createImageMessage (message, 'image');    
   }
-  uploadFile(message)
-  .then(ret => {
-    let content = JSON.stringify({...fileInfo(message), src: ret.data.src});      
-    sendMessage(content, msgType)
-  })
-  .catch(err => console.log('发送失败',err))
+  let info = fileInfo(message);
+  if(info){
+    uploadFile(message)
+    .then(ret => {
+      let content = JSON.stringify({...info(message), src: ret.data.src});      
+      sendMessage(content, msgType)
+    })
+    .catch(err => dispatchAction(showAlert('发送失败')))
+  }
+  else{
+    dispatchAction(showAlert('文件过大'))
+  }  
 }
 
 function createTextMessage (message, msgType) {

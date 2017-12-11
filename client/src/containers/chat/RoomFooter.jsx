@@ -1,14 +1,18 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { addMessageItem } from '../../redux/actions/message';
-
+import { toggleTools, toggleExpressions } from '../../redux/actions/pageUI';
 import RoomFooter from '../../components/chat/RoomFooter';
 
-function mapStateToProps(state) {
-  return {
+export default connect(
+  state => ({
     chatting: state.chatting,
-    user: state.user
-  };
-}
-
-export default connect(mapStateToProps)(RoomFooter);
+    user: state.user,
+    showTools: state.pageUI.getIn(['layout', 'showTools']),
+    showExpressions: state.pageUI.getIn(['layout', 'showExpressions']),
+  }),
+  dispatch => ({
+    toggleTools: () => dispatch(toggleTools()),
+    toggleExpressions: () => dispatch(toggleExpressions())
+  })
+)(RoomFooter);

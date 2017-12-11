@@ -6,6 +6,7 @@ import EditableInput from '../common/EditableInput';
 import Avatar from '../common/Avatar';
 import { socketEmit } from '../../redux/actions/common.js';
 import { autobind } from 'core-decorators';
+import { formatCompleteDate } from '../../util/date.js';
 import '../../assete/scss/UserProfile.scss';
 
 class UserProfile extends Component {
@@ -44,7 +45,7 @@ class UserProfile extends Component {
               </DelayAnimation>              
             </div>
             <span className = 'nickname'>{ nickname }</span>
-            <span className = 'createAt'>Create at{ this.state.createAt }</span>
+            <span className = 'createAt'>Create at { formatCompleteDate(this.state.createAt, '-') }</span>
           </ProfileSection>       
           <ProfileSection>
             <ul className = 'info'>

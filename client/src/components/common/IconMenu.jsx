@@ -20,14 +20,13 @@ class IconMenu extends Component {
           y     = e.pageY,
           winX  = window.innerWidth, 
           winY  = window.innerHeight,
-          width = this.props.width || 180,
+          width = this.props.width || 160,
           size  = this.props.size || 20,
           distence = 0,
           pX = distence + size,
           pY = pX,
           dX = winX / 2 > x ? 'left' : 'right',
           dY = winY / 2 > y ? 'top' : 'bottom'; 
-          console.log(winY / 2, y)
       let style = {
         width: width + 'px',
         [dX]: pX + 'px',
@@ -43,10 +42,11 @@ class IconMenu extends Component {
       <div  onClick = { this.toggleShow }  className = 'icon-menu' style = {{width: size, height: size}}>
         <span className = { 'icon ' + iconClassName } style = {{ width: size, height: size  }}></span>       
         { 
-          this.state.isShow &&
-          (<div className = 'menu-wrap' style = { this.state.style }>
+          this.state.isShow 
+          && 
+          <div className = 'menu-wrap' style = { this.state.style }>
             { children }
-          </div>) 
+          </div>
         }
       </div>
     )

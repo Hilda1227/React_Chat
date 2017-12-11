@@ -36,10 +36,10 @@ export const fileInfo = (file) => {
     else if(size < k * k){
       size = (size / k).toFixed(2) + 'KB';
     }
-    else if(size < Math.pow(k, 3)){
+    else if(size < 3 * Math.pow(k, 2)){
       size = (size / Math.pow(k, 2)).toFixed(2) + 'MB';
     }
-    else if(size > Math.pow(k, 3)){
+    else if(size > 3 * Math.pow(k, 2)){
       return false;
     };
     return {fileName: file.name, size};

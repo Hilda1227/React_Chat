@@ -10,17 +10,6 @@ import Expressions from './Expressions';
 class RoomFooter extends Component {
   constructor (props) {
     super(props);
-    this.state = {
-      showTools: false,
-      showExpressions: false
-    };
-  }
-
-  @autobind
-  togglePanel (prop) {
-    this.state[prop] 
-      ? this.setState({[prop]: false})
-      : this.setState({[prop]: true});
   }
 
   @autobind
@@ -59,14 +48,14 @@ class RoomFooter extends Component {
             <button onClick = { () => { this.sendText() } } id = 'send'>发送</button>
           </div>
           <div className = 'tool'>
-            <span  onClick = { () => {this.togglePanel('showExpressions')} } id = 'emoji'></span>
-            <span  onClick = { () => {this.togglePanel('showTools')} } id = 'more'></span>
+            <span  onClick = { this.props.toggleExpressions } id = 'emoji'></span>
+            <span  onClick = { this.props.toggleTools } id = 'more'></span>
           </div>
         </div>
         <div className = 'tool-panel'>
           <ReactCSSTransitionGroup transitionName="ToolPanel" transitionEnterTimeout={500} transitionLeaveTimeout={300}> 
             { 
-              this.state.showTools 
+              this.props.showTools 
               ? (<ul className = 'more'>
                   <li className = 'button-item' id = 'button-file'><input type = 'file' 
                     onChange = { this.sendFile }/>
@@ -78,7 +67,7 @@ class RoomFooter extends Component {
               : null
             }
             { 
-              this.state.showExpressions
+              this.props.showExpressions
               ? (<Expressions
                   onClick = { this.addEmoji }
                 />)

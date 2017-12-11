@@ -11,6 +11,8 @@ import {
     RESTORE_INIT,
     SHOW_ALERT,
     HIDDEN_ALERT,
+    TOGGLE_TOOLS,
+    TOGGLE_EXPRESSIONS,
 } from '../constants/pageUI.js';
 
 // true  or false
@@ -58,16 +60,24 @@ export const restoreInit = () => {
     type: RESTORE_INIT
   }
 }
-
 export const showAlert = (payload) => {
   return {
     type: SHOW_ALERT,
     payload
   }
 }
-
 export const hiddenAlert = (payload) => {
   return {
     type: HIDDEN_ALERT,
+  }
+}
+export const toggleTools = () => {
+  return {
+    type: TOGGLE_TOOLS,
+  }
+}
+export const toggleExpressions = () => {
+  return {
+    type: TOGGLE_EXPRESSIONS,
   }
 }
