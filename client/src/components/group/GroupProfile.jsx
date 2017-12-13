@@ -19,7 +19,7 @@ class GroupProfile extends Component {
       editable: false,     
       nickname: '',
       avatar:'',
-      creator: '',
+      creator: {},
       count: 0,
       createAt: '',
       describe: '',
@@ -38,7 +38,7 @@ class GroupProfile extends Component {
     .then(data => {
       this.setState({
         ...data.info,
-        editable: data.info.creator === this.props.user_id
+        editable: data.info.creator._id === this.props.user_id
       })
       this.preAvatar = data.info.avatar;
     })
@@ -105,7 +105,7 @@ class GroupProfile extends Component {
             <ProfileSection title = '群组成员'>           
               <ul className = 'group-member'>
                 <li><span>人数</span> <span>{ count }</span></li>
-                <li><span>管理员</span> <span>hilda</span></li>
+                <li><span>管理员</span> <span>{ creator.nickname }</span></li>
               </ul>           
             </ProfileSection>
             { editable 

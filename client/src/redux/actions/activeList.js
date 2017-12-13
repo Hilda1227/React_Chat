@@ -13,8 +13,6 @@ import {
   JOIN_GROUP,
 } from '../constants/activeList.js';
 
-
-
 export const initRoomList = (payload) => (dispatch) => {
   socketEmit('init groups', {_id: payload})
   .then(data => dispatch({
@@ -33,6 +31,13 @@ export const joinGroup = (payload) => (dispatch) => {
 }
 
 // payload为群组_id
+export const removeActiveItem = (payload) => {
+  return {
+    type: REMOVE_ACTIVE_ITEM,
+    payload: Immutable.fromJS(payload)
+  }
+}
+
 export const quitGroup = (payload) => (dispatch) => {
   return socketEmit('quit group', { group_id: payload})
     .then(data => {
@@ -62,12 +67,7 @@ export const searchAddItem = (payload) => (dispatch) => {
   .catch(err => dispatch(showAlert(err)))
 }
 
-export const removeActiveItem = (payload) => {
-  return {
-    type: REMOVE_ACTIVE_ITEM,
-    payload: Immutable.fromJS(payload)
-  }
-}
+
 
 // nickname, type, lastWord, lastWordTime
 export const updateActiveItem = (payload) => {

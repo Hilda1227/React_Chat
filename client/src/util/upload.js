@@ -7,7 +7,7 @@ import { initRoomList } from '../redux/actions/activeList.js';
 import { showAlert } from '../redux/actions/pageUI.js';
 import { setUser } from '../redux/actions/user';
 
-axios.defaults.baseURL = 'http://127.0.0.1:3004';
+axios.defaults.baseURL = 'http://localhost:3004';
 
 function formData (data) {
   let formdata = new FormData();
@@ -52,7 +52,9 @@ export const createGroup = (info) => {
   })
   .then(res => {
     console.log('返回',res.data)
-    return dispatchAction(initRoomList(info._id));
+    if(!res.data.isError)
+     return dispatchAction(initRoomList(info._id));
+    dispatchAction(showAlert(res.data.msg));
   })
   .catch(err => dispatchAction(showAlert(err)))
 }

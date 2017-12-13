@@ -35,10 +35,18 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                   limit: 5000,
-                  name: 'img/[name].[ext]'
+                  name: 'img/[name].[hash:7].[ext]'
                 }
-              },
+            },
             //对图片进行打包
+            {
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                loader: 'url-loader',
+                options: {
+                  limit: 10000,
+                  name: 'font/[name].[hash:7].[ext]'
+                }
+            }
         ]
     },
     resolve:{

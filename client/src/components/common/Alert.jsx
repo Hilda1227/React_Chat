@@ -10,13 +10,13 @@ class Alert extends Component {
   }
   componentWillReceiveProps (nextProps) {
     if(nextProps.showAlert === true)
-    setTimeout(this.props.hiddenAlert, 2000);
+    setTimeout(this.props.hiddenAlert, 3000);
   }
   render () {
     return (    
       <ReactCSSTransitionGroup transitionName="Alert" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
         { this.props.showAlert 
-          && (<div className='alert'> <span>{ this.props.alertContent }</span></div>)
+          && <div className='alert'><span>{ this.props.alertContent }</span></div>
         }
       </ReactCSSTransitionGroup> 
     )

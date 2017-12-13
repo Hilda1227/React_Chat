@@ -71,7 +71,7 @@ ReactDOM.render(
       <BrowserRouter basename="/">
         <div className = 'App'>
           <Alert/>
-          <Switch>
+          {<Switch>
             <Route path = '/login' component = { Login }/>
             <Route path = '/signUp' component = { SignUp }/>
             <Route path =  '/'  render = {props => (
@@ -80,7 +80,7 @@ ReactDOM.render(
                 : ( <Redirect to={{ pathname: '/login',state: { from: props.location }}}/>)
             )}
             /> 
-          </Switch>
+          </Switch>}
         </div>    
       </BrowserRouter> 
     </Provider>,

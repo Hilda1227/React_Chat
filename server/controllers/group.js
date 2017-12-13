@@ -16,16 +16,16 @@ module.exports = {
 
   async fetchtGroupInfo (info, socket, cb) {
     const group = await Group.findOne({_id: info._id});
+    const admin = await User.findOne({ _id: group.creator });
     if(Group) {
       let info = {
         nickname: group.nickname,
         avatar: group.avatar,
-        creator: group.creator,
+        creator: admin,
         count: group.members.length,
         createAt: group.createAt,
         describe: group.describe
       }
-      console.log(info)
       return cb({ isError: false, msg: {info} })
     }
     cb({ isError: true, msg: '不存在此用户' })

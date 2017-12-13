@@ -20,15 +20,19 @@ router.post('/upload/file',async function (ctx) {
 })
 
 router.post('/api/createGroup',async function (ctx) { 
-  const { nickname, describe, _id } = ctx.request.fields;  
+  const { nickname, describe, _id } = ctx.request.fields; 
+  user = await User.findOne({ _id: _id });
+  if(user.groups.length >= 3) {
+    return ctx.body = ({ isError: true, msg: '每人最多只能3个群组哦~'});
+  } 
   let info = { nickname, creator: _id };
   let file= ctx.request.files[0];
   if(file){
-    let ret = await uploadFile(`${Date.now() + file.name}`, file.path);
+    try{ let ret = await uploadFile(`${Date.now() + file.name}`, file.path); }
+    catch (err) { return ctx.body = ({ isError: true, msg: '头像上传失败'}); }
     info.avatar = ret.src;
   }
-  if(describe) info.describe = describe;
-  user = await User.findOne({ _id: _id });
+  if(describe) info.describe = describe; 
   group = await new Group({...info});
   group.members.push(_id);
   user.groups.push(group._id);
@@ -43,7 +47,8 @@ router.post('/api/modifyUserInfo',async function (ctx) {
   let info = {nickname, sex, place};
   let file= ctx.request.files[0];
   if(file){
-    let ret = await uploadFile(`${Date.now() + file.name}`, file.path);
+    try{ let ret = await uploadFile(`${Date.now() + file.name}`, file.path); }
+    catch (err) { return ctx.body = ({ isError: true, msg: '发送失败'}); }
     info.avatar = ret.src;
   }
   await User.update({_id: _id},{$set: {...info}});
@@ -58,7 +63,8 @@ router.post('/api/modifyUserpInfo',async function (ctx) {
   let info = {nickname, sex, place};
   let file= ctx.request.files[0];
   if(file){
-    let ret = await uploadFile(`${Date.now() + file.name}`, file.path);
+    try{ let ret = await uploadFile(`${Date.now() + file.name}`, file.path); }
+    catch (err) { return ctx.body = ({ isError: true, msg: '发送失败'}); }
     info.avatar = ret.src;
   }
   await User.update({_id: _id},{$set: {...info}});
@@ -75,7 +81,8 @@ router.post('/api/modifyGroupInfo',async function (ctx) {
   let info = { nickname, describe };
   let file= ctx.request.files[0];
   if(file){
-    let ret = await uploadFile(`${Date.now() + file.name}`, file.path);
+    try{ let ret = await uploadFile(`${Date.now() + file.name}`, file.path); }
+    catch (err) { return ctx.body = ({ isError: true, msg: '发送失败'}); }
     info.avatar = ret.src;
   }
   await Group.update({_id: _id},{$set: {...info}});
