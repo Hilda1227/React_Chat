@@ -28,6 +28,7 @@
 
 1. 用户密码采用bcrypt-nodejs模块进行加密
 2. 用户登录成功后，采用jsonwebtoken生成token发送给客户端保存起来，客户端在以后的一些具有修改行为的请求中携带此token,服务端验证token是否合法，是则进行后续的处理，否则返回错误消息。
+3. 防XSS注入，通过正则匹配，将html预留字符替换为对应的实体编码
 
 ## webpack无法对组件里以相对路径引用的图片进行打包
 
@@ -45,7 +46,7 @@
 
 ## 如何在接受到新消息reducer调用结束的时候，紧接着调用RoomMsg组件内的方法，自动滚动到div底部，
 尝试了不能直接把这个组件export出去，
-解决办法：给RoomMsg组件设置一个needScroll属性，利用componentWillReceiveProps这个生命周期钩子，在接收到新的props时进行判断，需要往下滚动时将needScroll设为true，在componentDidUpdate这个钩子中，如果needScroll为true时，调用scrollToBottom滚动到底部
+最终解决办法：给RoomMsg组件设置一个needScroll属性，利用componentWillReceiveProps和componentDidUpdate这两个生命周期钩子，在接收到新的props时进行判断，需要往下滚动时将needScroll设为true，在componentDidUpdate这个钩子中，如果needScroll为true时，调用scrollToBottom滚动到底部
 
 ## 接口说明
 

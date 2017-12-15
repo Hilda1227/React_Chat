@@ -6,8 +6,9 @@ import {
 import { initRoomList } from '../redux/actions/activeList.js';
 import { showAlert } from '../redux/actions/pageUI.js';
 import { setUser } from '../redux/actions/user';
+import config from '../config/serverConfig';
 
-axios.defaults.baseURL = 'http://localhost:3004';
+axios.defaults.baseURL = `http://${config.server.HOST}:${config.server.PORT}`;
 
 function formData (data) {
   let formdata = new FormData();

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Layout from '../containers/chat/Layout'
+import Layout from '../containers/Layout'
 
 
 const Index = ({ match })  =>  { 

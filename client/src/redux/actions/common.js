@@ -4,9 +4,7 @@ import store from '../store' ;
 import config from '../../config/serverConfig.js';
 
 let dispatch = store.dispatch,
-    socket = process.env.NODE_ENV === 'development' 
-    ? io.connect(`http://${config.development.HOST}:${config.development.PORT}`)
-    : io.connect(`http://${config.production.HOST}:${config.production.PORT}`);
+    socket = io.connect(`http://${config.server.HOST}:${config.server.PORT}`);
 
 module.exports = {
   socket,

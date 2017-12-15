@@ -35,15 +35,16 @@ $otherColor: #838383;
       } 
       .message{
           display: flex;
-        .isSending{
-            order: 1;
+        .isLoading{
+            order: 3;
             align-self: flex-end;
             img{
-              width: 1.5rem;
-              height: 1.5rem;
+              width: 1.6rem;
+              height: 1.6rem;
             }
         }
         .content{
+            order: 2;
             border-radius: 8px;
             background: $msgBgColor;
             color: $msgColor;
@@ -82,7 +83,7 @@ $otherColor: #838383;
             }
         } 
         .message{
-            .isSending{
+            .isLoading{
                 order: 1 !important;
             }
             .content{ 
