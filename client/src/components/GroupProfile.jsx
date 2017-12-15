@@ -92,7 +92,7 @@ class GroupProfile extends Component {
                 handleChange = { this.handleChange('nickname') }
                 maxLength = { 15 }
               />
-              <span className = 'createAt'>Create at { formatCompleteDate(this.state.createAt, '-') }</span>
+              <span className = 'createAt'>Create at { formatCompleteDate(this.state.createAt, '/') }</span>
             </ProfileSection>
             <ProfileSection title = '群介绍'>           
               <EditableInput

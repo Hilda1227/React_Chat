@@ -5,7 +5,9 @@ import { setLoading } from './pageUI';
 import {
     INIT_HISTORY,
     ADD_HISTORY,
-    ADD_MESSAGE_ITEM
+    ADD_MESSAGE_ITEM,
+    SET_HAS_SEND,
+    SET_FILE_SRC
 } from '../constants/message.js';
 
 
@@ -43,5 +45,18 @@ export const addMessageItem = (payload) =>{
     type: ADD_MESSAGE_ITEM,
     payload: Immutable.fromJS(payload)
   };
+}
+// 消息_id
+export const setHasSend = (payload) => {
+  return {
+    type: SET_HAS_SEND,
+    payload
+  }
+}
+export const setFileSrc = (payload) => {
+  return {
+    type: SET_FILE_SRC,
+    payload
+  }
 }
 

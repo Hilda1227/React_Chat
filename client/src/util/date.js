@@ -19,6 +19,7 @@ export function formatDate (date) {
 export function formatCompleteDate (time, str) {
   if(time != null){
     let date = new Date(time);
-    return date.getFullYear() + str + (date.getMonth() + 1) + str + date.getDate() 
+    return date.getFullYear() + str + (date.getMonth() + 1) + str + date.getDate() + ' ' +
+           String(date.getHours()).padStart(2, '0') + ':' + String(date.getMinutes()).padStart(2, '0'); 
  }
 }

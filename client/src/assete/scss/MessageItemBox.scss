@@ -38,10 +38,11 @@ $otherColor: #838383;
         .isLoading{
             order: 3;
             align-self: flex-end;
-            img{
-              width: 1.6rem;
-              height: 1.6rem;
-            }
+            width: 1.5rem;
+            height: 1.5rem;
+            background: url('../img/loading.gif') no-repeat center;
+            background-size: cover;
+            margin: 0.5rem;
         }
         .content{
             order: 2;

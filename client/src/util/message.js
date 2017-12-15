@@ -9,7 +9,7 @@ import {
   fileInfo
 } from './upload';
   
-import { addMessageItem } from '../redux/actions/message';
+import { addMessageItem, setHasSend, setFileSrc } from '../redux/actions/message';
 import { updateActiveItem } from '../redux/actions/activeList';
 import { showAlert } from '../redux/actions/pageUI.js';
   
@@ -41,64 +41,86 @@ export function createMessage (message, msgType) {
   }
 }
 
-function createFileMessage (message, msgType) {
-  let isImage = /image\/\w+/.test(message.type);
-  if(isImage){
-    return createImageMessage (message, 'image');    
-  }
-  let info = fileInfo(message);
-  if(info){
-    uploadFile(message)
-    .then(ret => {
-      let content = JSON.stringify({...info(message), src: ret.data.src});      
-      sendMessage(content, msgType)
-    })
-    .catch(err => dispatchAction(showAlert('发送失败')))
-  }
-  else{
-    dispatchAction(showAlert('文件过大'))
-  }  
-}
-
 function createTextMessage (message, msgType) {
-  sendMessage(message, msgType)
+  let chatting = store.getState().chatting,
+      user = store.getState().user,
+      preView = {
+        msgType, type: chatting.get('type'), sender: user.get('nickname'), createAt: new Date(), 
+        content: message, avatar: user.get('avatar'), isLoading: true, _id: Date.now()
+      }  
+  dispatchAction(addMessageItem(preView));
+  socketEmit('new message', {
+    msgType, type: chatting.get('type'), toId: chatting.get('_id'), content: message, 
+    token: localStorage.getItem('token')
+  })
+  .then(() => {
+    dispatchAction(updateActiveItem({
+      msgType, type: chatting.get('type'), lastWord:  message, lastWordSender: user.get('nickname'),  
+      _id: chatting.get('_id'), lastWordTime: new Date(), curRoom: true
+    }));
+    dispatchAction(setHasSend(preView._id));
+  })
 }
 
 function createImageMessage (message, msgType) {    
   let reader = new FileReader();
   reader.readAsDataURL(message);
-  reader.addEventListener("load", () => {
-    sendMessage(reader.result, msgType)         
+  reader.addEventListener("load", () => {  
+    let chatting = store.getState().chatting,
+        user = store.getState().user,
+        preView = {
+          msgType, type: chatting.get('type'), sender: user.get('nickname'), createAt: new Date(), 
+          content: reader.result, avatar: user.get('avatar'), isLoading: true, _id: Date.now()
+        }
+    dispatchAction(addMessageItem(preView));
+    uploadFile(message)
+    .then(ret => {
+      socketEmit('new message', {
+        msgType, type: chatting.get('type'), toId: chatting.get('_id'), 
+        content: ret.data.src, token: localStorage.getItem('token'),
+      })
+      .then(() => {
+        dispatchAction(updateActiveItem({
+          msgType, type: chatting.get('type'), lastWord:  message, lastWordSender: user.get('nickname'),  
+          _id: chatting.get('_id'), lastWordTime: new Date(), curRoom: true
+        }));
+        dispatchAction(setHasSend(preView._id));
+      })
+    })
   }, false);   
 }
 
-function sendMessage (message, msgType) {
-  const chatting = store.getState().chatting,
-        user = store.getState().user;
-  dispatchAction(addMessageItem({
-    msgType,
-    type: chatting.get('type'),
-    sender: user.get('nickname'), 
-    createAt: new Date(), 
-    content: message, 
-    avatar: user.get('avatar'),
-  }));
-
-  socketEmit('new message', {
-    msgType, 
-    type: chatting.get('type'), 
-    toId: chatting.get('_id'), 
-    content: message, 
-    token: localStorage.getItem('token'),
+function createFileMessage (message, msgType) {
+  let isImage = /image\/\w+/.test(message.type);
+  if(isImage){
+    return createImageMessage (message, 'image');    
+  }
+  let chatting = store.getState().chatting,
+      user     = store.getState().user,
+      info     = fileInfo(message),
+      preView  = {
+        msgType, type: chatting.get('type'), sender: user.get('nickname'), createAt: new Date(), 
+        content: JSON.stringify({...info, src: '#'}), avatar: user.get('avatar'), isLoading: true,
+        _id: Date.now()
+      };
+  if(!info)  return dispatchAction(showAlert('文件过大'))
+  dispatchAction(addMessageItem(preView));
+  uploadFile(message)
+  .then(ret => {
+    let content = JSON.stringify({...info, src: ret.data.src});       
+    socketEmit('new message', {
+      msgType, type: chatting.get('type'), toId: chatting.get('_id'), content, 
+      token: localStorage.getItem('token'),
+    })
+    .then(() => {
+      dispatchAction(updateActiveItem({
+        msgType, type: chatting.get('type'), lastWord:  content, lastWordSender: user.get('nickname'),  
+        _id: chatting.get('_id'), lastWordTime: new Date(), curRoom: true
+      }));
+      dispatchAction(setFileSrc({ _id: preView._id, src: ret.data.src}));
+      dispatchAction(setHasSend(preView._id));
+    })
   })
-  
-  dispatchAction(updateActiveItem({
-    msgType,
-    type: chatting.get('type'),
-    lastWord:  message, 
-    lastWordSender: user.get('nickname'),  
-    _id: chatting.get('_id'),
-    lastWordTime: new Date(),         
-    curRoom: true
-  }));
+  .catch(err => {dispatchAction(showAlert('发送失败')); console.log(err)})
+
 }
