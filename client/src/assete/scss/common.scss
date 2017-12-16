@@ -12,7 +12,8 @@ html, body,#root, .App{
     height: 100%;
     position: relative;
     color: #696969;
-    font-family:  '微软雅黑';   
+    font-family:  '微软雅黑';  
+    overflow: hidden; 
 }
 .App{
   display: flex;

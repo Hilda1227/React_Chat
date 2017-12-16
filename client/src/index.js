@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware  } from 'redux';
-import { BrowserRouter, Route, withRouter, Switch, Redirect } from 'react-router-dom';
+import { HashRouter, Route, withRouter, Switch, Redirect } from 'react-router-dom';
 
 import store from './redux/store';
 import {
@@ -54,11 +54,9 @@ const handleEnter = () => {
   const token = localStorage.getItem('token'),
         user_id = store.getState().user.get('_id');
   if(token){   
-    console.log('dddd1')
     if(!user_id) handleInit(token);
     return true;
   }else{
-    console.log('dddd2')
     return false;
   }
 }
@@ -68,7 +66,7 @@ const handleEnter = () => {
 
 ReactDOM.render(
     <Provider store={ store }>
-      <BrowserRouter basename="/">
+      <HashRouter basename="/">
         <div className = 'App'>
           <Alert/>
           {<Switch>
@@ -82,7 +80,7 @@ ReactDOM.render(
             /> 
           </Switch>}
         </div>    
-      </BrowserRouter> 
+      </HashRouter> 
     </Provider>,
     document.getElementById('root')
 );

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { autobind } from 'core-decorators';
 import '../assete/scss/AsideHeader.scss';
 import IconMenu from './common/IconMenu';
+import PropTypes from 'prop-types';
 
 class AsideHeader extends Component {
   constructor (props) {
@@ -10,6 +11,9 @@ class AsideHeader extends Component {
       showList: false
     }
   }
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  };
   @autobind
   toggleShow () {
     this.state.showList 
@@ -19,7 +23,7 @@ class AsideHeader extends Component {
   @autobind
   logout () {
     localStorage.setItem('token', null);
-    window.location.href='/login';
+    this.context.router.history.push("/login");
     this.props.clearUser();
   }
   render () {
