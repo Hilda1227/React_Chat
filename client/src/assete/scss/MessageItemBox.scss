@@ -62,7 +62,7 @@ $otherColor: #838383;
 }
  
 .room-msg-item-other .content{
-    @include triangle (0.8rem, 10deg, left, 0.5rem, $msgBgColor)
+    @include triangle-msg (0.65rem, 100deg, left, 0.5rem, $msgBgColor)
 }
 .room-msg-item-self{ 
     justify-content: flex-end;
@@ -90,7 +90,7 @@ $otherColor: #838383;
             .content{ 
                 background-color: $msgBgColorSelf;
                 color: $msgColorSelf;      
-                @include triangle(0.8rem, -10deg, right, 0.5rem, $msgBgColorSelf);
+                @include triangle-msg(0.7rem, -10deg, right, 0.5rem, $msgBgColorSelf);
             }
         }
           

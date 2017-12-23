@@ -1,5 +1,4 @@
-import Immutable from 'immutable';
-
+import immutable from 'immutable';
 import {
   INIT_GROUP_LIST,
   ADD_ACTIVE_ITEM,
@@ -8,15 +7,15 @@ import {
   SET_ACTIVE_ITEM,
   CLEAR_UNREAD,
   SET_ONLINE,
-} from '../constants/activeList'
+} from '../constants/activeList';
 
-const findItem = (state, id) => {
+var findItem = (state, id) => {
   return state.findKey((value) => (
     value.get('_id') === id
   ));
 }
 
-const activeList = (state = Immutable.fromJS([]), action) => {
+const activeList = (state = immutable.fromJS([]), action) => {
   switch( action.type ){
 
     case ADD_ACTIVE_ITEM: {

@@ -1,18 +1,18 @@
-import Immutable from 'immutable';
+import immutable from 'immutable';
 
 import {
   SET_CHATTING,
   CLOSE_CHATTING
 } from '../constants/chatting'
 
-const chatting = (state = Immutable.fromJS({}), action) => {
+const chatting = (state = immutable.fromJS({}), action) => {
   switch( action.type ){
 
     case SET_CHATTING: {
-      return Immutable.fromJS(action.payload);
+      return immutable.fromJS(action.payload);
     }
     case CLOSE_CHATTING:{
-      return Immutable.fromJS({});
+      return immutable.fromJS({});
     }
     default: {
       return state;

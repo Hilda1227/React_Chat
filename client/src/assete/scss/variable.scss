@@ -10,6 +10,18 @@
         top: $top;
     }
 }
+@mixin triangle-msg ($size, $rotate, $direction, $top, $color) {
+    &::after{
+        content: '';
+        position: absolute;
+        border: $size solid transparent;
+        border-top-color: $color;
+        border-left-color: $color;
+        transform: rotate($rotate);
+        #{$direction}: -$size; 
+        top: $top;
+    }
+}
 $roomBgColor: #eef1f6;
 // $mainColor: #7dcfcb;
 $mainColor: #e8bbc5;

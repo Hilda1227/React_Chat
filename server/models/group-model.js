@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const config = require('../config/init-config.js');
 
 const groupSchema = mongoose.Schema({
   nickname: String,
   avatar: {
     type: String,
-    default: 'http://localhost:3004/chat/img/default_group_avatar.svg'
+    default: config.DEFAULT_GROUP_AVATAR    
   },
   creator: {
     type: Schema.Types.ObjectId,

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const config = require('../config/init-config.js');
 
 const userSchema = mongoose.Schema({
   nickname: String,
@@ -11,7 +12,7 @@ const userSchema = mongoose.Schema({
   },
   avatar: {
     type: String, 
-    default: 'https://cdn.dribbble.com/users/35381/screenshots/3118843/wut.png'
+    default: config.DEFAULT_USER_AVATAR
   },
   groups: [{
     type: Schema.Types.ObjectId,

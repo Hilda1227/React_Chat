@@ -46,19 +46,17 @@ const handleInit = token => {
     dispatchAction(setUser( data.user ));
     dispatchAction(initRoomList(data.user._id));
   })
-  .catch( err => {window.location.href='/login'; console.log(err)})
+  .catch( err => {window.location.href='#login'; console.log(err)})
 }
 
 const handleEnter = () => {
- 
   const token = localStorage.getItem('token'),
         user_id = store.getState().user.get('_id');
   if(token){   
     if(!user_id) handleInit(token);
     return true;
-  }else{
-    return false;
   }
+  else return false;
 }
 
 

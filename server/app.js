@@ -4,6 +4,7 @@ const bodyParser = require('koa-bodyparser');
 const cors = require('koa-cors'); 
 const body = require('koa-better-body');
 const serve = require('koa-static-server');
+const config = require('./config/init-config.js');
 
 const socket = require('./socket');
 
@@ -34,8 +35,8 @@ app.use(user);
 
 
 // 监听3004端口
-server.listen(3004, () => {
-  console.log('正在监听3004端口...')
+server.listen(config.PORT, () => {
+  console.log('正在监听' + config.PORT + '端口...')
 });
 
 
