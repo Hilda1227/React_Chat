@@ -63,7 +63,7 @@
  npm install  // 安装依赖
  mongod --dbpath d:\data      // 开启数据库 d:\data 为数据库文件夹位置，可自行设置
  npm run start  // 运行服务
- cd ../client  // 进入前端文件目录
+ cd React_Chat/client  // 另外打开一个命令窗口，进入前端文件目录
  npm install  // 安装依赖 
  npm run dev // 启动热加载
 ```
