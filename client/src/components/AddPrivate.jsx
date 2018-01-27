@@ -51,16 +51,16 @@ class addPrivate extends Component {
   }
   render () {
     let users = this.state.users.map( item => {
-    return (
-      <ResultItem
-        { ...item } 
-        key = { item._id }
-        add = { () => {
-          this.props.addPrivate({...item, type: 'private'});
-          this.props.close();
-        }}
-      />
-    )
+      return (
+        <ResultItem
+          { ...item } 
+          key = { item._id }
+          add = { () => {
+            this.props.addPrivate({...item, type: 'private'});
+            this.props.close();
+          }}
+        />
+      );
     })
     return (
       <div className = ' left-panel-wrap add-chat'>

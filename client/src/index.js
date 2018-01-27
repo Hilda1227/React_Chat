@@ -46,12 +46,14 @@ const handleInit = token => {
     dispatchAction(setUser( data.user ));
     dispatchAction(initRoomList(data.user._id));
   })
-  .catch( err => {window.location.href='#login'; console.log(err)})
+  .catch( err => {HashRouter.push('/login'); console.log(err)})
 }
 
 const handleEnter = () => {
+  
   const token = localStorage.getItem('token'),
         user_id = store.getState().user.get('_id');
+        console.log(token)
   if(token){   
     if(!user_id) handleInit(token);
     return true;
@@ -71,9 +73,9 @@ ReactDOM.render(
             <Route path = '/login' component = { Login }/>
             <Route path = '/signUp' component = { SignUp }/>
             <Route path =  '/'  render = {props => (
-              handleEnter() 
-                ? (<Index {...props}/>) 
-                : ( <Redirect to={{ pathname: '/login',state: { from: props.location }}}/>)
+              handleEnter()
+                ? (<Index {...props}/>)
+                : (<Redirect to={{ pathname: '/login',state: { from: props.location }}}/>)
             )}
             /> 
           </Switch>}

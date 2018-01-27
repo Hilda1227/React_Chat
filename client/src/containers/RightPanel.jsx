@@ -4,13 +4,14 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { toggleRightPanel } from '../redux/actions/pageUI';
 import UserProfile from '../containers/UserProfile';
 import GroupProfile from '../containers/GroupProfile';
-
+import GroupMembers from '../containers/GroupMembers';
 
 const RightPanel = ({ rightPanelIs, showRightPanel, toggleRightPanel }) => {
   function show (value) {
     switch (value) {
       case 'UserProfile': return <UserProfile close = { toggleRightPanel } />;
       case 'GroupProfile': return <GroupProfile close = { toggleRightPanel } />;
+      case 'GroupMembers': return <GroupMembers close = { toggleRightPanel } />;
       default: null;
     }
   }

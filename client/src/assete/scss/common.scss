@@ -19,6 +19,9 @@ html, body,#root, .App{
   display: flex;
   justify-content: center;
   align-items: center;
+  // background: #eeeeee;
+  // background: url('../img/bg.png') center no-repeat;
+  // background-size: cover;
 }
 ul, li{
   list-style: none;
@@ -39,7 +42,9 @@ input{
 button{
   background-color:rgba(255,255,255,0);
   border:none;
+  border-radius: 3px;
   outline:none;
+  font-size: 0.9rem;
   &：focus{
     outline:none;
   }

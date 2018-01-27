@@ -56,21 +56,19 @@ class RoomFooter extends Component {
           <ReactCSSTransitionGroup transitionName="ToolPanel" transitionEnterTimeout={500} transitionLeaveTimeout={300}> 
             { 
               this.props.showTools 
-              ? (<ul className = 'more'>
-                  <li className = 'button-item' id = 'button-file'><input type = 'file' 
-                    onChange = { this.sendFile }/>
-                  </li>
-                  <li className = 'button-item' id = 'button-image'><input type = 'file' 
-                    accept = "image/*"  onChange = { this.sendImage }/>
-                  </li>
-                </ul>) 
-              : null
+                ? (<ul className = 'more'>
+                    <li className = 'button-item' id = 'button-file'><input type = 'file' 
+                      onChange = { this.sendFile }/>
+                    </li>
+                    <li className = 'button-item' id = 'button-image'><input type = 'file' 
+                      accept = "image/*"  onChange = { this.sendImage }/>
+                    </li>
+                  </ul>) 
+                : null
             }
             { 
               this.props.showExpressions
-              ? (<Expressions
-                  onClick = { this.addEmoji }
-                />)
+              ? (<Expressions onClick = { this.addEmoji } />)
               : null        
             }
           </ReactCSSTransitionGroup>

@@ -43,17 +43,23 @@ class SignUp extends Component {
       })
       .catch(err => this.props.showAlert(err))
     }
-    else this.props.showAlert('输入不合法')
   }
   @autobind
   validateInput () {
     let regEmail = /^[0-9a-zA-Z_-]+@\w+\.\w+$/,
-        nickname = this.state.nickname ? this.state.nickname.trim() : '' ,
-        email    = this.state.email ? this.state.email.trim() : '' ,
-        password = this.state.password ? this.state.password.trim() : '' ;
-    if(nickname && regEmail.test(email) && password)
-      return { nickname, email, password };
-    return false;
+        nickname = this.state.nickname.trim() ,
+        email    = this.state.email.trim(),
+        password = this.state.password.trim();
+    if(!nickname){
+      this.props.showAlert('昵称不能为空'); return;
+    }
+    if(!regEmail.test(email)){
+      this.props.showAlert('请输入合法的邮箱'); return;
+    }
+    if(!password){
+      this.props.showAlert('密码不能为空'); return;
+    }
+    return { nickname, email, password };
   }
   render () {
     return (

@@ -90,6 +90,14 @@ module.exports = {
       return cb({isError: false, msg: {groups}});
     }
     return cb({isError: true, msg: '服务器好像凌乱了'});   
-  }
+  },
 
+  async mergeMembers (info, socket, cb) {
+    console.log('收到请求', info)
+    let group = await Group.findOne({_id: info.group_id});
+    let members = await group.members.map(async item => {
+      return await User.findOne({ _id: item });
+    })
+    return cb({isError: false, msg: {members}});
+  }
 }

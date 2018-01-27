@@ -22,7 +22,7 @@ class AsideHeader extends Component {
   }
   @autobind
   logout () {
-    localStorage.setItem('token', null);
+    localStorage.setItem('token', '');
     this.context.router.history.push("/login");
     this.props.clearUser();
   }

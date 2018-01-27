@@ -4,8 +4,6 @@ const initConfig = require('../config/init-config.js');
 const Group = require('./group-model.js');
 const User = require('./user-model.js');
 
-mongoose.Promise = global.Promise;
-
 (async function (params) {
   try{
     const db = await mongoose.connect('mongodb://localhost/chat-room', { useMongoClient: true });

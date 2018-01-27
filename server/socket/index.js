@@ -93,6 +93,11 @@ module.exports = function socket (io){
       .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} )     
     })
 
+    socket.on('merge members', (info, cb) => {
+      group.mergeMembers(info, socket, cb)
+      .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} ) 
+    })
+
     socket.on('init groups', (info, cb) => {
       group.initGroupList(info, socket, cb)
       .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} )     

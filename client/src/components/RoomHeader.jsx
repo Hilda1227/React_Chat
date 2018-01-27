@@ -16,7 +16,8 @@ class RoomHeader extends Component {
     this.handle = () => {
       if(window.innerWidth <= 650 && !this.state.showMenu ) {
         this.setState({showMenu: true})
-      }else if(window.innerWidth > 650 && this.state.showMenu ) {
+      }
+      else if(window.innerWidth > 650 && this.state.showMenu ) {
         this.setState({showMenu: false})
       }
     }
@@ -41,8 +42,10 @@ class RoomHeader extends Component {
             : <Avatar src = { chatting.get('avatar') }  size = '2.7rem' />
           }                
           <span className = 'nickname'>{ chatting.get('to') }</span>
+          
           <div className = 'target'>
-            <IconMenu iconClassName = 'icon-menu-2'size = { 15 } >
+            <span className = 'members' onClick = { () => selectRightPanel('GroupMembers') } ></span>
+            <IconMenu iconClassName = 'icon-menu-2'size = { 16 } >
               {
                 chatting.get('type') === 'private'
                 ? (<ul className = 'menu-list'>
@@ -61,7 +64,5 @@ class RoomHeader extends Component {
     )
   }
 }
-
-
 
 export default RoomHeader

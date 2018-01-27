@@ -122,5 +122,4 @@ function createFileMessage (message, msgType) {
     })
   })
   .catch(err => {dispatchAction(showAlert('发送失败')); console.log(err)})
-
 }

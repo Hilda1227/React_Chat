@@ -31,10 +31,22 @@
     .nickname{
       font-size: 0.9rem;
       font-weight: bold;
-    }
+    }   
     .target{
       right: 0px;
       position: absolute;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 4rem;
+      .members{
+        background: url('../img/group.png');
+        width: 16px;
+        height: 16px;
+        background-position: center;
+        background-size: cover;
+        display: inline-block;
+      }
     } 
   }
 }
