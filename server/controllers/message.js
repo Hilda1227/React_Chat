@@ -14,9 +14,13 @@ module.exports = {
   async newMessage (info, socket, cb, io) {
     const { type, user_id, content, toId, msgType} = info;
     let from = await User.findOne({ _id: user_id });
+    // 如果私聊
     if(type === 'private'){
-      let target = await User.findOne({ _id: toId }).populate('socket','socket_id'),          
-          newMsg = await new PrivateMsg({from: from._id, to: target._id, content, msgType, createAt: Date.now()});      
+      let target = await User.findOne({ _id: toId }).populate('socket','socket_id'); 
+      // 如果已被对方屏蔽， 则返回
+      if(Array.from(target.shield).indexOf(user_id)) return cb({ isError: false, msg: "您已被对方屏蔽" });        
+      let newMsg = await new PrivateMsg({from: from._id, to: target._id, content, msgType, createAt: Date.now()});      
+      // 如果对方在线
       if(target.onlineState) {
         let msg = {
           sender: from.nickname, createAt: newMsg.createAt, content,
@@ -27,8 +31,11 @@ module.exports = {
       await newMsg.save();
       return cb({ isError: false, msg: {_id: newMsg._id} });
     }
-    else{
-      console.log('收到群聊',info)
+    else{ // 如果是群消息
+      let group = await Group.findOne({_id: toId});
+      // 如果已被禁言
+      if(!Array.from(group.block).every(item => String(item) !== user_id )) 
+        return cb({ isError: true, msg: '您已被禁言' });
       let newMsg = await new GroupMsg({content, from: user_id, to: toId, msgType, createAt: Date.now()}).save();     
       socket.broadcast.to(toId).emit('new message',{
         sender: from.nickname, createAt: newMsg.createAt, content,

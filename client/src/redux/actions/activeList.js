@@ -22,13 +22,6 @@ export const initRoomList = (payload) => (dispatch) => {
   .catch(err => console.log(err))
 }
 
-export const joinGroup = (payload) => (dispatch) => {
-  return socketEmit('join group', { _id: payload})
-    .then(data => {
-      dispatch(addActiveItem(data.group));
-    })
-    .catch(err => dispatch(showAlert(err)))
-}
 
 // payload为群组_id
 export const removeActiveItem = (payload) => {
@@ -36,16 +29,6 @@ export const removeActiveItem = (payload) => {
     type: REMOVE_ACTIVE_ITEM,
     payload: Immutable.fromJS(payload)
   }
-}
-
-export const quitGroup = (payload) => (dispatch) => {
-  return socketEmit('quit group', { group_id: payload})
-    .then(data => {
-      dispatch(removeActiveItem(payload));
-      dispatch(closeChatting());
-      dispatch(showAlert('已成功退出'))
-    })
-    .catch(err => dispatch(showAlert(err)))
 }
 
 export const addActiveItem = (payload) => {

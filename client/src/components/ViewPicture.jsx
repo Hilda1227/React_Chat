@@ -5,10 +5,7 @@ import React from 'react'
 const ViewPicture = () => {
   return (
     <div className='ViewPicture'>      
-      <div className = 'welcome'>
-        <div className = 'welcome-img'></div>
-        <span className = 'welcome-word'>Hi~, 选择房间开始聊天吧</span>
-      </div>
+      
     </div>
   );
 }

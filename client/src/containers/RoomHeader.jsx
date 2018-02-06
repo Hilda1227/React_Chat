@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { removeActiveItem, quitGroup } from '../redux/actions/activeList';
+import { removeActiveItem} from '../redux/actions/activeList';
+import { quitGroup } from '../redux/actions/group';
 import { closeChatting } from '../redux/actions/chatting';
 import Immutable from 'immutable';
 import { getHistory } from '../redux/actions/message';

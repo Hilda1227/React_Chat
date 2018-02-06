@@ -16,7 +16,7 @@ module.exports = {
 
   async fetchtGroupInfo (info, socket, cb) {
     const group = await Group.findOne({_id: info._id});
-    const admin = await User.findOne({ _id: group.creator });
+    const admin = await User.findOne({ _id: String(group.creator) });
     if(Group) {
       let info = {
         nickname: group.nickname,
@@ -36,15 +36,25 @@ module.exports = {
     let group = await Group.findOne({_id: info._id});
     if(group) {
       user = await User.findOne({ _id: info.user_id });
-      if(user && user.groups.indexOf(group._id) !== -1)
-        return cb({ isError: true, msg: '您已在该房间'})
-      user.groups.push(group._id);
-      group.members.push(user._id);
-      await user.save(); await group.save();
-      socket.join(group._id);
-      cb({ isError: false, msg: {group: {
-        avatar: group.avatar, _id: group._id, nickname: group.nickname, type: 'group'
-      }} })      
+      if(user && user.groups.indexOf(group._id) !== -1){
+        return cb({ isError: true, msg: '您已在该房间'});
+      }
+      else {
+        user.groups.push(group._id);
+        group.members.push(user._id);
+        await user.save(); await group.save();
+        socket.join(group._id);
+        cb({isError: false, 
+          msg: { group: 
+          {
+            avatar: group.avatar, 
+            _id: group._id, 
+            nickname: group.nickname, 
+            type: 'group'
+          }
+        } 
+        }); return;
+      }
     }
     return cb({isError: true, msg: '不存在该群组'})  
   },
@@ -93,11 +103,63 @@ module.exports = {
   },
 
   async mergeMembers (info, socket, cb) {
-    console.log('收到请求', info)
     let group = await Group.findOne({_id: info.group_id});
-    let members = await group.members.map(async item => {
-      return await User.findOne({ _id: item });
+    
+    let promise = group.members.map( async item => {
+      const user = await User.findOne({ _id: item })
+      return user;
     })
-    return cb({isError: false, msg: {members}});
+    Promise.all(promise).then(members => {
+      return cb({isError: false, msg: {members}});
+    })    
+  },
+
+  async blockTalking (info, socket, cb) {
+    const { user_id, group_id, m_id } = info;
+    let group = await Group.findOne({_id: group_id});
+    if(String(group.creator) !== user_id) {
+      return cb({isError: true, msg: '权限不足'});
+    }
+    else if(group.block.indexOf(m_id) !== -1) {
+      return cb({isError: true, msg: '已禁言'});
+    }
+    else {
+      group.block.push(m_id);
+      await group.save();
+      cb({isError: false, msg: '已禁言'})
+    }    
+  },
+
+  async relieveBlock (info, socket, cb) {
+    const { user_id, group_id, m_id } = info;
+    let group = await Group.findOne({_id: group_id});
+    if(String(group.creator) !== user_id) {
+      cb({isError: true, msg: '权限不足'})
+    }
+    else {
+      let index = Array.from(group.block).indexOf(m_id);
+      group.block.splice(index, 1);
+      await group.save();
+      cb({isError: false, msg: '禁言已解除'})
+    } 
+  },
+
+  async removeMember (info, socket, cb) {
+    const { user_id, group_id, m_id } = info;
+    let group = await Group.findOne({_id: group_id}),
+        user = await User.findOne({_id: user_id}),
+        member = await User.findOne({_id: m_id});
+    if(String(group.creator) !== user_id) {
+      cb({isError: true, msg: '权限不足'})
+    }
+    else {
+      let index = group.members.indexOf(m_id);
+      group.members.splice(index, 1);
+      await group.save();
+      index = member.groups.indexOf(group_id);
+      member.groups.splice(index, 1);
+      await member.save();
+      cb({isError: false, msg: '已移出该群'})
+    } 
   }
 }

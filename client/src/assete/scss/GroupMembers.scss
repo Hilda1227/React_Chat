@@ -1,0 +1,35 @@
+.group-members{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  .results-wrap{
+    flex-grow: 1;
+    width: 100%;
+    overflow-x: hidden; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+  }
+  .menu-list{
+    position: absolute;
+    display: block;
+    width: 8rem;
+    padding: 8px 0;
+    background: #fff;
+    border-radius: 2px;
+    color: #666;
+    box-shadow: 0 1px 6px rgba(0,0,0,.117647);
+    .list-item{
+      height: 2.5rem;
+      padding-left: 0.6rem;
+      line-height: 2.5rem;
+      transition: 200ms;
+      padding: 0 8px;
+      &:hover{
+        background-color: #f9f9f9;
+      }
+    }
+  }
+}

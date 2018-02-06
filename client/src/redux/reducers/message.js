@@ -3,7 +3,7 @@ import {
   INIT_HISTORY,
   ADD_HISTORY,
   ADD_MESSAGE_ITEM,
-  SET_HAS_SEND,
+  SET_STATUS,
   SET_FILE_SRC
 } from '../constants/message.js'
 
@@ -21,9 +21,9 @@ const message = (state = init, action) => {
     case ADD_MESSAGE_ITEM: {
       return state.push(action.payload);
     }
-    case SET_HAS_SEND: {
-      let key = state.findLastKey(item => item.get('_id') == action.payload);
-      return state.setIn([key, 'isLoading'], false);
+    case SET_STATUS: {
+      let key = state.findLastKey(item => item.get('_id') == action.payload.id);
+      return state.setIn([key, 'status'], action.payload.status);
     }
     case SET_FILE_SRC: {
       let key = state.findLastKey(item => item.get('_id') == action.payload._id);

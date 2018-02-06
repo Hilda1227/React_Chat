@@ -18,10 +18,13 @@ module.exports = {
       try{
         socket.emit(name, payload, function (data) {
         console.log('收到emit返回数据: ',data)
-          if(data.isError) reject(data.msg);
-          resolve(data.msg);
+          if(data.isError) {
+           reject(data.msg); return;
+          }
+          else resolve(data.msg);
         });
-      }catch(err) {console.log(`socketEmit出错了~${err}`);}
+      }
+      catch(err) {console.log(`socketEmit出错了~${err}`);}
     })
   }
 }

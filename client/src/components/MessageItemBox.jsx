@@ -28,7 +28,6 @@ class MessageItemBox extends Component{
       default:
         message = null;
     }
-    let loading = (<div className = 'isLoading'></div>);
     return (
       <div className = { `room-msg-item room-msg-item${ isSelf ? '-self' : '-other' }`  }>
         <div style = {{backgroundImage: `url(${avatar})`}} className = 'avatar'></div>
@@ -37,7 +36,14 @@ class MessageItemBox extends Component{
             <span className = 'sender'> { sender } </span> 
             <time> { formatDate(createAt) } </time>
           </div>
-          <div className = 'message'>{ this.props.isLoading && loading } { message }</div>                      
+          <div className = 'message'>
+            {
+              this.props.status === 'pending'
+              ? <div className = 'isLoading'></div>
+              : (this.props.status === 'failed' && <div className = 'failed'></div>)
+            } 
+            { message }
+          </div>                      
         </div>
       </div>
     )

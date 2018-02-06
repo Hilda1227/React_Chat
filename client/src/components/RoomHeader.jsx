@@ -44,13 +44,13 @@ class RoomHeader extends Component {
           <span className = 'nickname'>{ chatting.get('to') }</span>
           
           <div className = 'target'>
-            <span className = 'members' onClick = { () => selectRightPanel('GroupMembers') } ></span>
+            {type === 'group' && <span className = 'members' onClick = { () => selectRightPanel('GroupMembers') } ></span>}
             <IconMenu iconClassName = 'icon-menu-2'size = { 16 } >
               {
                 chatting.get('type') === 'private'
                 ? (<ul className = 'menu-list'>
                     <li className = 'list-item' onClick = { () => selectRightPanel('UserProfile') }>用户信息</li>
-                    <li className = 'list-item' onClick = { () => delChatting(_id) }>删除对话</li>
+                    <li className = 'list-item' onClick = { () => delChatting(_id) }>关闭对话</li>
                   </ul>)
                 : (<ul className = 'menu-list'>
                     <li className = 'list-item' onClick = { () => selectRightPanel('GroupProfile') }>群组信息</li>

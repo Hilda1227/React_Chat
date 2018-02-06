@@ -37,7 +37,11 @@ const userSchema = mongoose.Schema({
   place: {
     type: String,
     default: '火星'
-  }
+  },
+  shield: [{
+    type: Schema.Types.ObjectId,
+    ref: 'user'
+  }]
 });
 
 module.exports = mongoose.model('user', userSchema);

@@ -5,7 +5,9 @@ import {
   CLOSE_CHATTING
 } from '../constants/chatting'
 
-const chatting = (state = immutable.fromJS({}), action) => {
+let defaultValue = immutable.fromJS({})
+
+const chatting = (state = defaultValue, action) => {
   switch( action.type ){
 
     case SET_CHATTING: {

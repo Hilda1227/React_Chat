@@ -20,6 +20,11 @@ const groupSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'user'
   }],
+  // 禁言
+  block:[{
+    type: Schema.Types.ObjectId,
+    ref: 'user'
+  }],
   createAt: {
     type: Date,
     default: new Date()

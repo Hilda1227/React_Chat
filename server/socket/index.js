@@ -124,6 +124,26 @@ module.exports = function socket (io){
       .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} )
     })
 
+    // user_id, group_id, m_id
+    socket.on('block', (info, cb) => {
+      parsetoken(info)
+      .then(() => group.blockTalking(info, socket, cb))
+      .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} )     
+    })
+
+    // user_id, group_id, m_id
+    socket.on('relieve block', (info, cb) => {
+      parsetoken(info)
+      .then(() => group.relieveBlock(info, socket, cb))
+      .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} )     
+    });
+
+    // user_id, group_id, m_id
+    socket.on('remove member', (info, cb) => {
+      parsetoken(info)
+      .then(() => group.removeMember(info, socket, cb))
+      .catch( err => { cb({isError: true, msg: '服务器好像凌乱了'}); console.log(err)} )     
+    })
   })
 }
 

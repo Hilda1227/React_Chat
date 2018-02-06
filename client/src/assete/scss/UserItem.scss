@@ -1,0 +1,30 @@
+.user-item{     
+    height: 4.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #efefef;
+    cursor: pointer;
+    transition: 300ms;
+    .item{
+      width: 94%;
+      height: 3rem;
+      display: flex;
+      .avatar{
+        margin-right: 1.5rem;
+        margin-left: 0.2rem;
+      }
+      .info{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .nickname{
+          color: #000;
+        }
+        .other{
+          font-size: 12px;
+        }
+      }
+    }
+  }

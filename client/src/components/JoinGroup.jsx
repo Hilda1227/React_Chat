@@ -6,7 +6,7 @@ import PanelHeader from './common/PanelHeader';
 import Loading from './common/Loading';
 import { connect } from 'react-redux';
 import { socketEmit } from '../redux/actions/common.js';
-import { joinGroup } from '../redux/actions/activeList.js';
+import { joinGroup } from '../redux/actions/group.js';
 import { showAlert } from '../redux/actions/pageUI.js';
 import Avatar from './common/Avatar';
 
@@ -52,10 +52,14 @@ class JoinGroup extends Component {
   }
   joinGroup (_id) {
     this.props.joinGroup(_id)
-    .then(() => {
+    .then(data => {
       this.setState({ isLoading: false })
       this.props.close();
       this.props.showAlert('加入成功')
+    })
+    .catch(err => {
+      this.setState({ isLoading: false });
+      this.props.showAlert(err)
     })
   }
   render () {

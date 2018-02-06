@@ -36,7 +36,7 @@
       right: 0px;
       position: absolute;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
       width: 4rem;
       .members{
@@ -46,6 +46,7 @@
         background-position: center;
         background-size: cover;
         display: inline-block;
+        margin-right: 1.5rem;
       }
     } 
   }

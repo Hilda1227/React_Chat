@@ -6,7 +6,7 @@ import {
     INIT_HISTORY,
     ADD_HISTORY,
     ADD_MESSAGE_ITEM,
-    SET_HAS_SEND,
+    SET_STATUS,
     SET_FILE_SRC
 } from '../constants/message.js';
 
@@ -47,9 +47,9 @@ export const addMessageItem = (payload) =>{
   };
 }
 // 消息_id
-export const setHasSend = (payload) => {
+export const setStatus = (payload) => {
   return {
-    type: SET_HAS_SEND,
+    type: SET_STATUS,
     payload
   }
 }

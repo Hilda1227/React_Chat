@@ -9,7 +9,7 @@ import {
   fileInfo
 } from './upload';
   
-import { addMessageItem, setHasSend, setFileSrc } from '../redux/actions/message';
+import { addMessageItem, setStatus, setFileSrc } from '../redux/actions/message';
 import { updateActiveItem } from '../redux/actions/activeList';
 import { showAlert } from '../redux/actions/pageUI.js';
   
@@ -46,7 +46,7 @@ function createTextMessage (message, msgType) {
       user = store.getState().user,
       preView = {
         msgType, type: chatting.get('type'), sender: user.get('nickname'), createAt: new Date(), 
-        content: message, avatar: user.get('avatar'), isLoading: true, _id: Date.now()
+        content: message, avatar: user.get('avatar'), status: 'pending', _id: Date.now()
       }  
   dispatchAction(addMessageItem(preView));
   socketEmit('new message', {
@@ -58,7 +58,11 @@ function createTextMessage (message, msgType) {
       msgType, type: chatting.get('type'), lastWord:  message, lastWordSender: user.get('nickname'),  
       _id: chatting.get('_id'), lastWordTime: new Date(), curRoom: true
     }));
-    dispatchAction(setHasSend(preView._id));
+    dispatchAction(setStatus({ id: preView._id, status: 'success'}));
+  })
+  .catch( (err) => {
+    dispatchAction(setStatus({ id: preView._id, status: 'failed'}));
+    dispatchAction(showAlert(err));
   })
 }
 
@@ -70,7 +74,7 @@ function createImageMessage (message, msgType) {
         user = store.getState().user,
         preView = {
           msgType, type: chatting.get('type'), sender: user.get('nickname'), createAt: new Date(), 
-          content: reader.result, avatar: user.get('avatar'), isLoading: true, _id: Date.now()
+          content: reader.result, avatar: user.get('avatar'), status: 'pending', _id: Date.now()
         }
     dispatchAction(addMessageItem(preView));
     uploadFile(message)
@@ -84,7 +88,11 @@ function createImageMessage (message, msgType) {
           msgType, type: chatting.get('type'), lastWord:  message, lastWordSender: user.get('nickname'),  
           _id: chatting.get('_id'), lastWordTime: new Date(), curRoom: true
         }));
-        dispatchAction(setHasSend(preView._id));
+        dispatchAction(setStatus({ id: preView._id, status: 'success'}));
+      })
+      .catch( (err) => {
+        dispatchAction(setStatus({ id: preView._id, status: 'failed'}));
+        dispatchAction(showAlert(err));
       })
     })
   }, false);   
@@ -100,7 +108,7 @@ function createFileMessage (message, msgType) {
       info     = fileInfo(message),
       preView  = {
         msgType, type: chatting.get('type'), sender: user.get('nickname'), createAt: new Date(), 
-        content: JSON.stringify({...info, src: '#'}), avatar: user.get('avatar'), isLoading: true,
+        content: JSON.stringify({...info, src: '#'}), avatar: user.get('avatar'), status: 'pending',
         _id: Date.now()
       };
   if(!info)  return dispatchAction(showAlert('文件过大'))
@@ -118,7 +126,11 @@ function createFileMessage (message, msgType) {
         _id: chatting.get('_id'), lastWordTime: new Date(), curRoom: true
       }));
       dispatchAction(setFileSrc({ _id: preView._id, src: ret.data.src}));
-      dispatchAction(setHasSend(preView._id));
+      dispatchAction(setStatus({ id: preView._id, status: 'success'}));
+    })
+    .catch( (err) => {
+      dispatchAction(setStatus({ id: preView._id, status: 'failed'}));
+      dispatchAction(showAlert(err));
     })
   })
   .catch(err => {dispatchAction(showAlert('发送失败')); console.log(err)})
