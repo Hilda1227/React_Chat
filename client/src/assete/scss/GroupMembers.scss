@@ -32,4 +32,10 @@
       }
     }
   }
+  .blocked{
+    width: 1.4rem;
+    height: 1.4rem;
+    background: url('../img/block.png') no-repeat center;
+    background-size: cover;
+  }
 }

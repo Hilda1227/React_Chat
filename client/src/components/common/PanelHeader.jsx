@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toggleLeftPanel } from '../../redux/actions/pageUI';
-import '../../assete/scss/PanelHeader.scss'
+import '../../assete/scss/PanelHeader.scss';
 
-const PanelHeader = ({ direction = 'left', title, close, color = '#e8bbc5' }) => { 
+const PanelHeader = ({ direction = 'left', title, close, themeColor }) => { 
   return (
-    <div className = 'panel-header' style = {{ backgroundColor: color, }} >
+    <div className = 'panel-header' style = {{ backgroundColor: themeColor}} >
       <span onClick = { close } className = {`close-${direction}`}></span>
       <span>{ title }</span>
     </div>
   );
 }
 
-export default PanelHeader;
+function mapStateToProps(state) {
+  return {
+    themeColor: state.pageUI.get('themeColor')
+  };
+}
+
+export default connect(mapStateToProps)(PanelHeader);

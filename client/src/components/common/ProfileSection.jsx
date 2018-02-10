@@ -1,16 +1,23 @@
 import React from 'react'
 import '../../assete/scss/ProfileSection.scss';
+import { connect } from 'react-redux';
 
-const ProfileSection = ({ hover, title, children, color = '#37b6df' }) => {
+const ProfileSection = ({ hover, title, children, themeColor }) => {
   return (
     <div className = {`profile-section profile-section-${ hover ? 'hover' : '' }`}>
       <div className = 'profile-section-wrap'>
-        { title && (<span className = 'profile-title' style = {{ color }}>{ title }</span>) }
-        { children && <div className = 'profile-content'style = {{borderColor: color}}>{ children }</div>  }
+        { title && (<span className = 'profile-title' style = {{ color: themeColor}}>{ title }</span>) }
+        { children && <div className = 'profile-content'style = {{borderColor:  themeColor}}>{ children }</div>  }
       </div>     
     </div>
   )
   
 }
 
-export default ProfileSection;
+function mapStateToProps(state) {
+  return {
+    themeColor: state.pageUI.get('themeColor')
+  };
+}
+
+export default connect(mapStateToProps)(ProfileSection);

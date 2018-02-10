@@ -1,18 +1,20 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import AsideHeader from '../components/AsideHeader';
-import { selectLeftPanel } from '../redux/actions/pageUI';
+import { selectLeftPanel, setThemeColor} from '../redux/actions/pageUI';
 import { clearUser } from '../redux/actions/user';
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
+    themeColor: state.pageUI.get('themeColor')
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     selectLeftPanel: payload => () => dispatch(selectLeftPanel(payload)),
-    clearUser: () => dispatch(clearUser()) 
+    clearUser: () => dispatch(clearUser()),
+    setThemeColor: payload => () =>  dispatch(setThemeColor(payload))
   };
 }
 

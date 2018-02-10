@@ -37,6 +37,7 @@ class RoomFooter extends Component {
   }
   
   render () {
+    const { themeColor, toggleExpressions, toggleTools } = this.props;
     return (
       <div className = 'room-footer'>
         <div className = 'footer-wrap'>
@@ -45,11 +46,11 @@ class RoomFooter extends Component {
               ref={ (node) => this.input = node }
               onKeyDown = { (e)  => { if(e.keyCode === 13) this.sendText() } } 
             />
-            <button onClick = { () => { this.sendText() } } id = 'send'>发送</button>
+            <button onClick = { () => { this.sendText() } } id = 'send' style = {{ backgroundColor: themeColor }}>发送</button>
           </div>
           <div className = 'tool'>
-            <span  onClick = { this.props.toggleExpressions } id = 'emoji'></span>
-            <span  onClick = { this.props.toggleTools } id = 'more'></span>
+            <span  onClick = { toggleExpressions } id = 'emoji'></span>
+            <span  onClick = { toggleTools } id = 'more'></span>
           </div>
         </div>
         <div className = 'tool-panel'>

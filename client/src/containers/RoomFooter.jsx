@@ -10,6 +10,7 @@ export default connect(
     user: state.user,
     showTools: state.pageUI.getIn(['layout', 'showTools']),
     showExpressions: state.pageUI.getIn(['layout', 'showExpressions']),
+    themeColor: state.pageUI.get('themeColor')
   }),
   dispatch => ({
     toggleTools: () => dispatch(toggleTools()),

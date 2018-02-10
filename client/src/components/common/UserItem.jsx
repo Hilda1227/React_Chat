@@ -1,7 +1,7 @@
 import React from 'react';
 import Avatar from './Avatar';
 import '../../assete/scss/UserItem.scss';
-const UserItem = ({avatar, nickname, onlineState, onContextMenu, onClick}) => { 
+const UserItem = ({avatar, nickname, onlineState, onContextMenu, onClick, children}) => { 
   return (
     <div className = 'user-item'
       onClick = { onClick || null }
@@ -15,6 +15,7 @@ const UserItem = ({avatar, nickname, onlineState, onContextMenu, onClick}) => {
           <span className = 'nickname'>{ nickname }</span>
           <p className = 'other'>{ '[' + (onlineState ? '在线' : '离开') + ']' }</p>
         </div>
+        <div className = 'slot'>{ children }</div>
       </div>
     </div>
   )

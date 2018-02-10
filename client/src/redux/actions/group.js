@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
 import { socketEmit } from './common.js';
 import { setChatting, closeChatting } from './chatting.js';
-import { addActiveItem } from './activeList.js';
+import { addActiveItem, removeActiveItem } from './activeList.js';
 import { showAlert } from './pageUI.js';
 
 export const joinGroup = (payload) => (dispatch) => {

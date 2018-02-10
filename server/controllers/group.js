@@ -36,7 +36,10 @@ module.exports = {
     let group = await Group.findOne({_id: info._id});
     if(group) {
       user = await User.findOne({ _id: info.user_id });
-      if(user && user.groups.indexOf(group._id) !== -1){
+      if(user && 
+        user.groups.indexOf(group._id) !== -1 ||
+        group.members.indexOf(info.user_id) !== -1
+      ){
         return cb({ isError: true, msg: '您已在该房间'});
       }
       else {
@@ -106,8 +109,8 @@ module.exports = {
     let group = await Group.findOne({_id: info.group_id});
     
     let promise = group.members.map( async item => {
-      const user = await User.findOne({ _id: item })
-      return user;
+      const user = await User.findOne({ _id: item });
+      return {...user._doc, blocked: group.block.indexOf(user._id) !== -1 };
     })
     Promise.all(promise).then(members => {
       return cb({isError: false, msg: {members}});

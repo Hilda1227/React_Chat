@@ -12,6 +12,7 @@ import {
   HIDDEN_ALERT,
   TOGGLE_TOOLS,
   TOGGLE_EXPRESSIONS,
+  SET_THEMECOLOR
 } from '../constants/pageUI.js'
 
 const init = Immutable.fromJS({
@@ -34,7 +35,8 @@ const init = Immutable.fromJS({
     sex: '',    
     createAt: '',
     place: ''
-  }
+  },
+  themeColor: localStorage.getItem('themeColor') || '#7dcfcb'
 });
 
 const pageUI = (state = init, action) => {
@@ -86,6 +88,10 @@ const pageUI = (state = init, action) => {
     }
     case HIDDEN_ALERT: {
       return state.set('showAlert', false);
+    }
+    case SET_THEMECOLOR: {
+      localStorage.setItem('themeColor', action.payload);
+      return state.set('themeColor', action.payload)
     }
     default: {
       return state;

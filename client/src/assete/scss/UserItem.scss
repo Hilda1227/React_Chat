@@ -6,7 +6,7 @@
     align-items: center;
     border-bottom: 1px solid #efefef;
     cursor: pointer;
-    transition: 300ms;
+    transition: 300ms;   
     .item{
       width: 94%;
       height: 3rem;
@@ -25,6 +25,15 @@
         .other{
           font-size: 12px;
         }
+      }
+      .slot{
+        position: absolute;
+        right: 0;
+        height: 3rem;;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 1rem; 
       }
     }
   }

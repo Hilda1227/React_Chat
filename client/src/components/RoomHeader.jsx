@@ -30,11 +30,11 @@ class RoomHeader extends Component {
   }
 
   render () {
-    const {chatting, delChatting, quitGroup, selectRightPanel} = this.props;
+    const {chatting, delChatting, quitGroup, selectRightPanel, themeColor} = this.props;
     const { type, _id } = this.props.chatting.toJS();
     let list;    
     return (      
-      <div className = 'room-header'>
+      <div className = 'room-header' style = {{background: themeColor}}>
         <div className = 'room-header-wrap'>        
           {
             this.state.showMenu 

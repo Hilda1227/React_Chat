@@ -12,7 +12,9 @@ import { formatCompleteDate } from '../util/date.js';
 const HOCComponent = function (WrappedComponent) {
   return class extends Component {
     render () {
-      return <WrappedComponent {...this.props}/>
+      return <WrappedComponent {...this.props}>
+      { this.props.blocked && <span className = 'blocked'></span> }
+      </WrappedComponent>;
     }
   }
 }
@@ -50,14 +52,17 @@ class GroupMembers extends Component {
     let containX = this.members.clientWidth,
         containY = this.members.clientHeight;
     return (e) => {
+      e.preventDefault();  // 阻止默认事件
+      if (document.all) window.event.returnValue = false;// for IE  
+  
       if(this.state.showMenu){
         this.setState({showMenu: false})
       }
       else{
-        let X = e.pageX - actualLeft, 
+        let X = Math.abs(e.pageX - actualLeft), 
             Y = e.pageY - this.members.offsetTop,  
             dX, dY;
-        if(containX / 2 > X ) dX = 'left'; else { dX = 'right'; X = containX - X};  
+        if(containX / 2 > X ) dX = 'left'; else { dX = 'right'; X = Math.abs(containX - X)};  
         if(containY / 2 > Y ) dY = 'top'; else { dY = 'bottom'; Y = containY - Y};      
         let style = {
           [dX]: X + 'px',
@@ -69,7 +74,7 @@ class GroupMembers extends Component {
   }
   
   render () {
-    const { privateChat, block, removeMember, user_id, chatting } = this.props;
+    const { privateChat, block, removeMember, user_id, chatting, relieveBlock } = this.props;
     let members = this.state.members.map( item => {
       return (
         <MItem 
@@ -90,27 +95,34 @@ class GroupMembers extends Component {
         <div  ref = {node => this.members = node}  className = 'results-wrap'>
           { members }
           {
-            this.state.showMenu
-            && (
-              this.state.isAdmin
-              ? (
-                <ul className = 'menu-list'  
-                  style = { this.state.style }
-                  onClick = { this.toggleMenu() }
-                >
-                  <li className = 'list-item' onClick = { () => privateChat({ ...this.state.item, type: 'private' }) }>添加私聊</li>             
-                  <li className = 'list-item' onClick = { () => block({ user_id, group_id: chatting._id, m_id: this.state.item._id }) }>禁言此人</li>
-                  <li className = 'list-item' onClick = { () => removeMember({ user_id, group_id: chatting._id, m_id: this.state.item._id }) }>移出该群</li>
-                </ul>
-              )
-              : (
-                <ul className = 'menu-list' 
-                  style = { this.state.style }
-                  onClick = { this.toggleMenu() }
-                >
-                  <li className = 'list-item' onClick = { () => privateChat({ ...this.state.item, type: 'private' }) }>添加私聊</li>
-                </ul>
-              )
+            this.state.showMenu  && 
+            (
+              <ul className = 'menu-list'  
+                style = { this.state.style }
+                onClick = { this.toggleMenu() }
+              >
+                <li className = 'list-item' 
+                  onClick = { () => privateChat({ ...this.state.item, type: 'private' }) }>添加私聊
+                  </li>             
+                {
+                  this.state.isAdmin && 
+                  (
+                    this.state.item.blocked 
+                    ? <li className = 'list-item' 
+                      onClick = { () => relieveBlock({ user_id, group_id: chatting._id, m_id: this.state.item._id }) }>解除禁言
+                      </li>
+                    : <li className = 'list-item' 
+                      onClick = { () => block({ user_id, group_id: chatting._id, m_id: this.state.item._id }) }>禁言此人
+                      </li>                    
+                  )
+                }
+                {
+                  this.state.isAdmin && 
+                  <li className = 'list-item' 
+                    onClick = { () => removeMember({ user_id, group_id: chatting._id, m_id: this.state.item._id }) }>移出该群
+                  </li>
+                }
+              </ul>
             )
           }
         </div>

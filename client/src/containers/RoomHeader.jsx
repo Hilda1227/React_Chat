@@ -11,6 +11,7 @@ import { selectRightPanel } from '../redux/actions/pageUI';
 function mapStateToProps(state) {
   return {
     chatting: state.chatting,
+    themeColor: state.pageUI.get('themeColor')
   };
 }
 

@@ -4,7 +4,7 @@ import GroupMembers from '../components/GroupMembers';
 import { addActiveItem } from '../redux/actions/activeList.js';
 import { toggleRightPanel } from '../redux/actions/pageUI.js';
 import { setChatting } from '../redux/actions/chatting.js';
-import { block, removeMember } from '../redux/actions/group.js';
+import { block, relieveBlock, removeMember } from '../redux/actions/group.js';
 function mapStateToProps (state) {
   return {
     chatting: state.chatting.toJS(),
@@ -19,7 +19,8 @@ function mapDispatchToProps (dispatch, ownProps) {
       dispatch(setChatting({ ...payload, to: payload.nickname }))
       dispatch(toggleRightPanel());
     },
-    block: (payload) =>  dispatch(block(payload)),
+    block: (payload) => dispatch(block(payload)),
+    relieveBlock: (payload) => dispatch(relieveBlock(payload)),
     removeMember: (payload) => dispatch(removeMember(payload))
   };
 }

@@ -4,7 +4,7 @@
     width: 100%;
     background-color: $mainColor;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     flex-shrink: 0;
     .avatar{
@@ -13,24 +13,92 @@
         border-radius: 50%;
         margin: auto 1rem;
         cursor: pointer;
+        position: absolute;
+        left: 0;
         
     }
     .icon-menu-wrap{
         width: 1.2rem;
         height: 1.2rem;
         float: right;
-        margin-right: 2rem;
+        margin-right: 1rem;
         cursor: pointer;
         background-size: 100% !important;
+        z-index: 8;
+    }
+    .skin{
+        width: 1.4rem;
+        height: 1.4rem;
+        float: right;
+        margin-right: 1rem;
+        cursor: pointer;
+        background: url('../img/skin.png') center no-repeat;
+        background-size: cover;
+        z-index: 8;
     }
 }
-.menu-list-hidden{
-    animation: hiddenList 300ms 1 forwards;
-    transform-origin: 0 0;
-}
-.menu-list-show{
-    animation: showList 300ms 1 forwards;
-    transform-origin: 0 0;
+.skin-panel{
+    width: 17rem;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.117647);
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    z-index: 200;
+    position: relative;    
+    h4{
+        padding-left: 1rem;
+        margin-bottom: 0.7rem;
+    }
+    .close{
+        width: 0.7rem;
+        height: 0.7rem;
+        display: inline-block;
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+        background: url('../img/close2.png') center no-repeat;
+        background-size: cover;
+    }
+    .skins{
+        width: 100%;
+        height: 6rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: flex-start;        
+        li{
+          flex-shrink: 0;
+          width: 2.8rem;
+          height: 2.8rem; 
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center; 
+          margin: 0 0.2rem;
+          box-sizing: border-box;
+          border: 5px solid #fff;
+          z-index: 21;
+          transition: 300ms;
+          &:hover{
+            border-width: 0;
+          }
+        }
+        li.checked{
+        &::after{
+            content: ' ';
+            height: 1rem;
+            width:0.5rem;
+            transform: rotateZ(40deg);
+            display: inline-block;
+            border-bottom: 4px solid #fff;
+            border-right: 4px solid #fff;           
+            border-radius: 4px;
+            margin-bottom: 0.4rem;
+            }
+        }
+        
+    }
 }
 
 

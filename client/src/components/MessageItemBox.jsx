@@ -36,7 +36,7 @@ class MessageItemBox extends Component{
             <span className = 'sender'> { sender } </span> 
             <time> { formatDate(createAt) } </time>
           </div>
-          <div className = 'message'>
+          <div className = 'message' style = {{ backgroundColor: this.props.themeColor }}>
             {
               this.props.status === 'pending'
               ? <div className = 'isLoading'></div>

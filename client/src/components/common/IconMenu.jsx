@@ -21,7 +21,7 @@ class IconMenu extends Component {
           winX  = window.innerWidth, 
           winY  = window.innerHeight,
           width = this.props.width || 160,
-          size  = this.props.size || 20,
+          size  = this.props.size || 15,
           distence = 0,
           pX = distence + size,
           pY = pX,
@@ -37,7 +37,7 @@ class IconMenu extends Component {
   }
   render () {
     const { iconClassName, children } = this.props;
-    let size = this.props.size || 20 + 'px';
+    let size = this.props.size || 16 + 'px';
     return (
       <div  onClick = { this.toggleShow }  
         className = 'icon-menu' 

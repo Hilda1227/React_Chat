@@ -13,6 +13,7 @@ import {
     HIDDEN_ALERT,
     TOGGLE_TOOLS,
     TOGGLE_EXPRESSIONS,
+    SET_THEMECOLOR
 } from '../constants/pageUI.js';
 
 // true  or false
@@ -79,5 +80,11 @@ export const toggleTools = () => {
 export const toggleExpressions = () => {
   return {
     type: TOGGLE_EXPRESSIONS,
+  }
+}
+export const setThemeColor = (payload) => {
+  return {
+    type: SET_THEMECOLOR,
+    payload
   }
 }
