@@ -3,14 +3,15 @@ import TextMessageItem from './TextMessageItem';
 import FileMessageItem from './FileMessageItem';
 import ImageMessageItem from './ImageMessageItem';
 import '../assete/scss/MessageItemBox.scss';
-import { formatDate } from '../util/date.js'
+import { formatDate } from '../util/date.js';
+import { connect } from 'react-redux';
 
 class MessageItemBox extends Component{
   constructor (props) {
     super(props);
   }
   render () {
-    const {sender, avatar, content, createAt, isSelf, msgType} = this.props;
+    const {sender, avatar, content, createAt, isSelf, msgType, themeColor} = this.props;
     let message;
     switch(msgType){
       case 'text': {
@@ -27,6 +28,11 @@ class MessageItemBox extends Component{
       }
       default:
         message = null;
+    };
+    let style = {
+      background: isSelf ? themeColor : '#fff',
+      color: isSelf ? '#fff' : ' #000 ',
+      borderColor: isSelf ? themeColor : '#fff',
     }
     return (
       <div className = { `room-msg-item room-msg-item${ isSelf ? '-self' : '-other' }`  }>
@@ -36,13 +42,13 @@ class MessageItemBox extends Component{
             <span className = 'sender'> { sender } </span> 
             <time> { formatDate(createAt) } </time>
           </div>
-          <div className = 'message' style = {{ backgroundColor: this.props.themeColor }}>
+          <div className = 'message'>
             {
               this.props.status === 'pending'
               ? <div className = 'isLoading'></div>
               : (this.props.status === 'failed' && <div className = 'failed'></div>)
             } 
-            { message }
+            <div className = 'content-wrap' style = { style }>{ message }</div>
           </div>                      
         </div>
       </div>
@@ -50,5 +56,12 @@ class MessageItemBox extends Component{
   }
 }
 
+function mapStateToProps (state) {
+  return {
+    themeColor: state.pageUI.get('themeColor')
+  };
+}
 
-export default MessageItemBox;
+export default connect(
+    mapStateToProps
+)(MessageItemBox);

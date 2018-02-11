@@ -10,7 +10,7 @@ import {
 } from './upload';
   
 import { addMessageItem, setStatus, setFileSrc } from '../redux/actions/message';
-import { updateActiveItem } from '../redux/actions/activeList';
+import { updateActiveItem, addActiveItem } from '../redux/actions/activeList';
 import { showAlert } from '../redux/actions/pageUI.js';
   
 export function handleMessage (message) {
@@ -26,8 +26,11 @@ export function handleMessage (message) {
     _id: message.from,
     lastWordTime: message.createAt,
     msgType: message.msgType,
+    avatar: message.avatar,
+    nickname: message.sender,
     curRoom,
   }
+  dispatchAction(addActiveItem(data));
   dispatchAction(updateActiveItem(data));
 }
 

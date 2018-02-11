@@ -18,7 +18,7 @@ module.exports = {
     if(type === 'private'){
       let target = await User.findOne({ _id: toId }).populate('socket','socket_id'); 
       // 如果已被对方屏蔽， 则返回
-      if(Array.from(target.shield).indexOf(user_id)) return cb({ isError: false, msg: "您已被对方屏蔽" });        
+      // if(Array.from(target.shield).indexOf(user_id)) return cb({ isError: false, msg: "您已被对方屏蔽" });        
       let newMsg = await new PrivateMsg({from: from._id, to: target._id, content, msgType, createAt: Date.now()});      
       // 如果对方在线
       if(target.onlineState) {

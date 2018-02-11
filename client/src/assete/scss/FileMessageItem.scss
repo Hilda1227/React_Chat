@@ -1,6 +1,6 @@
 @import './variable.scss';
 .file-content{
-    background-color: #fff !important;
+    background: #fff;
     &::after{
         border-top-color: #fff !important;
         border-left-color: #fff !important;

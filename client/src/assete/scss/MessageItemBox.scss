@@ -1,9 +1,7 @@
 @import './variable.scss';
 
-$msgBgColor: #fff;
-$msgColor: #000;
 $msgBgColorSelf: $mainColor;
-$msgColorSelf: #fff;
+
 $otherColor: #838383;
 
 .room-msg-item{
@@ -51,15 +49,19 @@ $otherColor: #838383;
             background-size: cover;
             margin: 0.5rem;
         }
-        .content{
+        .content-wrap{
             order: 2;
             border-radius: 8px;
-            background: $msgBgColor;
-            color: $msgColor;
             position: relative;
             padding:  0.6rem 0.8rem;
             box-shadow: 0 1px 1px #ccc;
             max-width: 100%;
+            min-height: 1.4rem;
+            .content{          
+                background: inherit;
+                color: inherit;
+                border-color: inherit;
+            }
         }
       }      
   } 
@@ -69,7 +71,7 @@ $otherColor: #838383;
 }
  
 .room-msg-item-other .content{
-    @include triangle-msg (0.65rem, 100deg, left, 0.5rem, $msgBgColor)
+    @include triangle-msg (0.65rem, 100deg, left, 0.5rem, inherit)
 }
 .room-msg-item-self{ 
     justify-content: flex-end;
@@ -90,11 +92,9 @@ $otherColor: #838383;
                 order: 1;
             }
         } 
-        .message{
-            .content{ 
-                background-color: $msgBgColorSelf;
-                color: $msgColorSelf;      
-                @include triangle-msg(0.7rem, -10deg, right, 0.5rem, $msgBgColorSelf);
+        .message{            
+            .content{     
+                @include triangle-msg(0.7rem, -10deg, right, 0.5rem,inherit);
             }
         }
           
