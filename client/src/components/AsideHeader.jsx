@@ -35,7 +35,8 @@ class AsideHeader extends Component {
   }
   render () {   
     const { selectLeftPanel, themeColor, setThemeColor } = this.props;
-    this.colors = ['#e8bbc5', '#fb6b8f', '#abcbf6', '#19b9eb', '#a0dcd2', '#cfbaaa', '#bdcddf', '#aaa', '#77dcc0'];
+    this.colors = ['#e8bbc5', '#fb6b8f', '#cfbaaa', '#bdcddf', '#aaa', '#77dcc0',
+    '#fc9d83', '#c4e098',  '#9fd2ec',];
     return (
       <div className = 'aside-header' style = {{background: themeColor}}>
         <div className = 'avatar' style = {{backgroundImage: `url(${this.props.user.get('avatar')})`}}></div>

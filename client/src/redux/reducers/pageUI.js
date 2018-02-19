@@ -36,7 +36,7 @@ const init = Immutable.fromJS({
     createAt: '',
     place: ''
   },
-  themeColor: localStorage.getItem('themeColor') || '#7dcfcb'
+  themeColor: localStorage.getItem('themeColor') || '#bdcddf'
 });
 
 const pageUI = (state = init, action) => {

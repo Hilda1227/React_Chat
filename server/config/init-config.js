@@ -1,4 +1,4 @@
-const HOST = 'localhost';
+const HOST = '123.206.31.196';
 const PORT = '3004';
 
 module.exports = {

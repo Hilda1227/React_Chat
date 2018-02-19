@@ -19,7 +19,6 @@ const activeList = (state = immutable.fromJS([]), action) => {
   switch( action.type ){
 
     case ADD_ACTIVE_ITEM: {
-      console.log('dddddddddddddddddddddddd')
       if(findItem(state, action.payload.get('_id')) == undefined){
         return state.push(action.payload);
       }

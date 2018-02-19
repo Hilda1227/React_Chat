@@ -11,4 +11,5 @@ export default {
   server,
   EMOJI_URL: `http://${server.HOST}:${server.PORT}/chat/emoji/`,
   DEFAULT_GROUP_URL: `http://${server.HOST}:${server.PORT}/chat/img/default_group_avatar.svg`,
+  DEFAULT_USER_AVATAR: `http://${server.HOST}:${server.PORT}/chat/img/default_user_avatar.jpg`
 }

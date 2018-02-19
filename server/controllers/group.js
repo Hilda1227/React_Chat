@@ -69,8 +69,8 @@ module.exports = {
         index = user.groups.indexOf(group._id);
     if(index !== -1){
       user.groups.splice(index, 1);
-      let members = group.members.filter(item => item !== user._id );
-      group.members = members;
+      index = group.members.indexOf(user._id);
+      (index !== -1) && group.members.splice(index, 1);
       socket.leave(info.group_id);
       await user.save(); await group.save();
       cb({ isError: false, msg: '已成功退出'});
