@@ -5,20 +5,19 @@ import {
   CLEAR_USER
 } from '../constants/user.js'
 
-const init = Immutable.fromJS({});
+const init = Immutable.fromJS({})
 
 const user = (state = init, action) => {
-  
-  switch( action.type ){
+  switch (action.type) {
     case SET_USER: {
-      return action.payload;
+      return action.payload
     }
-    case CLEAR_USER: 
-      return init;
+    case CLEAR_USER:
+      return init
     default: {
-      return state;
+      return state
     }
   }
 }
 
-export default user;
+export default user

@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const privateMsgSchema = mongoose.Schema({
   from: {
@@ -15,8 +15,7 @@ const privateMsgSchema = mongoose.Schema({
     type: Number,
     default: Date.now()
   },
-  msgType: String,
-});
+  msgType: String
+})
 
-module.exports = mongoose.model('privateMsg', privateMsgSchema);
-
+module.exports = mongoose.model('privateMsg', privateMsgSchema)

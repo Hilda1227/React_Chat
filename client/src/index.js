@@ -1,86 +1,82 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware  } from 'redux';
-import { HashRouter, Route, withRouter, Switch, Redirect } from 'react-router-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import { HashRouter, Route, withRouter, Switch, Redirect } from 'react-router-dom'
 
-import store from './redux/store';
+import store from './redux/store'
 import {
-  socket, 
-  dispatchAction, 
+  socket,
+  dispatchAction,
   socketEmit
-} from './redux/actions/common' ;
+} from './redux/actions/common'
 
-import { handleMessage } from './util/message.js';
+import { handleMessage } from './util/message.js'
 
 import {
-  setOnline, 
+  setOnline,
   initRoomList
-} from './redux/actions/activeList';
+} from './redux/actions/activeList'
 
-import { setUser } from './redux/actions/user';
+import { setUser } from './redux/actions/user'
 
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
-import Index from './pages/Index';
-import Alert from './components/common/Alert';
+import Login from './pages/Login'
+import SignUp from './pages/SignUp'
+import Index from './pages/Index'
+import Alert from './components/common/Alert'
 
-import './assete/scss/common.scss';
-import './assete/scss/CSSTransition.scss';
+import './assete/scss/common.scss'
+import './assete/scss/CSSTransition.scss'
 
 socket.on('new message', data => {
-  handleMessage(data);
+  handleMessage(data)
 })
 
 socket.on('offline', data => {
-  dispatchAction(setOnline({ ...data, state: false}));
+  dispatchAction(setOnline({ ...data, state: false }))
 })
 
 socket.on('online', data => {
-  dispatchAction(setOnline({ ...data, state: true}));
+  dispatchAction(setOnline({ ...data, state: true }))
 })
 
 const handleInit = token => {
-  socketEmit('auto login', {token})
-  .then( data => {
-    dispatchAction(setUser( data.user ));
-    dispatchAction(initRoomList(data.user._id));
-  })
-  .catch( err => {HashRouter.push('/login'); console.log(err)})
+  socketEmit('auto login', { token })
+    .then(data => {
+      dispatchAction(setUser(data.user))
+      dispatchAction(initRoomList(data.user._id))
+    })
+    .catch(err => { HashRouter.push('/login'); console.log(err) })
 }
 
 const handleEnter = () => {
-  
-  const token = localStorage.getItem('token'),
-        user_id = store.getState().user.get('_id');
-        console.log(token)
-  if(token){   
-    if(!user_id) handleInit(token);
-    return true;
-  }
-  else return false;
+  const token = localStorage.getItem('token')
+  const user_id = store.getState().user.get('_id')
+  console.log(token)
+  if (token) {
+    if (!user_id) handleInit(token)
+    return true
+  } else return false
 }
 
-
-
-
 ReactDOM.render(
-    <Provider store={ store }>
-      <HashRouter basename="/">
-        <div className = 'App'>
-          <Alert/>
-          {<Switch>
-            <Route path = '/login' component = { Login }/>
-            <Route path = '/signUp' component = { SignUp }/>
-            <Route path =  '/'  render = {props => (
+  <Provider store={store}>
+    <HashRouter basename='/'>
+      <div className='App'>
+        <Alert />
+        <Switch>
+          <Route path='/login' component={Login} />
+          <Route path='/signUp' component={SignUp} />
+          <Route
+            path='/' render={props => (
               handleEnter()
-                ? (<Index {...props}/>)
-                : (<Redirect to={{ pathname: '/login',state: { from: props.location }}}/>)
+                ? (<Index {...props} />)
+                : (<Redirect to={{ pathname: '/login', state: { from: props.location } }} />)
             )}
-            /> 
-          </Switch>}
-        </div>    
-      </HashRouter> 
-    </Provider>,
-    document.getElementById('root')
-);
+          />
+        </Switch>
+      </div>
+    </HashRouter>
+  </Provider>,
+  document.getElementById('root')
+)

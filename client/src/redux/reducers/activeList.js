@@ -1,4 +1,4 @@
-import immutable from 'immutable';
+import immutable from 'immutable'
 import {
   INIT_GROUP_LIST,
   ADD_ACTIVE_ITEM,
@@ -6,72 +6,71 @@ import {
   UPDATE_ACTIVE_ITEM,
   SET_ACTIVE_ITEM,
   CLEAR_UNREAD,
-  SET_ONLINE,
-} from '../constants/activeList';
+  SET_ONLINE
+} from '../constants/activeList'
 
-var findItem = (state, id) => {
+const findItem = (state, id) => {
   return state.findKey((value) => (
     value.get('_id') === id
-  ));
+  ))
 }
 
 const activeList = (state = immutable.fromJS([]), action) => {
-  switch( action.type ){
-
+  switch (action.type) {
     case ADD_ACTIVE_ITEM: {
-      if(findItem(state, action.payload.get('_id')) == undefined){
-        return state.push(action.payload);
+      if (findItem(state, action.payload.get('_id')) == undefined) {
+        return state.push(action.payload)
       }
     }
 
-    case REMOVE_ACTIVE_ITEM: {   
-      let index = findItem(state, action.payload);     
-      return state.delete(index);
+    case REMOVE_ACTIVE_ITEM: {
+      const index = findItem(state, action.payload)
+      return state.delete(index)
     }
 
-    case UPDATE_ACTIVE_ITEM: {      
-      let index = findItem(state, action.payload.get('_id'));  
-      if(typeof index !== 'undefined'){  
-        if(!action.payload.get('curRoom')){
-          let unread = state.get(index).get('unread') || 0;
-          let newactive = state.get(index).merge(action.payload.set('unread', unread+1));
-          return state.set(index, newactive);
-        }   
-        return state.set(index, state.get(index).merge(action.payload));
+    case UPDATE_ACTIVE_ITEM: {
+      const index = findItem(state, action.payload.get('_id'))
+      if (typeof index !== 'undefined') {
+        if (!action.payload.get('curRoom')) {
+          const unread = state.get(index).get('unread') || 0
+          const newactive = state.get(index).merge(action.payload.set('unread', unread + 1))
+          return state.set(index, newactive)
+        }
+        return state.set(index, state.get(index).merge(action.payload))
       }
-      return state;
+      return state
     };
 
-    case SET_ACTIVE_ITEM: {      
-      let index = findItem(state, action.payload.get('_id'));  
-      if(typeof index !== 'undefined'){          
-        return state.set(index, state.get(index).merge(action.payload));
+    case SET_ACTIVE_ITEM: {
+      const index = findItem(state, action.payload.get('_id'))
+      if (typeof index !== 'undefined') {
+        return state.set(index, state.get(index).merge(action.payload))
       }
-      return state;
+      return state
     };
 
     case CLEAR_UNREAD: {
-      let index = findItem(state, action.payload.get('_id')); 
-      let newactive = state.get(index).set('unread', 0);
-      return state.set(index, newactive);
+      const index = findItem(state, action.payload.get('_id'))
+      const newactive = state.get(index).set('unread', 0)
+      return state.set(index, newactive)
     };
 
     case SET_ONLINE: {
-      let index = findItem(state, action.payload.get('_id'));
-      if(typeof index != 'undefined'){
-        let newactive = state.get(index).set('onlineState', action.payload.get('state'));
-        return state.set(index, newactive);
+      const index = findItem(state, action.payload.get('_id'))
+      if (typeof index !== 'undefined') {
+        const newactive = state.get(index).set('onlineState', action.payload.get('state'))
+        return state.set(index, newactive)
       }
-      return state;
+      return state
     };
 
     case INIT_GROUP_LIST: {
-      return action.payload;
+      return action.payload
     };
     default: {
-      return state;
+      return state
     }
   }
 }
 
-  export default activeList;
+export default activeList

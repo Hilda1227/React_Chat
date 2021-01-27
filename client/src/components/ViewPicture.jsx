@@ -4,10 +4,8 @@ import React from 'react'
 
 const ViewPicture = () => {
   return (
-    <div className='ViewPicture'>      
-      
-    </div>
-  );
+    <div className='ViewPicture' />
+  )
 }
 
-export default ViewPicture;
+export default ViewPicture
