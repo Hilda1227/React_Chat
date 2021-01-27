@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const socketSchema = mongoose.Schema({
   socket_id: String,
@@ -8,10 +8,9 @@ const socketSchema = mongoose.Schema({
     ref: 'user'
   },
   createdAt: {
-    type: Date, 
+    type: Date,
     default: new Date()
-  },
-});
+  }
+})
 
-module.exports = mongoose.model('socket', socketSchema);
-
+module.exports = mongoose.model('socket', socketSchema)

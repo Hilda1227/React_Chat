@@ -1,3 +1,3 @@
 module.exports = {
-    SIGN_KEY: 'Hilda1227'
+  SIGN_KEY: 'Hilda1227'
 }
