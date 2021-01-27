@@ -29,7 +29,7 @@
     "build": "webpack --config webpack-prod-config.js -p"
   },
   "devDependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.21.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
