@@ -1,5 +1,5 @@
-const HOST = '123.206.31.196';
-const PORT = '3004';
+const HOST = '123.206.31.196'
+const PORT = '3004'
 
 module.exports = {
   AUTHER: 'hilda',
@@ -12,5 +12,5 @@ module.exports = {
   BUCKET: 'chat-room',
   QINIU_PATH: 'http://ozb78dx0y.bkt.clouddn.com/',
   DEFAULT_GROUP_AVATAR: `http://${HOST}:${PORT}/chat/img/default_group_avatar.svg`,
-  DEFAULT_USER_AVATAR: `http://${HOST}:${PORT}/chat/img/default_user_avatar.jpg`,
+  DEFAULT_USER_AVATAR: `http://${HOST}:${PORT}/chat/img/default_user_avatar.jpg`
 }

@@ -7,34 +7,33 @@ import {
   SET_FILE_SRC
 } from '../constants/message.js'
 
-const init = Immutable.fromJS([]);
+const init = Immutable.fromJS([])
 
 const message = (state = init, action) => {
-  switch( action.type ){
-
+  switch (action.type) {
     case INIT_HISTORY: {
-      return action.payload;
+      return action.payload
     }
     case ADD_HISTORY: {
-      return action.payload.concat(state);
+      return action.payload.concat(state)
     }
     case ADD_MESSAGE_ITEM: {
-      return state.push(action.payload);
+      return state.push(action.payload)
     }
     case SET_STATUS: {
-      let key = state.findLastKey(item => item.get('_id') == action.payload.id);
-      return state.setIn([key, 'status'], action.payload.status);
+      const key = state.findLastKey(item => item.get('_id') == action.payload.id)
+      return state.setIn([key, 'status'], action.payload.status)
     }
     case SET_FILE_SRC: {
-      let key = state.findLastKey(item => item.get('_id') == action.payload._id);
-      let content = JSON.parse(state.getIn([key, 'content']));
-      content.src = action.payload.src;
-      return state.setIn([key, 'content'], JSON.stringify(content));
+      const key = state.findLastKey(item => item.get('_id') == action.payload._id)
+      const content = JSON.parse(state.getIn([key, 'content']))
+      content.src = action.payload.src
+      return state.setIn([key, 'content'], JSON.stringify(content))
     }
     default: {
-      return state;
+      return state
     }
   }
 }
 
-export default message;
+export default message

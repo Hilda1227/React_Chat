@@ -6,37 +6,36 @@ const store = {
     nickname: 'xxx',
     avatar: 'xxx',
     sex: 'xxx',
-    _id: '',
+    _id: ''
   },
   activeList: [{
     nickname: '',
     avatar: '',
     lastWord: '',
-    lastWordTime: '', 
+    lastWordTime: '',
     lastWordSender: '',
     unread: Number,
     type: '', // private or group
     _id: ''// 群组_id或私聊对像的_id
   }],
   messages: [{
-    from: 'xxx', //当前聊天对象_id或者当前群组的_id
+    from: 'xxx', // 当前聊天对象_id或者当前群组的_id
     sender: '', // 发送者昵称
     avatar: 'xxx',
     content: '',
     createAt: 'xxx',
     type: '', // private or groups
-    msgType: '', // text or file 
+    msgType: '', // text or file
     _id: ''// 消息本身的id
   }],
   chatting: {
     to: 'xxx',
     type: '',
     avatar: '',
-    _id: '',
+    _id: ''
   },
   pageUI: {
-    isLoading: Boolean,
-    
+    isLoading: Boolean
+
   }
 }
-

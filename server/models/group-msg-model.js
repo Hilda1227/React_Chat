@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const groupMsgSchema = mongoose.Schema({
   to: {
@@ -15,8 +15,7 @@ const groupMsgSchema = mongoose.Schema({
     type: Number,
     default: Date.now()
   },
-  msgType: String,
-});
+  msgType: String
+})
 
-module.exports = mongoose.model('groupMsg', groupMsgSchema);
-
+module.exports = mongoose.model('groupMsg', groupMsgSchema)

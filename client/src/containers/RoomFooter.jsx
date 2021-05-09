@@ -1,8 +1,8 @@
-import { Component } from 'react';
-import { connect } from 'react-redux';
-import { addMessageItem } from '../redux/actions/message';
-import { toggleTools, toggleExpressions } from '../redux/actions/pageUI';
-import RoomFooter from '../components/RoomFooter';
+import { Component } from 'react'
+import { connect } from 'react-redux'
+import { addMessageItem } from '../redux/actions/message'
+import { toggleTools, toggleExpressions } from '../redux/actions/pageUI'
+import RoomFooter from '../components/RoomFooter'
 
 export default connect(
   state => ({
@@ -16,4 +16,4 @@ export default connect(
     toggleTools: () => dispatch(toggleTools()),
     toggleExpressions: () => dispatch(toggleExpressions())
   })
-)(RoomFooter);
+)(RoomFooter)

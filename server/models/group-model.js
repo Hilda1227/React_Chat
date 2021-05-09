@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const config = require('../config/init-config.js');
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+const config = require('../config/init-config.js')
 
 const groupSchema = mongoose.Schema({
   nickname: String,
   avatar: {
     type: String,
-    default: config.DEFAULT_GROUP_AVATAR    
+    default: config.DEFAULT_GROUP_AVATAR
   },
   creator: {
     type: Schema.Types.ObjectId,
@@ -21,7 +21,7 @@ const groupSchema = mongoose.Schema({
     ref: 'user'
   }],
   // 禁言
-  block:[{
+  block: [{
     type: Schema.Types.ObjectId,
     ref: 'user'
   }],
@@ -33,7 +33,6 @@ const groupSchema = mongoose.Schema({
     type: String,
     default: '群主很懒，还没有群介绍哦~'
   }
-});
+})
 
-module.exports = mongoose.model('group', groupSchema);
-
+module.exports = mongoose.model('group', groupSchema)

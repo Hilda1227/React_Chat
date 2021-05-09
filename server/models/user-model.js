@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const config = require('../config/init-config.js');
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+const config = require('../config/init-config.js')
 
 const userSchema = mongoose.Schema({
   nickname: String,
@@ -11,7 +11,7 @@ const userSchema = mongoose.Schema({
     default: '秘密'
   },
   avatar: {
-    type: String, 
+    type: String,
     default: config.DEFAULT_USER_AVATAR
   },
   groups: [{
@@ -26,7 +26,7 @@ const userSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'socket'
   },
-  onlineState:{
+  onlineState: {
     type: Boolean,
     default: true
   },
@@ -42,7 +42,6 @@ const userSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'user'
   }]
-});
+})
 
-module.exports = mongoose.model('user', userSchema);
-
+module.exports = mongoose.model('user', userSchema)

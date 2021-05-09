@@ -1,8 +1,8 @@
 import Immutable from 'immutable'
-import{ socketEmit } from './common.js'
+import { socketEmit } from './common.js'
 import {
-    SET_USER,
-    CLEAR_USER
+  SET_USER,
+  CLEAR_USER
 } from '../constants/user.js'
 
 export const setUser = (payload) => {
@@ -17,37 +17,13 @@ export const clearUser = () => {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import axios from 'axios';
 // import io from 'socket.io-client'
-
 
 // const socket = io.connect('http://localhost:3004');
 
 // socket.emit('login',{here:  "加油~"})
 // axios.defaults.baseURL = 'http://localhost:3004';
-
-
-
-
 
 // export const signUp = (info) => {
 //   return axios.post('/api/signUp', info)
@@ -66,4 +42,3 @@ export const clearUser = () => {
 //     return res;
 //   })
 // }
-
