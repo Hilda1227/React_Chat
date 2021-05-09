@@ -1,38 +1,38 @@
-import Immutable from 'immutable';
-import { socketEmit } from './common.js';
+import Immutable from 'immutable'
+import { socketEmit } from './common.js'
 import {
-    GROUP_FORM_SHOW,
-    SET_LOADING,
-    SELECT_LEFT_PANEL,
-    TOGGLE_LEFT_PANEL,
-    SELECT_RIGHT_PANEL,
-    TOGGLE_RIGHT_PANEL,
-    TOGGLE_USER_INFO,
-    RESTORE_INIT,
-    SHOW_ALERT,
-    HIDDEN_ALERT,
-    TOGGLE_TOOLS,
-    TOGGLE_EXPRESSIONS,
-    SET_THEMECOLOR
-} from '../constants/pageUI.js';
+  GROUP_FORM_SHOW,
+  SET_LOADING,
+  SELECT_LEFT_PANEL,
+  TOGGLE_LEFT_PANEL,
+  SELECT_RIGHT_PANEL,
+  TOGGLE_RIGHT_PANEL,
+  TOGGLE_USER_INFO,
+  RESTORE_INIT,
+  SHOW_ALERT,
+  HIDDEN_ALERT,
+  TOGGLE_TOOLS,
+  TOGGLE_EXPRESSIONS,
+  SET_THEMECOLOR
+} from '../constants/pageUI.js'
 
 // true  or false
 export const groupFormShow = payload => {
   return {
     type: GROUP_FORM_SHOW,
-    payload 
+    payload
   }
 }
 export const setLoading = payload => {
   return {
     type: SET_LOADING,
-    payload 
+    payload
   }
 }
 export const selectLeftPanel = payload => {
   return {
     type: SELECT_LEFT_PANEL,
-    payload 
+    payload
   }
 }
 export const toggleLeftPanel = () => {
@@ -43,7 +43,7 @@ export const toggleLeftPanel = () => {
 export const selectRightPanel = payload => {
   return {
     type: SELECT_RIGHT_PANEL,
-    payload 
+    payload
   }
 }
 export const toggleRightPanel = () => {
@@ -69,17 +69,17 @@ export const showAlert = (payload) => {
 }
 export const hiddenAlert = (payload) => {
   return {
-    type: HIDDEN_ALERT,
+    type: HIDDEN_ALERT
   }
 }
 export const toggleTools = () => {
   return {
-    type: TOGGLE_TOOLS,
+    type: TOGGLE_TOOLS
   }
 }
 export const toggleExpressions = () => {
   return {
-    type: TOGGLE_EXPRESSIONS,
+    type: TOGGLE_EXPRESSIONS
   }
 }
 export const setThemeColor = (payload) => {

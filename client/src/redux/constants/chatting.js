@@ -1,2 +1,2 @@
-export const SET_CHATTING = 'SET_CHATTING';
-export const CLOSE_CHATTING = 'CLOSE_CHATTING';
+export const SET_CHATTING = 'SET_CHATTING'
+export const CLOSE_CHATTING = 'CLOSE_CHATTING'

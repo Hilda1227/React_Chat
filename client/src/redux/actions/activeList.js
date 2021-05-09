@@ -1,7 +1,7 @@
-import Immutable from 'immutable';
-import { socketEmit } from './common.js';
-import { setChatting, closeChatting } from './chatting.js';
-import { showAlert } from './pageUI.js';
+import Immutable from 'immutable'
+import { socketEmit } from './common.js'
+import { setChatting, closeChatting } from './chatting.js'
+import { showAlert } from './pageUI.js'
 import {
   INIT_GROUP_LIST,
   ADD_ACTIVE_ITEM,
@@ -10,18 +10,17 @@ import {
   SET_ACTIVE_ITEM,
   CLEAR_UNREAD,
   SET_ONLINE,
-  JOIN_GROUP,
-} from '../constants/activeList.js';
+  JOIN_GROUP
+} from '../constants/activeList.js'
 
 export const initRoomList = (payload) => (dispatch) => {
-  socketEmit('init groups', {_id: payload})
-  .then(data => dispatch({
-    type: INIT_GROUP_LIST,
-    payload: Immutable.fromJS(data.groups)
-  })) 
-  .catch(err => console.log(err))
+  socketEmit('init groups', { _id: payload })
+    .then(data => dispatch({
+      type: INIT_GROUP_LIST,
+      payload: Immutable.fromJS(data.groups)
+    }))
+    .catch(err => console.log(err))
 }
-
 
 // payload为群组_id
 export const removeActiveItem = (payload) => {
@@ -40,17 +39,17 @@ export const addActiveItem = (payload) => {
 
 export const searchAddItem = (payload) => (dispatch) => {
   socketEmit('find user', payload)
-  .then(data => {
-    dispatch(addActiveItem(Immutable.fromJS({...data.user, type: 'private'})));
-    dispatch(setChatting(Immutable.fromJS({
-      to: data.user.nickname, type: 'private', 
-      avatar: data.user.avatar, _id: data.user._id
-    })));
-  })
-  .catch(err => dispatch(showAlert(err)))
+    .then(data => {
+      dispatch(addActiveItem(Immutable.fromJS({ ...data.user, type: 'private' })))
+      dispatch(setChatting(Immutable.fromJS({
+        to: data.user.nickname,
+        type: 'private',
+        avatar: data.user.avatar,
+        _id: data.user._id
+      })))
+    })
+    .catch(err => dispatch(showAlert(err)))
 }
-
-
 
 // nickname, type, lastWord, lastWordTime
 export const updateActiveItem = (payload) => {

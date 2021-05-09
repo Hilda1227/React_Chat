@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import Avatar from './Avatar';
+import React, { Component } from 'react'
+import Avatar from './Avatar'
 
 const AvatarInfo = ({ _id, type, src, size }) => {
   const handleClick = () => {
     // fechInfo
   }
   return (
-    <Avatar/>
+    <Avatar />
   )
-  
 }
 
-export default Avatar;
+export default Avatar
