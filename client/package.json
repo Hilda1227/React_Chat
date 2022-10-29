@@ -22,7 +22,7 @@
     "react-scripts": "1.0.14",
     "redux": "^3.7.2",
     "scss-loader": "0.0.1",
-    "socket.io-client": "^2.0.4"
+    "socket.io-client": "^2.5.0"
   },
   "scripts": {
     "dev": "node server.js --history-api-fallback",
